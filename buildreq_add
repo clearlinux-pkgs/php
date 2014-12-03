@@ -1,0 +1,36 @@
+#
+# This file contains extra pkgconfig build requirements that don't get picked up but are 
+# desirable. One name per line, no whitespace.
+#
+bison
+bzip2-dev
+ca-certs
+curl-dev
+db
+dbus-dev
+expat-dev
+file-dev
+freetype-dev
+gdbm-dev
+gettext-dev
+gmp-dev
+httpd-dev
+libgd-dev
+libidn-dev
+libjpeg-turbo-dev
+libxml2
+libxml2-dev
+libxslt-dev
+ncurses-dev
+nghttp2-dev
+openssl-dev
+readline-dev
+systemd-dev
+xz-dev
+zlib-dev
+onig-dev
+pcre-dev
+expat-dev
+libzip-dev
+freetype-dev
+re2c

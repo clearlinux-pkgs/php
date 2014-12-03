@@ -1,0 +1,3 @@
+# This file contains the output files that need %exclude. Full path
+# names, one per line.
+/etc/pear.conf

@@ -1,0 +1,6 @@
+#
+# This file contains banned pkgconfig build requirements that get picked up but are 
+# undesireable desirable. One name per line, no whitespace.
+#httpd-dev
+enchant-dev
+

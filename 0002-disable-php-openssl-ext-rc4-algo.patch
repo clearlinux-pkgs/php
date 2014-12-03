@@ -1,0 +1,28 @@
+Disable RC4 algorithm fallback for signature checks.
+
+Our SSL library no longer supports RC4, so this will fail to
+link.
+
+diff -Nurb php-5.6.28-orig/ext/openssl/openssl.c php-5.6.28/ext/openssl/openssl.c
+--- php-5.6.28-orig/ext/openssl/openssl.c	2016-11-08 17:22:57.000000000 -0800
++++ php-5.6.28/ext/openssl/openssl.c	2016-12-12 10:31:15.541435770 -0800
+@@ -4941,7 +4941,8 @@
+ 			RETURN_FALSE;
+ 		}
+ 	} else {
+-		cipher = EVP_rc4();
++		php_error_docref(NULL TSRMLS_CC, E_WARNING, "RC4 disabled, no fallback signature algorithm.");
++		RETURN_FALSE;
+ 	}
+ 
+ 	pkeys = safe_emalloc(nkeys, sizeof(*pkeys), 0);
+@@ -5069,7 +5070,8 @@
+ 			RETURN_FALSE;
+ 		}
+ 	} else {
+-		cipher = EVP_rc4();
++		php_error_docref(NULL TSRMLS_CC, E_WARNING, "RC4 disabled, no fallback signature algorithm.");
++		RETURN_FALSE;
+ 	}
+ 	
+ 	buf = emalloc(data_len + 1);

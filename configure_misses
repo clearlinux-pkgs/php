@@ -1,0 +1,173 @@
+Configure miss: icc
+Configure miss: suncc
+Configure miss: if compiler supports -R
+Configure miss: whether to force non-PIC code in shared modules
+Configure miss: whether /dev/arandom exists
+Configure miss: Apache 2.0 handler-module support via DSO through APXS
+Configure miss: sys/pstat.h usability
+Configure miss: sys/pstat.h presence
+Configure miss: PS_STRINGS
+Configure miss: embedded SAPI library support
+Configure miss: port framework
+Configure miss: /dev/poll
+Configure miss: apparmor
+Configure miss: LiteSpeed support
+Configure miss: phpdbg web SAPI support
+Configure miss: phpdbg debug build
+Configure miss: sun_len in sys/un.h
+Configure miss: whether cross-process locking is required by accept()
+Configure miss: chosen SAPI module
+Configure miss: sendmail
+Configure miss: whether system uses EBCDIC
+Configure miss: yp_get_default_domain
+Configure miss: __yp_get_default_domain
+Configure miss: yp_get_default_domain in -lnsl
+Configure miss: __yp_get_default_domain in -lnsl
+Configure miss: __dlopen
+Configure miss: ApplicationServices/ApplicationServices.h
+Configure miss: dns.h
+Configure miss: sys/sysexits.h
+Configure miss: sys/varargs.h
+Configure miss: unix.h
+Configure miss: broken getcwd
+Configure miss: int8
+Configure miss: int16
+Configure miss: int32
+Configure miss: int64
+Configure miss: uint8
+Configure miss: uint16
+Configure miss: uint32
+Configure miss: uint64
+Configure miss: field sa_len in struct sockaddr
+Configure miss: crypt
+Configure miss: funopen
+Configure miss: std_syslog
+Configure miss: crypt_r
+Configure miss: whether to include gcov symbols
+Configure miss: whether to include debugging symbols
+Configure miss: whether to enable PHP's own SIGCHLD handler
+Configure miss: whether to explicitly link against libgcc
+Configure miss: whether to enable dmalloc
+Configure miss: whether to enable DTrace support
+Configure miss: libxml2 install dir
+Configure miss: Kerberos support
+Configure miss: RAND_egd
+Configure miss: if the location of ZLIB install directory is defined
+Configure miss: whether to enable bc style precision math functions
+Configure miss: gnutls support in libcurl
+Configure miss: QDBM support
+Configure miss: GDBM support
+Configure miss: NDBM support
+Configure miss: TCADB support
+Configure miss: Berkeley DB4 support
+Configure miss: Berkeley DB3 support
+Configure miss: Berkeley DB2 support
+Configure miss: DB1 support
+Configure miss: DBM support
+Configure miss: ENCHANT support
+Configure miss: whether to enable EXIF (metadata from images) support
+Configure miss: pcre install prefix
+Configure miss: OpenSSL dir for FTP
+Configure miss: the location of libpng
+Configure miss: the location of libXpm
+Configure miss: FreeType 2
+Configure miss: whether to enable truetype string function in GD
+Configure miss: whether to enable JIS-mapped Japanese font support in GD
+Configure miss: GNU gettext support
+Configure miss: GNU MP support
+Configure miss: mhash support
+Configure miss: if iconv supports //IGNORE
+Configure miss: IMAP support
+Configure miss: IMAP Kerberos support
+Configure miss: IMAP SSL support
+Configure miss: Firebird support
+Configure miss: whether to enable internationalization support
+Configure miss: LDAP support
+Configure miss: LDAP Cyrus SASL support
+Configure miss: external libmbfl
+Configure miss: mcrypt support
+Configure miss: whether to enable embedded MySQLi support
+Configure miss: Oracle Database OCI8 support
+Configure miss: Adabas support
+Configure miss: SAP DB support
+Configure miss: Solid support
+Configure miss: IBM DB2 support
+Configure miss: ODBCRouter.com support
+Configure miss: Empress support
+Configure miss: Empress local access support
+Configure miss: Birdstep support
+Configure miss: a custom ODBC support
+Configure miss: iODBC support
+Configure miss: Easysoft ODBC-ODBC Bridge support
+Configure miss: unixODBC support
+Configure miss: DBMaker support
+Configure miss: any ODBC driver support
+Configure miss: PDO_DBLIB support via FreeTDS
+Configure miss: Firebird support for PDO
+Configure miss: Oracle OCI support for PDO
+Configure miss: ODBC v3 support for PDO
+Configure miss: PostgreSQL support for PDO
+Configure miss: PostgreSQL support
+Configure miss: makedev
+Configure miss: PSPELL support
+Configure miss: libedit readline replacement
+Configure miss: rl_on_new_line in -ledit
+Configure miss: recode support
+Configure miss: mm support
+Configure miss: whether to enable shmop support
+Configure miss: SNMP support
+Configure miss: OpenSSL dir for SNMP
+Configure miss: whether flush should be called explicitly after a buffered io
+Configure miss: extended DES crypt
+Configure miss: Blowfish crypt
+Configure miss: strpncpy
+Configure miss: res_nsearch
+Configure miss: __res_nsearch
+Configure miss: res_nsearch in -lresolv
+Configure miss: res_ndestroy
+Configure miss: __res_ndestroy
+Configure miss: res_ndestroy in -lresolv
+Configure miss: __res_ndestroy in -lresolv
+Configure miss: res_ndestroy in -lbind
+Configure miss: __res_ndestroy in -lbind
+Configure miss: res_ndestroy in -lsocket
+Configure miss: __res_ndestroy in -lsocket
+Configure miss: dns_search
+Configure miss: __dns_search
+Configure miss: dns_search in -lresolv
+Configure miss: __dns_search in -lresolv
+Configure miss: dns_search in -lbind
+Configure miss: __dns_search in -lbind
+Configure miss: dns_search in -lsocket
+Configure miss: __dns_search in -lsocket
+Configure miss: dn_expand
+Configure miss: dn_skipname
+Configure miss: res_search
+Configure miss: atomic.h usability
+Configure miss: atomic.h presence
+Configure miss: atomic.h
+Configure miss: whether arc4random_buf is declared
+Configure miss: whether to enable System V semaphore support
+Configure miss: whether to enable System V shared memory support
+Configure miss: TIDY support
+Configure miss: whether to enable WDDX support
+Configure miss: libexpat dir for WDDX
+Configure miss: libexpat install dir
+Configure miss: XMLRPC-EPI support
+Configure miss: libexpat dir for XMLRPC-EPI
+Configure miss: iconv dir for XMLRPC-EPI
+Configure miss: XSL support
+Configure miss: pcre install prefix
+Configure miss: libzip
+Configure miss: whether to enable mysqlnd
+Configure miss: sigsetjmp
+Configure miss: whether sprintf is broken
+Configure miss: whether fp_except is defined
+Configure miss: usable fpsetprec
+Configure miss: usable _controlfp
+Configure miss: usable _controlfp_s
+Configure miss: whether double cast to long preserves least significant bits
+Configure miss: whether dlsym() requires a leading underscore in symbol names
+Configure miss: whether to enable thread-safety
+Configure miss: whether to enable Zend debugging
+Configure miss: target system is Darwin

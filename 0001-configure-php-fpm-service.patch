@@ -1,0 +1,54 @@
+Default configuration and service unit for php-fpm.
+
+--- /dev/null	2015-06-01 08:10:48.353140932 -0700
++++ b/config/php-httpd.conf	2016-02-25 05:55:18.662535453 -0700
+@@ -0,0 +1,11 @@
++# Enable php-fpm proxy on port 9000
++LoadModule proxy_module /usr/lib/httpd/modules/mod_proxy.so
++LoadModule proxy_fcgi_module /usr/lib/httpd/modules/mod_proxy_fcgi.so
++<FilesMatch \.php$>
++    SetHandler "proxy:unix:/run/php-fpm.sock|fcgi://127.0.0.1"
++</FilesMatch>
++
++# Override default directory index to include index.php
++<IfModule dir_module>
++    DirectoryIndex index.html index.php
++</IfModule>
+--- a/sapi/fpm/www.conf.in	2017-01-18 09:50:55.574058713 -0800
++++ b/sapi/fpm/www.conf.in	2017-01-18 09:53:22.431157906 -0800
+@@ -33,7 +33,7 @@
+ ;                            (IPv6 and IPv4-mapped) on a specific port;
+ ;   '/path/to/unix/socket' - to listen on a unix socket.
+ ; Note: This value is mandatory.
+-listen = 127.0.0.1:9000
++listen = /run/php-fpm.sock
+ 
+ ; Set listen(2) backlog.
+ ; Default Value: 511 (-1 on FreeBSD and OpenBSD)
+@@ -45,8 +45,8 @@
+ ; Default Values: user and group are set as the running user
+ ;                 mode is set to 0660
+ ;listen.owner = @php_fpm_user@
+-;listen.group = @php_fpm_group@
+-;listen.mode = 0660
++listen.group = httpd
++listen.mode = 0660
+ ; When POSIX Access Control Lists are supported you can set them using
+ ; these options, value is a comma separated list of user/group names.
+ ; When set, listen.owner and listen.group are ignored
+--- /dev/null	2015-06-01 08:10:48.353140932 -0700
++++ b/config/php-fpm.service	2015-06-09 09:59:06.151563463 -0700
+@@ -0,0 +1,13 @@
++[Unit]
++Description=The PHP FastCGI Process Manager
++After=syslog.target network.target
++
++[Service]
++Type=notify
++PIDFile=/run/php-fpm.pid
++ExecStart=/usr/sbin/php-fpm --nodaemonize
++ExecReload=/bin/kill -USR2 $MAINPID
++PrivateTmp=true
++
++[Install]
++WantedBy=multi-user.target

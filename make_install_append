@@ -1,0 +1,23 @@
+# Pear is broken http://pear.php.net/bugs/bug.php?id=20517&edit=2
+mkdir -p %{buildroot}/usr/lib64/php/docs
+mv %{buildroot}/usr/lib64/php/doc/PEAR %{buildroot}/usr/lib64/php/docs/PEAR
+# Setup php-fpm
+mv %{buildroot}/usr/share/defaults/php/php-fpm.conf.default %{buildroot}/usr/share/defaults/php/php-fpm.conf
+install -D -m 644 config/php-fpm.service %{buildroot}/usr/lib/systemd/system/php-fpm.service
+# Configure httpd 
+install -D -m 644 config/php-httpd.conf %{buildroot}/usr/share/defaults/httpd/conf.d/php.conf
+# Stray junk files
+rm -rf %{buildroot}/.depdb* %{buildroot}/.lock %{buildroot}/.channels %{buildroot}/.filemap
+# configure php-fpm default "www" pool for OOTB functionality
+mv %{buildroot}/usr/share/defaults/php/php-fpm.d/www.conf.default %{buildroot}/usr/share/defaults/php/php-fpm.d/www.conf
+mkdir -p %{buildroot}/usr/share/defaults/php
+cat > %{buildroot}/usr/share/defaults/php/php.ini  <<_ASUNAME 
+[zendopcache]
+zend_extension=/usr/lib64/extensions/no-debug-non-zts-20160303/opcache.so
+opcache.memory_consumption=128
+opcache.interned_strings_buffer=8
+opcache.max_accelerated_files=4000
+opcache.revalidate_freq=180
+opcache.fast_shutdown=1
+opcache.enable_cli=1
+_ASUNAME
