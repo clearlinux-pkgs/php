@@ -6,7 +6,7 @@
 #
 Name     : php
 Version  : 7.1.9
-Release  : 121
+Release  : 122
 URL      : http://us1.php.net/distributions/php-7.1.9.tar.xz
 Source0  : http://us1.php.net/distributions/php-7.1.9.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
