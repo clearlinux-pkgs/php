@@ -6,7 +6,7 @@
 #
 Name     : php
 Version  : 7.1.9
-Release  : 123
+Release  : 124
 URL      : http://us1.php.net/distributions/php-7.1.9.tar.xz
 Source0  : http://us1.php.net/distributions/php-7.1.9.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
@@ -45,6 +45,7 @@ BuildRequires : onig-dev
 BuildRequires : openssl-dev
 BuildRequires : pcre-dev
 BuildRequires : pkgconfig(libpng)
+BuildRequires : pkgconfig(libpq)
 BuildRequires : pkgconfig(libwebp)
 BuildRequires : re2c
 BuildRequires : readline-dev
@@ -134,7 +135,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1508167230
+export SOURCE_DATE_EPOCH=1512524435
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong "
 export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong "
@@ -157,6 +158,8 @@ export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semanti
 --with-mysql=mysqlnd \
 --with-mysqli=mysqlnd \
 --with-pdo-mysql=mysqlnd \
+--with-pgsql \
+--with-pdo-pgsql \
 --with-mysql-sock=/run/mariadb/mariadb.sock \
 --with-readline \
 --enable-mbstring \
@@ -174,7 +177,7 @@ export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semanti
 make V=1  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1508167230
+export SOURCE_DATE_EPOCH=1512524435
 rm -rf %{buildroot}
 %make_install
 ## make_install_append content

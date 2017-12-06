@@ -16,6 +16,8 @@
 --with-mysql=mysqlnd
 --with-mysqli=mysqlnd
 --with-pdo-mysql=mysqlnd
+--with-pgsql
+--with-pdo-pgsql
 --with-mysql-sock=/run/mariadb/mariadb.sock
 --with-readline
 --enable-mbstring

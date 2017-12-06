@@ -106,8 +106,7 @@ Configure miss: PDO_DBLIB support via FreeTDS
 Configure miss: Firebird support for PDO
 Configure miss: Oracle OCI support for PDO
 Configure miss: ODBC v3 support for PDO
-Configure miss: PostgreSQL support for PDO
-Configure miss: PostgreSQL support
+Configure miss: openssl dependencies
 Configure miss: makedev
 Configure miss: PSPELL support
 Configure miss: libedit readline replacement
