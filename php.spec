@@ -6,7 +6,7 @@
 #
 Name     : php
 Version  : 7.1.9
-Release  : 124
+Release  : 125
 URL      : http://us1.php.net/distributions/php-7.1.9.tar.xz
 Source0  : http://us1.php.net/distributions/php-7.1.9.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
@@ -135,12 +135,20 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1512524435
+export SOURCE_DATE_EPOCH=1517165718
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong "
 export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong "
 export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong "
-%configure --disable-static --sysconfdir=/usr/share/defaults/php \
+export CFLAGS_GENERATE="$CFLAGS -fprofile-generate -fprofile-dir=pgo -fprofile-update=atomic "
+export FCFLAGS_GENERATE="$FCFLAGS -fprofile-generate -fprofile-dir=pgo -fprofile-update=atomic "
+export FFLAGS_GENERATE="$FFLAGS -fprofile-generate -fprofile-dir=pgo -fprofile-update=atomic "
+export CXXFLAGS_GENERATE="$CXXFLAGS -fprofile-generate -fprofile-dir=pgo -fprofile-update=atomic "
+export CFLAGS_USE="$CFLAGS -fprofile-use -fprofile-dir=pgo -fprofile-correction "
+export FCFLAGS_USE="$FCFLAGS -fprofile-use -fprofile-dir=pgo -fprofile-correction "
+export FFLAGS_USE="$FFLAGS -fprofile-use -fprofile-dir=pgo -fprofile-correction "
+export CXXFLAGS_USE="$CXXFLAGS -fprofile-use -fprofile-dir=pgo -fprofile-correction "
+CFLAGS="${CFLAGS_GENERATE}" CXXFLAGS="${CXXFLAGS_GENERATE}" FFLAGS="${FFLAGS_GENERATE}" FCFLAGS="${FCFLAGS_GENERATE}" %configure --disable-static --sysconfdir=/usr/share/defaults/php \
 --enable-dba=shared \
 --enable-calendar \
 --enable-ftp \
@@ -174,10 +182,49 @@ export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semanti
 --with-config-file-path=/usr/share/defaults/php/ \
 --with-jpeg-dir=/usr/lib64 \
 --with-webp-dir=/usr/lib64
-make V=1  %{?_smp_mflags}
+make  %{?_smp_mflags}
+
+export NO_INTERACTION=1 SKIP_ONLINE_TESTS=1
+make test || :
+make clean
+CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS="${FCFLAGS_USE}" %configure --disable-static --sysconfdir=/usr/share/defaults/php \
+--enable-dba=shared \
+--enable-calendar \
+--enable-ftp \
+--enable-soap \
+--enable-sockets \
+--with-gd \
+--enable-zip \
+--with-curl \
+--enable-pcntl \
+--with-bz2 \
+--with-zlib \
+--enable-phar \
+--enable-fpm \
+--with-fpm-systemd \
+--with-mysql=mysqlnd \
+--with-mysqli=mysqlnd \
+--with-pdo-mysql=mysqlnd \
+--with-pgsql \
+--with-pdo-pgsql \
+--with-mysql-sock=/run/mariadb/mariadb.sock \
+--with-readline \
+--enable-mbstring \
+--with-openssl \
+--enable-sysvmsg \
+--with-onig=/usr \
+--with-zlib \
+--with-system-ciphers \
+--enable-opcache \
+--enable-pcre-jit \
+--enable-re2c-cgoto \
+--with-config-file-path=/usr/share/defaults/php/ \
+--with-jpeg-dir=/usr/lib64 \
+--with-webp-dir=/usr/lib64
+make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1512524435
+export SOURCE_DATE_EPOCH=1517165718
 rm -rf %{buildroot}
 %make_install
 ## make_install_append content

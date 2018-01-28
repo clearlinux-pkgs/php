@@ -1,0 +1,2 @@
+export NO_INTERACTION=1 SKIP_ONLINE_TESTS=1 
+make test || :
