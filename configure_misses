@@ -3,6 +3,9 @@ Configure miss: suncc
 Configure miss: if compiler supports -R
 Configure miss: whether to force non-PIC code in shared modules
 Configure miss: whether /dev/arandom exists
+Configure miss: whether atof() accepts NAN
+Configure miss: whether atof() accepts INF
+Configure miss: whether HUGE_VAL + -HUGEVAL == NAN
 Configure miss: Apache 2.0 handler-module support via DSO through APXS
 Configure miss: sys/pstat.h usability
 Configure miss: sys/pstat.h presence
@@ -43,6 +46,7 @@ Configure miss: crypt
 Configure miss: funopen
 Configure miss: std_syslog
 Configure miss: crypt_r
+Configure miss: valgrind
 Configure miss: whether to include gcov symbols
 Configure miss: whether to include debugging symbols
 Configure miss: whether to enable PHP's own SIGCHLD handler
@@ -59,6 +63,7 @@ Configure miss: QDBM support
 Configure miss: GDBM support
 Configure miss: NDBM support
 Configure miss: TCADB support
+Configure miss: LMDB support
 Configure miss: Berkeley DB4 support
 Configure miss: Berkeley DB3 support
 Configure miss: Berkeley DB2 support
@@ -71,7 +76,6 @@ Configure miss: OpenSSL dir for FTP
 Configure miss: the location of libpng
 Configure miss: the location of libXpm
 Configure miss: FreeType 2
-Configure miss: whether to enable truetype string function in GD
 Configure miss: whether to enable JIS-mapped Japanese font support in GD
 Configure miss: GNU gettext support
 Configure miss: GNU MP support
@@ -85,7 +89,6 @@ Configure miss: whether to enable internationalization support
 Configure miss: LDAP support
 Configure miss: LDAP Cyrus SASL support
 Configure miss: external libmbfl
-Configure miss: mcrypt support
 Configure miss: whether to enable embedded MySQLi support
 Configure miss: Oracle Database OCI8 support
 Configure miss: Adabas support
@@ -116,6 +119,7 @@ Configure miss: mm support
 Configure miss: whether to enable shmop support
 Configure miss: SNMP support
 Configure miss: OpenSSL dir for SNMP
+Configure miss: sodium support
 Configure miss: whether flush should be called explicitly after a buffered io
 Configure miss: extended DES crypt
 Configure miss: Blowfish crypt
@@ -146,6 +150,7 @@ Configure miss: atomic.h usability
 Configure miss: atomic.h presence
 Configure miss: atomic.h
 Configure miss: whether arc4random_buf is declared
+Configure miss: Argon2 support
 Configure miss: whether to enable System V semaphore support
 Configure miss: whether to enable System V shared memory support
 Configure miss: TIDY support
@@ -156,6 +161,7 @@ Configure miss: XMLRPC-EPI support
 Configure miss: libexpat dir for XMLRPC-EPI
 Configure miss: iconv dir for XMLRPC-EPI
 Configure miss: XSL support
+Configure miss: whether to enable zend-test extension
 Configure miss: pcre install prefix
 Configure miss: libzip
 Configure miss: whether to enable mysqlnd
@@ -175,6 +181,9 @@ Configure miss: suncc
 Configure miss: if compiler supports -R
 Configure miss: whether to force non-PIC code in shared modules
 Configure miss: whether /dev/arandom exists
+Configure miss: whether atof() accepts NAN
+Configure miss: whether atof() accepts INF
+Configure miss: whether HUGE_VAL + -HUGEVAL == NAN
 Configure miss: Apache 2.0 handler-module support via DSO through APXS
 Configure miss: sys/pstat.h usability
 Configure miss: sys/pstat.h presence
@@ -215,6 +224,7 @@ Configure miss: crypt
 Configure miss: funopen
 Configure miss: std_syslog
 Configure miss: crypt_r
+Configure miss: valgrind
 Configure miss: whether to include gcov symbols
 Configure miss: whether to include debugging symbols
 Configure miss: whether to enable PHP's own SIGCHLD handler
@@ -231,6 +241,7 @@ Configure miss: QDBM support
 Configure miss: GDBM support
 Configure miss: NDBM support
 Configure miss: TCADB support
+Configure miss: LMDB support
 Configure miss: Berkeley DB4 support
 Configure miss: Berkeley DB3 support
 Configure miss: Berkeley DB2 support
@@ -243,7 +254,6 @@ Configure miss: OpenSSL dir for FTP
 Configure miss: the location of libpng
 Configure miss: the location of libXpm
 Configure miss: FreeType 2
-Configure miss: whether to enable truetype string function in GD
 Configure miss: whether to enable JIS-mapped Japanese font support in GD
 Configure miss: GNU gettext support
 Configure miss: GNU MP support
@@ -257,7 +267,6 @@ Configure miss: whether to enable internationalization support
 Configure miss: LDAP support
 Configure miss: LDAP Cyrus SASL support
 Configure miss: external libmbfl
-Configure miss: mcrypt support
 Configure miss: whether to enable embedded MySQLi support
 Configure miss: Oracle Database OCI8 support
 Configure miss: Adabas support
@@ -288,6 +297,7 @@ Configure miss: mm support
 Configure miss: whether to enable shmop support
 Configure miss: SNMP support
 Configure miss: OpenSSL dir for SNMP
+Configure miss: sodium support
 Configure miss: whether flush should be called explicitly after a buffered io
 Configure miss: extended DES crypt
 Configure miss: Blowfish crypt
@@ -318,6 +328,7 @@ Configure miss: atomic.h usability
 Configure miss: atomic.h presence
 Configure miss: atomic.h
 Configure miss: whether arc4random_buf is declared
+Configure miss: Argon2 support
 Configure miss: whether to enable System V semaphore support
 Configure miss: whether to enable System V shared memory support
 Configure miss: TIDY support
@@ -328,6 +339,7 @@ Configure miss: XMLRPC-EPI support
 Configure miss: libexpat dir for XMLRPC-EPI
 Configure miss: iconv dir for XMLRPC-EPI
 Configure miss: XSL support
+Configure miss: whether to enable zend-test extension
 Configure miss: pcre install prefix
 Configure miss: libzip
 Configure miss: whether to enable mysqlnd

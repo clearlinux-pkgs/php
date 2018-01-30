@@ -34,3 +34,4 @@ expat-dev
 libzip-dev
 freetype-dev
 re2c
+valgrind
