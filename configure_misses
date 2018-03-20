@@ -24,8 +24,6 @@ Configure miss: sendmail
 Configure miss: whether system uses EBCDIC
 Configure miss: yp_get_default_domain
 Configure miss: __yp_get_default_domain
-Configure miss: yp_get_default_domain in -lnsl
-Configure miss: __yp_get_default_domain in -lnsl
 Configure miss: __dlopen
 Configure miss: ApplicationServices/ApplicationServices.h
 Configure miss: dns.h
@@ -202,8 +200,6 @@ Configure miss: sendmail
 Configure miss: whether system uses EBCDIC
 Configure miss: yp_get_default_domain
 Configure miss: __yp_get_default_domain
-Configure miss: yp_get_default_domain in -lnsl
-Configure miss: __yp_get_default_domain in -lnsl
 Configure miss: __dlopen
 Configure miss: ApplicationServices/ApplicationServices.h
 Configure miss: dns.h

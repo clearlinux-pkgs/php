@@ -21,3 +21,6 @@ opcache.revalidate_freq=180
 opcache.fast_shutdown=1
 opcache.enable_cli=1
 _ASUNAME
+# clr-service-restart
+mkdir -p %{buildroot}/usr/share/clr-service-restart
+ln -sf /usr/lib/systemd/system/php-fpm.service %{buildroot}/usr/share/clr-service-restart/php-fpm.service
