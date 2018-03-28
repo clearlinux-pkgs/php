@@ -1,5 +1,56 @@
 PHP                                                                        NEWS
 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+01 Mar 2018, PHP 7.2.3
+
+- Core:
+  . Fixed bug #75864 ("stream_isatty" returns wrong value on s390x). (Sam Ding)
+
+- Apache2Handler:
+  . Fixed bug #75882 (a simple way for segfaults in threadsafe php just with
+    configuration). (Anatol)
+
+- Date:
+  . Fixed bug #75857 (Timezone gets truncated when formatted). (carusogabriel)
+  . Fixed bug #75928 (Argument 2 for `DateTimeZone::listIdentifiers()` should
+    accept `null`). (Pedro Lacerda)
+  . Fixed bug #68406 (calling var_dump on a DateTimeZone object modifies it).
+    (jhdxr)
+
+- LDAP:
+  . Fixed bug #49876 (Fix LDAP path lookup on 64-bit distros). (dzuelke)
+
+- libxml2:
+  . Fixed bug #75871 (use pkg-config where available). (pmmaga)
+
+- PGSQL:
+  . Fixed bug #75838 (Memory leak in pg_escape_bytea()). (ard_1 at mail dot ru)
+
+- Phar:
+  . Fixed bug #54289 (Phar::extractTo() does not accept specific directories to
+    be extracted). (bishop)
+  . Fixed bug #65414 (deal with leading slash while adding files correctly). 
+    (bishopb)
+  . Fixed bug #65414 (deal with leading slash when adding files correctly).
+    (bishopb)
+
+- ODBC:
+  . Fixed bug #73725 (Unable to retrieve value of varchar(max) type). (Anatol)
+
+- Opcache:
+  . Fixed bug #75729 (opcache segfault when installing Bitrix). (Nikita)
+  . Fixed bug #75893 (file_get_contents $http_response_header variable bugged
+    with opcache). (Nikita)
+  . Fixed bug #75938 (Modulus value not stored in variable). (Nikita)
+
+- SPL:
+  . Fixed bug #74519 (strange behavior of AppendIterator). (jhdxr)
+
+- Standard:
+  . Fixed bug #75916 (DNS_CAA record results contain garbage). (Mike,
+    Philip Sharp)
+  . Fixed bug #75981 (Prevent reading beyond buffer start in http wrapper).
+    (Stas)
+
 01 Feb 2018, PHP 7.2.2
 
 - Core:
@@ -224,6 +275,8 @@ PHP                                                                        NEWS
     DateTimeInterface interface). (Majkl578)
   . Fixed bug #75149 (redefinition of typedefs ttinfo and t1info). (Remi)
   . Fixed bug #75222 (DateInterval microseconds property always 0). (jhdxr)
+  . Fixed bug #68406 (calling var_dump on a DateTimeZone object modifies it).
+    (jhdxr)
 
 - Dba:
   . Fixed bug #72885 (flatfile: dba_fetch() fails to read replaced entry).
