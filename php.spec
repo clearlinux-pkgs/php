@@ -7,8 +7,8 @@
 Name     : php
 Version  : 7.2.3
 Release  : 131
-URL      : https://us1.php.net/distributions/php-7.2.3.tar.xz
-Source0  : https://us3.php.net/distributions/php-7.2.3.tar.xz
+URL      : https://uk1.php.net/distributions/php-7.2.3.tar.xz
+Source0  : https://uk1.php.net/distributions/php-7.2.3.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
 Source99 : https://us1.php.net/distributions/php-7.2.3.tar.xz.asc
 Summary  : No detailed summary available
