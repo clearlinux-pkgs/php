@@ -8,9 +8,9 @@ Name     : php
 Version  : 7.2.3
 Release  : 136
 URL      : https://us1.php.net/distributions/php-7.2.3.tar.xz
-Source0  : https://us1.php.net/distributions/php-7.2.3.tar.xz
+Source0  : http://us1.php.net/distributions/php-7.2.3.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
-Source99 : https://us1.php.net/distributions/php-7.2.3.tar.xz.asc
+Source99 : http://us1.php.net/distributions/php-7.2.3.tar.xz.asc
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-2-Clause BSD-3-Clause HPND LGPL-2.1 MIT OLDAP-2.8 PHP-3.01 Zend-2.0 Zlib
