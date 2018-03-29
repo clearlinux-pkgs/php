@@ -1,5 +1,52 @@
 PHP                                                                        NEWS
 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+29 Mar 2018, PHP 7.2.4
+
+- Core:
+  . Fixed bug #76025 (Segfault while throwing exception in error_handler).
+    (Dmitry, Laruence)
+  . Fixed bug #76044 ('date: illegal option -- -' in ./configure on FreeBSD).
+    (Anatol)
+
+- FPM:
+  . Fixed bug #75605 (Dumpable FPM child processes allow bypassing opcache
+    access controls). (Jakub Zelenka)
+
+- FTP:
+  . Fixed ftp_pasv arginfo. (carusogabriel)
+
+- GD:
+  . Fixed bug #73957 (signed integer conversion in imagescale()). (cmb)
+  . Fixed bug #76041 (null pointer access crashed php). (cmb)
+  . Fixed imagesetinterpolation arginfo. (Gabriel Caruso)
+
+- iconv:
+  . Fixed bug #75867 (Freeing uninitialized pointer). (Philip Prindeville)
+
+- Mbstring:
+  . Fixed bug #62545 (wrong unicode mapping in some charsets). (cmb)
+
+- Opcache:
+  . Fixed bug #75969 (Assertion failure in live range DCE due to block pass
+    misoptimization). (Nikita)
+
+- OpenSSL:
+  . Fixed openssl_* arginfos. (carusogabriel)
+
+- PCNTL:
+  . Fixed bug #75873 (pcntl_wexitstatus returns incorrect on Big_Endian platform
+    (s390x)). (Sam Ding)
+
+- Phar:
+  . Fixed bug #76085 (Segmentation fault in buildFromIterator when directory
+    name contains a \n). (Laruence)
+
+- Standard:
+  . Fixed bug #75961 (Strange references behavior). (Laruence)
+  . Fixed some arginfos. (carusogabriel)
+  . Fixed bug #76068 (parse_ini_string fails to parse "[foo]\nbar=1|>baz" with
+    segfault). (Anatol)
+
 01 Mar 2018, PHP 7.2.3
 
 - Core:
@@ -275,8 +322,6 @@ PHP                                                                        NEWS
     DateTimeInterface interface). (Majkl578)
   . Fixed bug #75149 (redefinition of typedefs ttinfo and t1info). (Remi)
   . Fixed bug #75222 (DateInterval microseconds property always 0). (jhdxr)
-  . Fixed bug #68406 (calling var_dump on a DateTimeZone object modifies it).
-    (jhdxr)
 
 - Dba:
   . Fixed bug #72885 (flatfile: dba_fetch() fails to read replaced entry).
