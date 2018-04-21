@@ -52,3 +52,14 @@ Default configuration and service unit for php-fpm.
 +
 +[Install]
 +WantedBy=multi-user.target
+--- php-7.1.8/sapi/fpm/www.conf.in~	2017-08-01 17:36:55.000000000 +0000
++++ php-7.1.8/sapi/fpm/www.conf.in	2018-04-21 15:22:13.055667960 +0000
+@@ -93,7 +93,7 @@
+ ;             pm.process_idle_timeout   - The number of seconds after which
+ ;                                         an idle process will be killed.
+ ; Note: This value is mandatory.
+-pm = dynamic
++pm = ondemand
+ 
+ ; The number of child processes to be created when pm is set to 'static' and the
+ ; maximum number of child processes when pm is set to 'dynamic' or 'ondemand'.
