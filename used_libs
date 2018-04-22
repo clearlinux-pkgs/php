@@ -8,12 +8,10 @@ libm.so.6
 libonig.so.4
 libpng16.so.16
 libpq.so.5
-libreadline.so.7
 libresolv.so.2
 librt.so.1
 libssl.so.1.0.0
 libsystemd.so.0
-libtinfo.so.6
 libwebp.so.7
 libxml2.so.2
 libz.so.1

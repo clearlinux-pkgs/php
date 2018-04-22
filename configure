@@ -19,7 +19,7 @@
 --with-pgsql
 --with-pdo-pgsql
 --with-mysql-sock=/run/mariadb/mariadb.sock
---with-readline
+--with-outreadline
 --enable-mbstring
 --with-openssl
 --enable-sysvmsg
