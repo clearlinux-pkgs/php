@@ -5,12 +5,12 @@
 # Source0 file verified with key 0xDC9FF8D3EE5AF27F (remi@php.net)
 #
 Name     : php
-Version  : 7.2.4
-Release  : 139
-URL      : http://us1.php.net/distributions/php-7.2.4.tar.xz
-Source0  : http://us1.php.net/distributions/php-7.2.4.tar.xz
+Version  : 7.2.5
+Release  : 140
+URL      : http://us1.php.net/distributions/php-7.2.5.tar.xz
+Source0  : http://us1.php.net/distributions/php-7.2.5.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
-Source99 : http://us1.php.net/distributions/php-7.2.4.tar.xz.asc
+Source99 : http://us1.php.net/distributions/php-7.2.5.tar.xz.asc
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-2-Clause BSD-3-Clause HPND LGPL-2.1 MIT OLDAP-2.8 PHP-3.01 Zend-2.0 Zlib
@@ -124,9 +124,9 @@ lib components for the php package.
 %prep
 tar -xf %{SOURCE1}
 cd ..
-%setup -q -n php-7.2.4
-mkdir -p %{_topdir}/BUILD/php-7.2.4/phpbench
-mv %{_topdir}/BUILD/phpbench-0.8.2/* %{_topdir}/BUILD/php-7.2.4/phpbench
+%setup -q -n php-7.2.5
+mkdir -p %{_topdir}/BUILD/php-7.2.5/phpbench
+mv %{_topdir}/BUILD/phpbench-0.8.2/* %{_topdir}/BUILD/php-7.2.5/phpbench
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
@@ -136,7 +136,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1524412123
+export SOURCE_DATE_EPOCH=1524594946
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs "
 export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs "
@@ -170,7 +170,7 @@ CFLAGS="${CFLAGS_GENERATE}" CXXFLAGS="${CXXFLAGS_GENERATE}" FFLAGS="${FFLAGS_GEN
 --with-pgsql \
 --with-pdo-pgsql \
 --with-mysql-sock=/run/mariadb/mariadb.sock \
---with-outreadline \
+--without-readline \
 --enable-mbstring \
 --with-openssl \
 --enable-sysvmsg \
@@ -209,7 +209,7 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 --with-pgsql \
 --with-pdo-pgsql \
 --with-mysql-sock=/run/mariadb/mariadb.sock \
---with-outreadline \
+--without-readline \
 --enable-mbstring \
 --with-openssl \
 --enable-sysvmsg \
@@ -225,7 +225,7 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1524412123
+export SOURCE_DATE_EPOCH=1524594946
 rm -rf %{buildroot}
 %make_install
 ## make_install_append content

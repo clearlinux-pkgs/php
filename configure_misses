@@ -44,7 +44,7 @@ Configure miss: crypt
 Configure miss: funopen
 Configure miss: std_syslog
 Configure miss: crypt_r
-Configure miss: valgrind
+Configure miss: valgrind header
 Configure miss: whether to include gcov symbols
 Configure miss: whether to include debugging symbols
 Configure miss: whether to enable PHP's own SIGCHLD handler
@@ -220,7 +220,7 @@ Configure miss: crypt
 Configure miss: funopen
 Configure miss: std_syslog
 Configure miss: crypt_r
-Configure miss: valgrind
+Configure miss: valgrind header
 Configure miss: whether to include gcov symbols
 Configure miss: whether to include debugging symbols
 Configure miss: whether to enable PHP's own SIGCHLD handler
