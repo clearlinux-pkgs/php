@@ -6,7 +6,7 @@
 #
 Name     : php
 Version  : 7.2.5
-Release  : 140
+Release  : 141
 URL      : http://us1.php.net/distributions/php-7.2.5.tar.xz
 Source0  : http://us1.php.net/distributions/php-7.2.5.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
