@@ -6,7 +6,7 @@
 #
 Name     : php
 Version  : 7.2.5
-Release  : 142
+Release  : 143
 URL      : http://us1.php.net/distributions/php-7.2.5.tar.xz
 Source0  : http://us1.php.net/distributions/php-7.2.5.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
@@ -18,7 +18,7 @@ Requires: php-bin
 Requires: php-config
 Requires: php-lib
 Requires: php-data
-Requires: php-doc
+Requires: php-man
 BuildRequires : bison
 BuildRequires : bzip2-dev
 BuildRequires : ca-certs
@@ -71,6 +71,7 @@ Summary: bin components for the php package.
 Group: Binaries
 Requires: php-data
 Requires: php-config
+Requires: php-man
 
 %description bin
 bin components for the php package.
@@ -104,14 +105,6 @@ Provides: php-devel
 dev components for the php package.
 
 
-%package doc
-Summary: doc components for the php package.
-Group: Documentation
-
-%description doc
-doc components for the php package.
-
-
 %package lib
 Summary: lib components for the php package.
 Group: Libraries
@@ -119,6 +112,14 @@ Requires: php-data
 
 %description lib
 lib components for the php package.
+
+
+%package man
+Summary: man components for the php package.
+Group: Default
+
+%description man
+man components for the php package.
 
 
 %prep
@@ -136,7 +137,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1526017487
+export SOURCE_DATE_EPOCH=1526255466
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -225,7 +226,7 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1526017487
+export SOURCE_DATE_EPOCH=1526255466
 rm -rf %{buildroot}
 %make_install
 ## make_install_append content
@@ -762,12 +763,18 @@ ln -sf /usr/lib/systemd/system/php-fpm.service %{buildroot}/usr/share/clr-servic
 /usr/include/php/main/streams/php_streams_int.h
 /usr/include/php/sapi/cli/cli.h
 
-%files doc
-%defattr(-,root,root,-)
-%doc /usr/share/man/man1/*
-%doc /usr/share/man/man8/*
-
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/extensions/no-debug-non-zts-20170718/dba.so
 /usr/lib64/extensions/no-debug-non-zts-20170718/opcache.so
+
+%files man
+%defattr(-,root,root,-)
+/usr/share/man/man1/phar.1
+/usr/share/man/man1/phar.phar.1
+/usr/share/man/man1/php-cgi.1
+/usr/share/man/man1/php-config.1
+/usr/share/man/man1/php.1
+/usr/share/man/man1/phpdbg.1
+/usr/share/man/man1/phpize.1
+/usr/share/man/man8/php-fpm.8
