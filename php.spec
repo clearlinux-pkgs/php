@@ -5,12 +5,12 @@
 # Source0 file verified with key 0xDBDB397470D12172 (pollita@php.net)
 #
 Name     : php
-Version  : 7.2.6
-Release  : 144
-URL      : http://us1.php.net/distributions/php-7.2.6.tar.xz
-Source0  : http://us1.php.net/distributions/php-7.2.6.tar.xz
+Version  : 7.2.7
+Release  : 145
+URL      : http://us1.php.net/distributions/php-7.2.7.tar.xz
+Source0  : http://us1.php.net/distributions/php-7.2.7.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
-Source99 : http://us1.php.net/distributions/php-7.2.6.tar.xz.asc
+Source99 : http://us1.php.net/distributions/php-7.2.7.tar.xz.asc
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-2-Clause BSD-3-Clause HPND LGPL-2.1 MIT OLDAP-2.8 PHP-3.01 Zend-2.0 Zlib
@@ -18,6 +18,7 @@ Requires: php-bin
 Requires: php-config
 Requires: php-lib
 Requires: php-data
+Requires: php-license
 Requires: php-man
 BuildRequires : bison
 BuildRequires : bzip2-dev
@@ -71,6 +72,7 @@ Summary: bin components for the php package.
 Group: Binaries
 Requires: php-data
 Requires: php-config
+Requires: php-license
 Requires: php-man
 
 %description bin
@@ -105,13 +107,31 @@ Provides: php-devel
 dev components for the php package.
 
 
+%package doc
+Summary: doc components for the php package.
+Group: Documentation
+Requires: php-man
+
+%description doc
+doc components for the php package.
+
+
 %package lib
 Summary: lib components for the php package.
 Group: Libraries
 Requires: php-data
+Requires: php-license
 
 %description lib
 lib components for the php package.
+
+
+%package license
+Summary: license components for the php package.
+Group: Default
+
+%description license
+license components for the php package.
 
 
 %package man
@@ -125,9 +145,9 @@ man components for the php package.
 %prep
 tar -xf %{SOURCE1}
 cd ..
-%setup -q -n php-7.2.6
-mkdir -p %{_topdir}/BUILD/php-7.2.6/phpbench
-mv %{_topdir}/BUILD/phpbench-0.8.2/* %{_topdir}/BUILD/php-7.2.6/phpbench
+%setup -q -n php-7.2.7
+mkdir -p %{_topdir}/BUILD/php-7.2.7/phpbench
+mv %{_topdir}/BUILD/phpbench-0.8.2/* %{_topdir}/BUILD/php-7.2.7/phpbench
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
@@ -137,7 +157,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1527220125
+export SOURCE_DATE_EPOCH=1529781163
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -226,8 +246,24 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1527220125
+export SOURCE_DATE_EPOCH=1529781163
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/doc/php
+cp LICENSE %{buildroot}/usr/share/doc/php/LICENSE
+cp phpbench/LICENSE %{buildroot}/usr/share/doc/php/phpbench_LICENSE
+cp ext/bcmath/libbcmath/COPYING.LIB %{buildroot}/usr/share/doc/php/ext_bcmath_libbcmath_COPYING.LIB
+cp ext/date/lib/LICENSE.rst %{buildroot}/usr/share/doc/php/ext_date_lib_LICENSE.rst
+cp ext/phar/LICENSE %{buildroot}/usr/share/doc/php/ext_phar_LICENSE
+cp ext/zip/LICENSE_libzip %{buildroot}/usr/share/doc/php/ext_zip_LICENSE_libzip
+cp ext/mbstring/ucgendat/OPENLDAP_LICENSE %{buildroot}/usr/share/doc/php/ext_mbstring_ucgendat_OPENLDAP_LICENSE
+cp ext/mbstring/oniguruma/COPYING %{buildroot}/usr/share/doc/php/ext_mbstring_oniguruma_COPYING
+cp ext/mbstring/libmbfl/LICENSE %{buildroot}/usr/share/doc/php/ext_mbstring_libmbfl_LICENSE
+cp ext/fileinfo/libmagic/LICENSE %{buildroot}/usr/share/doc/php/ext_fileinfo_libmagic_LICENSE
+cp ext/pcre/pcrelib/LICENCE %{buildroot}/usr/share/doc/php/ext_pcre_pcrelib_LICENCE
+cp ext/oci8/LICENSE %{buildroot}/usr/share/doc/php/ext_oci8_LICENSE
+cp TSRM/LICENSE %{buildroot}/usr/share/doc/php/TSRM_LICENSE
+cp Zend/LICENSE %{buildroot}/usr/share/doc/php/Zend_LICENSE
+cp sapi/fpm/LICENSE %{buildroot}/usr/share/doc/php/sapi_fpm_LICENSE
 %make_install
 ## make_install_append content
 mkdir -p %{buildroot}/usr/lib64/php/docs
@@ -763,10 +799,31 @@ ln -sf /usr/lib/systemd/system/php-fpm.service %{buildroot}/usr/share/clr-servic
 /usr/include/php/main/streams/php_streams_int.h
 /usr/include/php/sapi/cli/cli.h
 
+%files doc
+%defattr(0644,root,root,0755)
+%doc /usr/share/doc/php/*
+
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/extensions/no-debug-non-zts-20170718/dba.so
 /usr/lib64/extensions/no-debug-non-zts-20170718/opcache.so
+
+%files license
+%defattr(-,root,root,-)
+/usr/share/doc/php/LICENSE
+/usr/share/doc/php/TSRM_LICENSE
+/usr/share/doc/php/Zend_LICENSE
+/usr/share/doc/php/ext_bcmath_libbcmath_COPYING.LIB
+/usr/share/doc/php/ext_date_lib_LICENSE.rst
+/usr/share/doc/php/ext_fileinfo_libmagic_LICENSE
+/usr/share/doc/php/ext_mbstring_libmbfl_LICENSE
+/usr/share/doc/php/ext_mbstring_oniguruma_COPYING
+/usr/share/doc/php/ext_mbstring_ucgendat_OPENLDAP_LICENSE
+/usr/share/doc/php/ext_oci8_LICENSE
+/usr/share/doc/php/ext_phar_LICENSE
+/usr/share/doc/php/ext_zip_LICENSE_libzip
+/usr/share/doc/php/phpbench_LICENSE
+/usr/share/doc/php/sapi_fpm_LICENSE
 
 %files man
 %defattr(-,root,root,-)
