@@ -70,13 +70,12 @@ Configure miss: the location of libpng
 Configure miss: the location of libXpm
 Configure miss: FreeType 2
 Configure miss: whether to enable JIS-mapped Japanese font support in GD
-Configure miss: GNU gettext support
+Configure miss: bindtextdomain in -lintl
 Configure miss: mhash support
 Configure miss: if iconv supports //IGNORE
 Configure miss: IMAP support
 Configure miss: IMAP SSL support
 Configure miss: Firebird support
-Configure miss: whether to enable internationalization support
 Configure miss: LDAP support
 Configure miss: LDAP Cyrus SASL support
 Configure miss: external libmbfl
@@ -104,7 +103,7 @@ Configure miss: openssl dependencies
 Configure miss: makedev
 Configure miss: PSPELL support
 Configure miss: libedit readline replacement
-Configure miss: readline support
+Configure miss: rl_on_new_line in -ledit
 Configure miss: recode support
 Configure miss: mm support
 Configure miss: whether to enable shmop support
@@ -237,13 +236,12 @@ Configure miss: the location of libpng
 Configure miss: the location of libXpm
 Configure miss: FreeType 2
 Configure miss: whether to enable JIS-mapped Japanese font support in GD
-Configure miss: GNU gettext support
+Configure miss: bindtextdomain in -lintl
 Configure miss: mhash support
 Configure miss: if iconv supports //IGNORE
 Configure miss: IMAP support
 Configure miss: IMAP SSL support
 Configure miss: Firebird support
-Configure miss: whether to enable internationalization support
 Configure miss: LDAP support
 Configure miss: LDAP Cyrus SASL support
 Configure miss: external libmbfl
@@ -271,7 +269,7 @@ Configure miss: openssl dependencies
 Configure miss: makedev
 Configure miss: PSPELL support
 Configure miss: libedit readline replacement
-Configure miss: readline support
+Configure miss: rl_on_new_line in -ledit
 Configure miss: recode support
 Configure miss: mm support
 Configure miss: whether to enable shmop support

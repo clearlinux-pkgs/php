@@ -6,7 +6,7 @@
 #
 Name     : php
 Version  : 7.2.8
-Release  : 147
+Release  : 148
 URL      : http://us1.php.net/distributions/php-7.2.8.tar.xz
 Source0  : http://us1.php.net/distributions/php-7.2.8.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
@@ -29,8 +29,10 @@ BuildRequires : curl-dev
 BuildRequires : db
 BuildRequires : dbus-dev
 BuildRequires : e2fsprogs-dev
+BuildRequires : enchant-dev
 BuildRequires : expat-dev
 BuildRequires : file-dev
+BuildRequires : freetype
 BuildRequires : freetype-dev
 BuildRequires : gdbm-dev
 BuildRequires : gettext-dev
@@ -41,6 +43,7 @@ BuildRequires : libXpm-dev
 BuildRequires : libgd-dev
 BuildRequires : libidn-dev
 BuildRequires : libjpeg-turbo-dev
+BuildRequires : libpng-dev
 BuildRequires : libxml2
 BuildRequires : libxml2-dev
 BuildRequires : libxslt-dev
@@ -52,6 +55,7 @@ BuildRequires : nghttp2-dev
 BuildRequires : onig-dev
 BuildRequires : openssl-dev
 BuildRequires : pcre-dev
+BuildRequires : php
 BuildRequires : pkgconfig(libpng)
 BuildRequires : pkgconfig(libpq)
 BuildRequires : pkgconfig(libwebp)
@@ -165,7 +169,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1532882498
+export SOURCE_DATE_EPOCH=1532887552
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -219,7 +223,10 @@ CFLAGS="${CFLAGS_GENERATE}" CXXFLAGS="${CXXFLAGS_GENERATE}" FFLAGS="${FFLAGS_GEN
 --enable-bcmath \
 --with-lmdb \
 --with-gdbm \
---with-xsl=/usr/lib64/
+--with-xsl=/usr/lib64/ \
+--with-gettext \
+--enable-intl \
+--with-readline
 make  %{?_smp_mflags}
 
 export NO_INTERACTION=1 SKIP_ONLINE_TESTS=1
@@ -266,11 +273,14 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 --enable-bcmath \
 --with-lmdb \
 --with-gdbm \
---with-xsl=/usr/lib64/
+--with-xsl=/usr/lib64/ \
+--with-gettext \
+--enable-intl \
+--with-readline
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1532882498
+export SOURCE_DATE_EPOCH=1532887552
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/doc/php
 cp LICENSE %{buildroot}/usr/share/doc/php/LICENSE
