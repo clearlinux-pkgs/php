@@ -52,23 +52,18 @@ Configure miss: whether to explicitly link against libgcc
 Configure miss: whether to enable dmalloc
 Configure miss: whether to enable DTrace support
 Configure miss: libxml2 install dir
-Configure miss: Kerberos support
 Configure miss: RAND_egd
 Configure miss: if the location of ZLIB install directory is defined
-Configure miss: whether to enable bc style precision math functions
 Configure miss: gnutls support in libcurl
 Configure miss: QDBM support
-Configure miss: GDBM support
 Configure miss: NDBM support
 Configure miss: TCADB support
-Configure miss: LMDB support
 Configure miss: Berkeley DB4 support
 Configure miss: Berkeley DB3 support
 Configure miss: Berkeley DB2 support
 Configure miss: DB1 support
 Configure miss: DBM support
 Configure miss: ENCHANT support
-Configure miss: whether to enable EXIF (metadata from images) support
 Configure miss: pcre install prefix
 Configure miss: OpenSSL dir for FTP
 Configure miss: the location of libpng
@@ -76,11 +71,9 @@ Configure miss: the location of libXpm
 Configure miss: FreeType 2
 Configure miss: whether to enable JIS-mapped Japanese font support in GD
 Configure miss: GNU gettext support
-Configure miss: GNU MP support
 Configure miss: mhash support
 Configure miss: if iconv supports //IGNORE
 Configure miss: IMAP support
-Configure miss: IMAP Kerberos support
 Configure miss: IMAP SSL support
 Configure miss: Firebird support
 Configure miss: whether to enable internationalization support
@@ -148,7 +141,6 @@ Configure miss: atomic.h usability
 Configure miss: atomic.h presence
 Configure miss: atomic.h
 Configure miss: whether arc4random_buf is declared
-Configure miss: Argon2 support
 Configure miss: whether to enable System V semaphore support
 Configure miss: whether to enable System V shared memory support
 Configure miss: TIDY support
@@ -158,7 +150,6 @@ Configure miss: libexpat install dir
 Configure miss: XMLRPC-EPI support
 Configure miss: libexpat dir for XMLRPC-EPI
 Configure miss: iconv dir for XMLRPC-EPI
-Configure miss: XSL support
 Configure miss: whether to enable zend-test extension
 Configure miss: pcre install prefix
 Configure miss: libzip
@@ -228,23 +219,18 @@ Configure miss: whether to explicitly link against libgcc
 Configure miss: whether to enable dmalloc
 Configure miss: whether to enable DTrace support
 Configure miss: libxml2 install dir
-Configure miss: Kerberos support
 Configure miss: RAND_egd
 Configure miss: if the location of ZLIB install directory is defined
-Configure miss: whether to enable bc style precision math functions
 Configure miss: gnutls support in libcurl
 Configure miss: QDBM support
-Configure miss: GDBM support
 Configure miss: NDBM support
 Configure miss: TCADB support
-Configure miss: LMDB support
 Configure miss: Berkeley DB4 support
 Configure miss: Berkeley DB3 support
 Configure miss: Berkeley DB2 support
 Configure miss: DB1 support
 Configure miss: DBM support
 Configure miss: ENCHANT support
-Configure miss: whether to enable EXIF (metadata from images) support
 Configure miss: pcre install prefix
 Configure miss: OpenSSL dir for FTP
 Configure miss: the location of libpng
@@ -252,11 +238,9 @@ Configure miss: the location of libXpm
 Configure miss: FreeType 2
 Configure miss: whether to enable JIS-mapped Japanese font support in GD
 Configure miss: GNU gettext support
-Configure miss: GNU MP support
 Configure miss: mhash support
 Configure miss: if iconv supports //IGNORE
 Configure miss: IMAP support
-Configure miss: IMAP Kerberos support
 Configure miss: IMAP SSL support
 Configure miss: Firebird support
 Configure miss: whether to enable internationalization support
@@ -324,7 +308,6 @@ Configure miss: atomic.h usability
 Configure miss: atomic.h presence
 Configure miss: atomic.h
 Configure miss: whether arc4random_buf is declared
-Configure miss: Argon2 support
 Configure miss: whether to enable System V semaphore support
 Configure miss: whether to enable System V shared memory support
 Configure miss: TIDY support
@@ -334,7 +317,6 @@ Configure miss: libexpat install dir
 Configure miss: XMLRPC-EPI support
 Configure miss: libexpat dir for XMLRPC-EPI
 Configure miss: iconv dir for XMLRPC-EPI
-Configure miss: XSL support
 Configure miss: whether to enable zend-test extension
 Configure miss: pcre install prefix
 Configure miss: libzip

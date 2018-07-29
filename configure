@@ -10,6 +10,7 @@
 --enable-pcntl
 --with-bz2
 --with-zlib
+--with-gmp
 --enable-phar
 --enable-fpm
 --with-fpm-systemd
@@ -24,7 +25,6 @@
 --with-openssl
 --enable-sysvmsg
 --with-onig=/usr
---with-zlib
 --with-system-ciphers
 --enable-opcache 
 --enable-pcre-jit
@@ -32,3 +32,14 @@
 --with-config-file-path=/usr/share/defaults/php/
 --with-jpeg-dir=/usr/lib64
 --with-webp-dir=/usr/lib64
+--with-kerberos
+--enable-calendar
+--enable-exif
+--with-password-argon2
+--enable-bcmath
+--with-lmdb
+--with-gdbm
+--with-xsl=/usr/lib64/
+--with-gettext
+--enable-intl
+--with-readline

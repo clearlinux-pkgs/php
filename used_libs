@@ -1,9 +1,14 @@
+libargon2.so.1
 libbz2.so.0
 libc.so.6
 libcrypto.so.1.0.0
 libcurl.so.4
 libdl.so.2
+libexslt.so.0
+libgdbm.so.4
+libgmp.so.10
 libjpeg.so.62
+liblmdb.so
 libm.so.6
 libonig.so.5
 libpng16.so.16
@@ -14,4 +19,5 @@ libssl.so.1.0.0
 libsystemd.so.0
 libwebp.so.7
 libxml2.so.2
+libxslt.so.1
 libz.so.1

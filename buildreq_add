@@ -35,3 +35,16 @@ libzip-dev
 freetype-dev
 re2c
 valgrind
+mariadb-dev
+postgresql-dev
+aspell-dev
+krb5-dev
+enchant-dev
+libXpm-dev
+argon2-dev
+e2fsprogs-dev
+lmdb-dev
+libpng-dev
+freetype
+gettext-dev
+php

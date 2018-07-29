@@ -6,7 +6,7 @@
 #
 Name     : php
 Version  : 7.2.8
-Release  : 146
+Release  : 147
 URL      : http://us1.php.net/distributions/php-7.2.8.tar.xz
 Source0  : http://us1.php.net/distributions/php-7.2.8.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
@@ -20,12 +20,15 @@ Requires: php-lib
 Requires: php-data
 Requires: php-license
 Requires: php-man
+BuildRequires : argon2-dev
+BuildRequires : aspell-dev
 BuildRequires : bison
 BuildRequires : bzip2-dev
 BuildRequires : ca-certs
 BuildRequires : curl-dev
 BuildRequires : db
 BuildRequires : dbus-dev
+BuildRequires : e2fsprogs-dev
 BuildRequires : expat-dev
 BuildRequires : file-dev
 BuildRequires : freetype-dev
@@ -33,6 +36,8 @@ BuildRequires : gdbm-dev
 BuildRequires : gettext-dev
 BuildRequires : gmp-dev
 BuildRequires : httpd-dev
+BuildRequires : krb5-dev
+BuildRequires : libXpm-dev
 BuildRequires : libgd-dev
 BuildRequires : libidn-dev
 BuildRequires : libjpeg-turbo-dev
@@ -40,6 +45,8 @@ BuildRequires : libxml2
 BuildRequires : libxml2-dev
 BuildRequires : libxslt-dev
 BuildRequires : libzip-dev
+BuildRequires : lmdb-dev
+BuildRequires : mariadb-dev
 BuildRequires : ncurses-dev
 BuildRequires : nghttp2-dev
 BuildRequires : onig-dev
@@ -48,6 +55,7 @@ BuildRequires : pcre-dev
 BuildRequires : pkgconfig(libpng)
 BuildRequires : pkgconfig(libpq)
 BuildRequires : pkgconfig(libwebp)
+BuildRequires : postgresql-dev
 BuildRequires : re2c
 BuildRequires : readline-dev
 BuildRequires : systemd-dev
@@ -157,7 +165,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1532105203
+export SOURCE_DATE_EPOCH=1532882498
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -182,6 +190,7 @@ CFLAGS="${CFLAGS_GENERATE}" CXXFLAGS="${CXXFLAGS_GENERATE}" FFLAGS="${FFLAGS_GEN
 --enable-pcntl \
 --with-bz2 \
 --with-zlib \
+--with-gmp \
 --enable-phar \
 --enable-fpm \
 --with-fpm-systemd \
@@ -196,14 +205,21 @@ CFLAGS="${CFLAGS_GENERATE}" CXXFLAGS="${CXXFLAGS_GENERATE}" FFLAGS="${FFLAGS_GEN
 --with-openssl \
 --enable-sysvmsg \
 --with-onig=/usr \
---with-zlib \
 --with-system-ciphers \
 --enable-opcache \
 --enable-pcre-jit \
 --enable-re2c-cgoto \
 --with-config-file-path=/usr/share/defaults/php/ \
 --with-jpeg-dir=/usr/lib64 \
---with-webp-dir=/usr/lib64
+--with-webp-dir=/usr/lib64 \
+--with-kerberos \
+--enable-calendar \
+--enable-exif \
+--with-password-argon2 \
+--enable-bcmath \
+--with-lmdb \
+--with-gdbm \
+--with-xsl=/usr/lib64/
 make  %{?_smp_mflags}
 
 export NO_INTERACTION=1 SKIP_ONLINE_TESTS=1
@@ -221,6 +237,7 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 --enable-pcntl \
 --with-bz2 \
 --with-zlib \
+--with-gmp \
 --enable-phar \
 --enable-fpm \
 --with-fpm-systemd \
@@ -235,18 +252,25 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 --with-openssl \
 --enable-sysvmsg \
 --with-onig=/usr \
---with-zlib \
 --with-system-ciphers \
 --enable-opcache \
 --enable-pcre-jit \
 --enable-re2c-cgoto \
 --with-config-file-path=/usr/share/defaults/php/ \
 --with-jpeg-dir=/usr/lib64 \
---with-webp-dir=/usr/lib64
+--with-webp-dir=/usr/lib64 \
+--with-kerberos \
+--enable-calendar \
+--enable-exif \
+--with-password-argon2 \
+--enable-bcmath \
+--with-lmdb \
+--with-gdbm \
+--with-xsl=/usr/lib64/
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1532105203
+export SOURCE_DATE_EPOCH=1532882498
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/doc/php
 cp LICENSE %{buildroot}/usr/share/doc/php/LICENSE
