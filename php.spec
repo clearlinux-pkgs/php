@@ -6,7 +6,7 @@
 #
 Name     : php
 Version  : 7.2.11
-Release  : 152
+Release  : 153
 URL      : http://us1.php.net/distributions/php-7.2.11.tar.xz
 Source0  : http://us1.php.net/distributions/php-7.2.11.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
@@ -15,11 +15,11 @@ Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-2-Clause BSD-3-Clause HPND LGPL-2.1 MIT OLDAP-2.8 PHP-3.01 Zend-2.0 Zlib
 Requires: php-bin = %{version}-%{release}
-Requires: php-config = %{version}-%{release}
 Requires: php-data = %{version}-%{release}
 Requires: php-lib = %{version}-%{release}
 Requires: php-license = %{version}-%{release}
 Requires: php-man = %{version}-%{release}
+Requires: php-services = %{version}-%{release}
 BuildRequires : argon2-dev
 BuildRequires : aspell-dev
 BuildRequires : bison
@@ -84,20 +84,12 @@ aspects of the PHP interpreter.
 Summary: bin components for the php package.
 Group: Binaries
 Requires: php-data = %{version}-%{release}
-Requires: php-config = %{version}-%{release}
 Requires: php-license = %{version}-%{release}
 Requires: php-man = %{version}-%{release}
+Requires: php-services = %{version}-%{release}
 
 %description bin
 bin components for the php package.
-
-
-%package config
-Summary: config components for the php package.
-Group: Default
-
-%description config
-config components for the php package.
 
 
 %package data
@@ -146,6 +138,14 @@ Group: Default
 man components for the php package.
 
 
+%package services
+Summary: services components for the php package.
+Group: Systemd services
+
+%description services
+services components for the php package.
+
+
 %prep
 %setup -q -n php-7.2.11
 cd ..
@@ -161,7 +161,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1539881468
+export SOURCE_DATE_EPOCH=1542428036
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -272,7 +272,7 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1539881468
+export SOURCE_DATE_EPOCH=1542428036
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
 cp LICENSE %{buildroot}/usr/share/package-licenses/php/LICENSE
@@ -498,10 +498,6 @@ ln -sf /usr/lib/systemd/system/php-fpm.service %{buildroot}/usr/share/clr-servic
 /usr/bin/phpdbg
 /usr/bin/phpize
 
-%files config
-%defattr(-,root,root,-)
-/usr/lib/systemd/system/php-fpm.service
-
 %files data
 %defattr(-,root,root,-)
 /usr/share/clr-service-restart/php-fpm.service
@@ -511,7 +507,6 @@ ln -sf /usr/lib/systemd/system/php-fpm.service %{buildroot}/usr/share/clr-servic
 /usr/share/defaults/php/php-fpm.d/www.conf
 /usr/share/defaults/php/php.ini
 /usr/share/fpm/status.html
-/usr/share/package-licenses/php/ext_pcre_pcrelib_LICENCE
 
 %files dev
 %defattr(-,root,root,-)
@@ -841,6 +836,7 @@ ln -sf /usr/lib/systemd/system/php-fpm.service %{buildroot}/usr/share/clr-servic
 /usr/share/package-licenses/php/ext_mbstring_libmbfl_LICENSE
 /usr/share/package-licenses/php/ext_mbstring_oniguruma_COPYING
 /usr/share/package-licenses/php/ext_mbstring_ucgendat_OPENLDAP_LICENSE
+/usr/share/package-licenses/php/ext_pcre_pcrelib_LICENCE
 /usr/share/package-licenses/php/ext_phar_LICENSE
 /usr/share/package-licenses/php/ext_zip_LICENSE_libzip
 /usr/share/package-licenses/php/phpbench_LICENSE
@@ -856,3 +852,7 @@ ln -sf /usr/lib/systemd/system/php-fpm.service %{buildroot}/usr/share/clr-servic
 /usr/share/man/man1/phpdbg.1
 /usr/share/man/man1/phpize.1
 /usr/share/man/man8/php-fpm.8
+
+%files services
+%defattr(-,root,root,-)
+/usr/lib/systemd/system/php-fpm.service
