@@ -11,6 +11,7 @@ Configure miss: sys/pstat.h usability
 Configure miss: sys/pstat.h presence
 Configure miss: PS_STRINGS
 Configure miss: embedded SAPI library support
+Configure miss: setproctitle_fast
 Configure miss: port framework
 Configure miss: /dev/poll
 Configure miss: apparmor
@@ -31,6 +32,7 @@ Configure miss: sys/sysexits.h
 Configure miss: sys/varargs.h
 Configure miss: unix.h
 Configure miss: broken getcwd
+Configure miss: broken gcc optimize-strlen
 Configure miss: int8
 Configure miss: int16
 Configure miss: int32
@@ -40,7 +42,9 @@ Configure miss: uint16
 Configure miss: uint32
 Configure miss: uint64
 Configure miss: field sa_len in struct sockaddr
+Configure miss: __attribute__((target))
 Configure miss: crypt
+Configure miss: explicit_memset
 Configure miss: funopen
 Configure miss: std_syslog
 Configure miss: crypt_r
@@ -78,17 +82,14 @@ Configure miss: IMAP SSL support
 Configure miss: Firebird support
 Configure miss: LDAP support
 Configure miss: LDAP Cyrus SASL support
-Configure miss: external libmbfl
 Configure miss: whether to enable embedded MySQLi support
 Configure miss: Oracle Database OCI8 support
 Configure miss: Adabas support
 Configure miss: SAP DB support
 Configure miss: Solid support
 Configure miss: IBM DB2 support
-Configure miss: ODBCRouter.com support
 Configure miss: Empress support
 Configure miss: Empress local access support
-Configure miss: Birdstep support
 Configure miss: a custom ODBC support
 Configure miss: iODBC support
 Configure miss: Easysoft ODBC-ODBC Bridge support
@@ -151,7 +152,6 @@ Configure miss: libexpat dir for XMLRPC-EPI
 Configure miss: iconv dir for XMLRPC-EPI
 Configure miss: whether to enable zend-test extension
 Configure miss: pcre install prefix
-Configure miss: libzip
 Configure miss: whether to enable mysqlnd
 Configure miss: sigsetjmp
 Configure miss: whether sprintf is broken
@@ -177,6 +177,7 @@ Configure miss: sys/pstat.h usability
 Configure miss: sys/pstat.h presence
 Configure miss: PS_STRINGS
 Configure miss: embedded SAPI library support
+Configure miss: setproctitle_fast
 Configure miss: port framework
 Configure miss: /dev/poll
 Configure miss: apparmor
@@ -197,6 +198,7 @@ Configure miss: sys/sysexits.h
 Configure miss: sys/varargs.h
 Configure miss: unix.h
 Configure miss: broken getcwd
+Configure miss: broken gcc optimize-strlen
 Configure miss: int8
 Configure miss: int16
 Configure miss: int32
@@ -206,7 +208,9 @@ Configure miss: uint16
 Configure miss: uint32
 Configure miss: uint64
 Configure miss: field sa_len in struct sockaddr
+Configure miss: __attribute__((target))
 Configure miss: crypt
+Configure miss: explicit_memset
 Configure miss: funopen
 Configure miss: std_syslog
 Configure miss: crypt_r
@@ -244,17 +248,14 @@ Configure miss: IMAP SSL support
 Configure miss: Firebird support
 Configure miss: LDAP support
 Configure miss: LDAP Cyrus SASL support
-Configure miss: external libmbfl
 Configure miss: whether to enable embedded MySQLi support
 Configure miss: Oracle Database OCI8 support
 Configure miss: Adabas support
 Configure miss: SAP DB support
 Configure miss: Solid support
 Configure miss: IBM DB2 support
-Configure miss: ODBCRouter.com support
 Configure miss: Empress support
 Configure miss: Empress local access support
-Configure miss: Birdstep support
 Configure miss: a custom ODBC support
 Configure miss: iODBC support
 Configure miss: Easysoft ODBC-ODBC Bridge support
@@ -317,7 +318,6 @@ Configure miss: libexpat dir for XMLRPC-EPI
 Configure miss: iconv dir for XMLRPC-EPI
 Configure miss: whether to enable zend-test extension
 Configure miss: pcre install prefix
-Configure miss: libzip
 Configure miss: whether to enable mysqlnd
 Configure miss: sigsetjmp
 Configure miss: whether sprintf is broken
