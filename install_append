@@ -13,7 +13,7 @@ mv %{buildroot}/usr/share/defaults/php/php-fpm.d/www.conf.default %{buildroot}/u
 mkdir -p %{buildroot}/usr/share/defaults/php
 cat > %{buildroot}/usr/share/defaults/php/php.ini  <<_ASUNAME 
 [zendopcache]
-zend_extension=/usr/lib64/extensions/no-debug-non-zts-20170718/opcache.so
+zend_extension=/usr/lib64/extensions/no-debug-non-zts-20180731/opcache.so
 opcache.memory_consumption=128
 opcache.interned_strings_buffer=8
 opcache.max_accelerated_files=4000
