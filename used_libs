@@ -23,7 +23,7 @@ librt.so.1
 libssl.so.1.1
 libstdc++.so.6
 libsystemd.so.0
-libtinfo.so.6
+libtinfow.so.6
 libwebp.so.7
 libxml2.so.2
 libxslt.so.1
