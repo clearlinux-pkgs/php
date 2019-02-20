@@ -104,7 +104,6 @@ Configure miss: openssl dependencies
 Configure miss: makedev
 Configure miss: PSPELL support
 Configure miss: libedit readline replacement
-Configure miss: rl_on_new_line in -ledit
 Configure miss: recode support
 Configure miss: mm support
 Configure miss: whether to enable shmop support
@@ -270,7 +269,6 @@ Configure miss: openssl dependencies
 Configure miss: makedev
 Configure miss: PSPELL support
 Configure miss: libedit readline replacement
-Configure miss: rl_on_new_line in -ledit
 Configure miss: recode support
 Configure miss: mm support
 Configure miss: whether to enable shmop support
