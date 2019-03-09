@@ -5,12 +5,12 @@
 # Source0 file verified with key 0xD66C9593118BCCB6 (cmb@php.net)
 #
 Name     : php
-Version  : 7.3.2
-Release  : 158
-URL      : http://us1.php.net/distributions/php-7.3.2.tar.xz
-Source0  : http://us1.php.net/distributions/php-7.3.2.tar.xz
+Version  : 7.3.3
+Release  : 159
+URL      : http://us1.php.net/distributions/php-7.3.3.tar.xz
+Source0  : http://us1.php.net/distributions/php-7.3.3.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
-Source99 : http://us1.php.net/distributions/php-7.3.2.tar.xz.asc
+Source99 : http://us1.php.net/distributions/php-7.3.3.tar.xz.asc
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-2-Clause BSD-3-Clause HPND LGPL-2.1 MIT OLDAP-2.8 PHP-3.01 Zend-2.0 Zlib
@@ -146,11 +146,11 @@ services components for the php package.
 
 
 %prep
-%setup -q -n php-7.3.2
+%setup -q -n php-7.3.3
 cd ..
-%setup -q -T -D -n php-7.3.2 -b 1
+%setup -q -T -D -n php-7.3.3 -b 1
 mkdir -p phpbench
-cp -r %{_topdir}/BUILD/phpbench-0.8.2/* %{_topdir}/BUILD/php-7.3.2/phpbench
+cp -r %{_topdir}/BUILD/phpbench-0.8.2/* %{_topdir}/BUILD/php-7.3.3/phpbench
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
@@ -160,7 +160,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1550629031
+export SOURCE_DATE_EPOCH=1552099624
 export LDFLAGS="${LDFLAGS} -fno-lto"
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -272,7 +272,7 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1550629031
+export SOURCE_DATE_EPOCH=1552099624
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
 cp TSRM/LICENSE %{buildroot}/usr/share/package-licenses/php/TSRM_LICENSE
