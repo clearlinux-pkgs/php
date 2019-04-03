@@ -5,12 +5,12 @@
 # Source0 file verified with key 0xD66C9593118BCCB6 (cmb@php.net)
 #
 Name     : php
-Version  : 7.3.3
-Release  : 159
-URL      : http://us1.php.net/distributions/php-7.3.3.tar.xz
-Source0  : http://us1.php.net/distributions/php-7.3.3.tar.xz
+Version  : 7.3.4
+Release  : 160
+URL      : http://us1.php.net/distributions/php-7.3.4.tar.xz
+Source0  : http://us1.php.net/distributions/php-7.3.4.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
-Source99 : http://us1.php.net/distributions/php-7.3.3.tar.xz.asc
+Source99 : http://us1.php.net/distributions/php-7.3.4.tar.xz.asc
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-2-Clause BSD-3-Clause HPND LGPL-2.1 MIT OLDAP-2.8 PHP-3.01 Zend-2.0 Zlib
@@ -38,6 +38,7 @@ BuildRequires : gdbm-dev
 BuildRequires : gettext-dev
 BuildRequires : gmp-dev
 BuildRequires : httpd-dev
+BuildRequires : intltool-dev
 BuildRequires : krb5-dev
 BuildRequires : libXpm-dev
 BuildRequires : libgd-dev
@@ -84,7 +85,6 @@ Summary: bin components for the php package.
 Group: Binaries
 Requires: php-data = %{version}-%{release}
 Requires: php-license = %{version}-%{release}
-Requires: php-man = %{version}-%{release}
 Requires: php-services = %{version}-%{release}
 
 %description bin
@@ -146,11 +146,11 @@ services components for the php package.
 
 
 %prep
-%setup -q -n php-7.3.3
+%setup -q -n php-7.3.4
 cd ..
-%setup -q -T -D -n php-7.3.3 -b 1
+%setup -q -T -D -n php-7.3.4 -b 1
 mkdir -p phpbench
-cp -r %{_topdir}/BUILD/phpbench-0.8.2/* %{_topdir}/BUILD/php-7.3.3/phpbench
+cp -r %{_topdir}/BUILD/phpbench-0.8.2/* %{_topdir}/BUILD/php-7.3.4/phpbench
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
@@ -160,7 +160,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1552099624
+export SOURCE_DATE_EPOCH=1554329550
 export LDFLAGS="${LDFLAGS} -fno-lto"
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -272,9 +272,10 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1552099624
+export SOURCE_DATE_EPOCH=1554329550
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
+cp LICENSE %{buildroot}/usr/share/package-licenses/php/LICENSE
 cp TSRM/LICENSE %{buildroot}/usr/share/package-licenses/php/TSRM_LICENSE
 cp Zend/LICENSE %{buildroot}/usr/share/package-licenses/php/Zend_LICENSE
 cp ext/bcmath/libbcmath/COPYING.LIB %{buildroot}/usr/share/package-licenses/php/ext_bcmath_libbcmath_COPYING.LIB
@@ -283,6 +284,7 @@ cp ext/fileinfo/libmagic/LICENSE %{buildroot}/usr/share/package-licenses/php/ext
 cp ext/mbstring/libmbfl/LICENSE %{buildroot}/usr/share/package-licenses/php/ext_mbstring_libmbfl_LICENSE
 cp ext/mbstring/oniguruma/COPYING %{buildroot}/usr/share/package-licenses/php/ext_mbstring_oniguruma_COPYING
 cp ext/mbstring/ucgendat/OPENLDAP_LICENSE %{buildroot}/usr/share/package-licenses/php/ext_mbstring_ucgendat_OPENLDAP_LICENSE
+cp ext/oci8/LICENSE %{buildroot}/usr/share/package-licenses/php/ext_oci8_LICENSE
 cp ext/zip/LICENSE_libzip %{buildroot}/usr/share/package-licenses/php/ext_zip_LICENSE_libzip
 cp phpbench/LICENSE %{buildroot}/usr/share/package-licenses/php/phpbench_LICENSE
 cp sapi/fpm/LICENSE %{buildroot}/usr/share/package-licenses/php/sapi_fpm_LICENSE
@@ -831,6 +833,7 @@ ln -sf /usr/lib/systemd/system/php-fpm.service %{buildroot}/usr/share/clr-servic
 
 %files license
 %defattr(0644,root,root,0755)
+/usr/share/package-licenses/php/LICENSE
 /usr/share/package-licenses/php/TSRM_LICENSE
 /usr/share/package-licenses/php/Zend_LICENSE
 /usr/share/package-licenses/php/ext_bcmath_libbcmath_COPYING.LIB
@@ -839,6 +842,7 @@ ln -sf /usr/lib/systemd/system/php-fpm.service %{buildroot}/usr/share/clr-servic
 /usr/share/package-licenses/php/ext_mbstring_libmbfl_LICENSE
 /usr/share/package-licenses/php/ext_mbstring_oniguruma_COPYING
 /usr/share/package-licenses/php/ext_mbstring_ucgendat_OPENLDAP_LICENSE
+/usr/share/package-licenses/php/ext_oci8_LICENSE
 /usr/share/package-licenses/php/ext_zip_LICENSE_libzip
 /usr/share/package-licenses/php/phpbench_LICENSE
 /usr/share/package-licenses/php/sapi_fpm_LICENSE
