@@ -6,7 +6,7 @@
 #
 Name     : php
 Version  : 7.3.4
-Release  : 160
+Release  : 161
 URL      : http://us1.php.net/distributions/php-7.3.4.tar.xz
 Source0  : http://us1.php.net/distributions/php-7.3.4.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
@@ -63,6 +63,7 @@ BuildRequires : pkgconfig(libwebp)
 BuildRequires : postgresql-dev
 BuildRequires : re2c
 BuildRequires : readline-dev
+BuildRequires : sqlite-autoconf-dev
 BuildRequires : systemd-dev
 BuildRequires : valgrind
 BuildRequires : xz-dev
@@ -160,7 +161,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1554329550
+export SOURCE_DATE_EPOCH=1554762493
 export LDFLAGS="${LDFLAGS} -fno-lto"
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -218,7 +219,9 @@ CFLAGS="${CFLAGS_GENERATE}" CXXFLAGS="${CXXFLAGS_GENERATE}" FFLAGS="${FFLAGS_GEN
 --with-xsl=/usr/lib64/ \
 --with-gettext \
 --enable-intl \
---with-readline
+--with-readline \
+--with-sqlite3=shared,/usr \
+--with-pdo-sqlite=/usr
 make  %{?_smp_mflags}
 
 export NO_INTERACTION=1 SKIP_ONLINE_TESTS=1
@@ -268,11 +271,13 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 --with-xsl=/usr/lib64/ \
 --with-gettext \
 --enable-intl \
---with-readline
+--with-readline \
+--with-sqlite3=shared,/usr \
+--with-pdo-sqlite=/usr
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1554329550
+export SOURCE_DATE_EPOCH=1554762493
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
 cp LICENSE %{buildroot}/usr/share/package-licenses/php/LICENSE
@@ -718,7 +723,6 @@ ln -sf /usr/lib/systemd/system/php-fpm.service %{buildroot}/usr/share/clr-servic
 /usr/include/php/ext/spl/spl_heap.h
 /usr/include/php/ext/spl/spl_iterators.h
 /usr/include/php/ext/spl/spl_observer.h
-/usr/include/php/ext/sqlite3/libsqlite/sqlite3.h
 /usr/include/php/ext/standard/base64.h
 /usr/include/php/ext/standard/basic_functions.h
 /usr/include/php/ext/standard/crc32.h
@@ -830,6 +834,7 @@ ln -sf /usr/lib/systemd/system/php-fpm.service %{buildroot}/usr/share/clr-servic
 %defattr(-,root,root,-)
 /usr/lib64/extensions/no-debug-non-zts-20180731/dba.so
 /usr/lib64/extensions/no-debug-non-zts-20180731/opcache.so
+/usr/lib64/extensions/no-debug-non-zts-20180731/sqlite3.so
 
 %files license
 %defattr(0644,root,root,0755)

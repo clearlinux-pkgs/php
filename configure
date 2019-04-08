@@ -43,3 +43,5 @@
 --with-gettext
 --enable-intl
 --with-readline
+--with-sqlite3=shared,/usr
+--with-pdo-sqlite=/usr

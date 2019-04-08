@@ -20,6 +20,7 @@ libpq.so.5
 libreadline.so.7
 libresolv.so.2
 librt.so.1
+libsqlite3.so.0
 libssl.so.1.1
 libstdc++.so.6
 libsystemd.so.0

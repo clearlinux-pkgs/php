@@ -57,6 +57,7 @@ Configure miss: whether to enable dmalloc
 Configure miss: whether to enable DTrace support
 Configure miss: libxml2 install dir
 Configure miss: RAND_egd
+Configure miss: sqlite3_key in -lsqlite3
 Configure miss: if the location of ZLIB install directory is defined
 Configure miss: gnutls support in libcurl
 Configure miss: QDBM support
@@ -101,6 +102,7 @@ Configure miss: Firebird support for PDO
 Configure miss: Oracle OCI support for PDO
 Configure miss: ODBC v3 support for PDO
 Configure miss: openssl dependencies
+Configure miss: sqlite3_key in -lsqlite3
 Configure miss: makedev
 Configure miss: PSPELL support
 Configure miss: libedit readline replacement
@@ -222,6 +224,7 @@ Configure miss: whether to enable dmalloc
 Configure miss: whether to enable DTrace support
 Configure miss: libxml2 install dir
 Configure miss: RAND_egd
+Configure miss: sqlite3_key in -lsqlite3
 Configure miss: if the location of ZLIB install directory is defined
 Configure miss: gnutls support in libcurl
 Configure miss: QDBM support
@@ -266,6 +269,7 @@ Configure miss: Firebird support for PDO
 Configure miss: Oracle OCI support for PDO
 Configure miss: ODBC v3 support for PDO
 Configure miss: openssl dependencies
+Configure miss: sqlite3_key in -lsqlite3
 Configure miss: makedev
 Configure miss: PSPELL support
 Configure miss: libedit readline replacement
