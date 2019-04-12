@@ -6,12 +6,12 @@
 #
 Name     : php
 Version  : 7.3.4
-Release  : 161
+Release  : 162
 URL      : http://us1.php.net/distributions/php-7.3.4.tar.xz
 Source0  : http://us1.php.net/distributions/php-7.3.4.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
 Source99 : http://us1.php.net/distributions/php-7.3.4.tar.xz.asc
-Summary  : No detailed summary available
+Summary  : A general-purpose scripting language that is especially suited to web development
 Group    : Development/Tools
 License  : BSD-2-Clause BSD-3-Clause HPND LGPL-2.1 MIT OLDAP-2.8 PHP-3.01 Zend-2.0 Zlib
 Requires: php-bin = %{version}-%{release}
@@ -74,12 +74,11 @@ Patch3: 0002-disable-php-openssl-ext-rc4-algo.patch
 Patch4: 0003-reduce-fpm-event-wakeups.patch
 
 %description
--=- Documentation for PHPBench 0.8.1 -=-
-http://phpbench.pureftpd.org
-PHPBench is a benchmark suite for PHP.
-
-It performs a large number of simple tests in order to bench various
-aspects of the PHP interpreter.
+This is an extension that aims to implement some efficient data access
+interfaces and classes. You'll find the classes documented using php
+code in the file spl.php or in the corresponding .inc file in the examples
+subdirectory. Based on the internal implementations or the files in the
+examples subdirectory there are also some .php files to experiment with.
 
 %package bin
 Summary: bin components for the php package.
@@ -107,6 +106,7 @@ Requires: php-lib = %{version}-%{release}
 Requires: php-bin = %{version}-%{release}
 Requires: php-data = %{version}-%{release}
 Provides: php-devel = %{version}-%{release}
+Requires: php = %{version}-%{release}
 
 %description dev
 dev components for the php package.
@@ -161,8 +161,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1554762493
-export LDFLAGS="${LDFLAGS} -fno-lto"
+export SOURCE_DATE_EPOCH=1555078975
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -175,7 +174,6 @@ export CFLAGS_USE="$CFLAGS -fprofile-use -fprofile-dir=/var/tmp/pgo -fprofile-co
 export FCFLAGS_USE="$FCFLAGS -fprofile-use -fprofile-dir=/var/tmp/pgo -fprofile-correction "
 export FFLAGS_USE="$FFLAGS -fprofile-use -fprofile-dir=/var/tmp/pgo -fprofile-correction "
 export CXXFLAGS_USE="$CXXFLAGS -fprofile-use -fprofile-dir=/var/tmp/pgo -fprofile-correction "
-
 CFLAGS="${CFLAGS_GENERATE}" CXXFLAGS="${CXXFLAGS_GENERATE}" FFLAGS="${FFLAGS_GENERATE}" FCFLAGS="${FCFLAGS_GENERATE}" %configure --disable-static --sysconfdir=/usr/share/defaults/php \
 --enable-dba=shared \
 --enable-calendar \
@@ -281,7 +279,7 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1554762493
+export SOURCE_DATE_EPOCH=1555078975
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
 cp LICENSE %{buildroot}/usr/share/package-licenses/php/LICENSE

@@ -209,6 +209,7 @@ Configure miss: uint16
 Configure miss: uint32
 Configure miss: uint64
 Configure miss: field sa_len in struct sockaddr
+Configure miss: __attribute__((ifunc))
 Configure miss: __attribute__((target))
 Configure miss: crypt
 Configure miss: explicit_memset

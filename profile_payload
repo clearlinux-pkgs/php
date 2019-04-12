@@ -1,2 +1,5 @@
-export NO_INTERACTION=1 SKIP_ONLINE_TESTS=1 
-make test || :
+./sapi/cli/php Zend/micro_bench.php
+./sapi/cli/php Zend/bench.php
+pushd phpbench/
+../sapi/cli/php phpbench.php
+popd
