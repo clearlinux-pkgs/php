@@ -2,3 +2,4 @@ cve-2017-11146.nopatch
 0001-configure-php-fpm-service.patch
 0002-disable-php-openssl-ext-rc4-algo.patch
 0003-reduce-fpm-event-wakeups.patch
+0001-modify-makefile-behavior-to-not-remove-pgo-files-whe.patch
