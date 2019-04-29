@@ -6,7 +6,7 @@
 #
 Name     : php
 Version  : 7.3.4
-Release  : 163
+Release  : 165
 URL      : http://us1.php.net/distributions/php-7.3.4.tar.xz
 Source0  : http://us1.php.net/distributions/php-7.3.4.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
@@ -23,7 +23,6 @@ Requires: php-services = %{version}-%{release}
 BuildRequires : argon2-dev
 BuildRequires : aspell-dev
 BuildRequires : bison
-BuildRequires : buildreq-php
 BuildRequires : bzip2-dev
 BuildRequires : ca-certs
 BuildRequires : curl-dev
@@ -57,7 +56,6 @@ BuildRequires : nghttp2-dev
 BuildRequires : onig-dev
 BuildRequires : openssl-dev
 BuildRequires : pcre-dev
-BuildRequires : php
 BuildRequires : pkgconfig(libpng)
 BuildRequires : pkgconfig(libpq)
 BuildRequires : pkgconfig(libwebp)
@@ -165,7 +163,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1556566589
+export SOURCE_DATE_EPOCH=1556574756
 export LDFLAGS="${LDFLAGS} -fno-lto"
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -284,7 +282,7 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1556566589
+export SOURCE_DATE_EPOCH=1556574756
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
 cp LICENSE %{buildroot}/usr/share/package-licenses/php/LICENSE

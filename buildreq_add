@@ -47,5 +47,4 @@ lmdb-dev
 libpng-dev
 freetype
 gettext-dev
-php
 sqlite-autoconf-dev
