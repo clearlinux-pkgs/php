@@ -20,6 +20,7 @@ opcache.max_accelerated_files=4000
 opcache.revalidate_freq=180
 opcache.fast_shutdown=1
 opcache.enable_cli=1
+opcache.huge_code_pages=1
 _ASUNAME
 # clr-service-restart
 mkdir -p %{buildroot}/usr/share/clr-service-restart

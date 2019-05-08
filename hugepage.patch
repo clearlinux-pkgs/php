@@ -20,3 +20,14 @@
  
  	shared_segment->pos = 0;
  	shared_segment->size = requested_size;
+--- php-7.3.5/Zend/zend_alloc.c~	2019-05-08 02:35:38.000000000 +0000
++++ php-7.3.5/Zend/zend_alloc.c	2019-05-08 14:57:41.625297719 +0000
+@@ -191,7 +191,7 @@
+ typedef struct  _zend_mm_chunk     zend_mm_chunk;
+ typedef struct  _zend_mm_huge_list zend_mm_huge_list;
+ 
+-int zend_mm_use_huge_pages = 0;
++int zend_mm_use_huge_pages = 1;
+ 
+ /*
+  * Memory is retrived from OS by chunks of fixed size 2MB.

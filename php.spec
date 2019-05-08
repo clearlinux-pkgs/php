@@ -6,7 +6,7 @@
 #
 Name     : php
 Version  : 7.3.5
-Release  : 169
+Release  : 170
 URL      : http://us1.php.net/distributions/php-7.3.5.tar.xz
 Source0  : http://us1.php.net/distributions/php-7.3.5.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
@@ -165,7 +165,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1557283770
+export SOURCE_DATE_EPOCH=1557329106
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fcf-protection=full -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fcf-protection=full -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong "
 export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fcf-protection=full -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong "
@@ -224,7 +224,11 @@ CFLAGS="${CFLAGS_GENERATE}" CXXFLAGS="${CXXFLAGS_GENERATE}" FFLAGS="${FFLAGS_GEN
 --enable-intl \
 --with-readline \
 --with-sqlite3=shared,/usr \
---with-pdo-sqlite=/usr
+--with-pdo-sqlite=/usr \
+--enable-shmop \
+--enable-sysvshm \
+--enable-sysvsem \
+--enable-huge-code-pages
 make  %{?_smp_mflags}
 
 ./sapi/cli/php Zend/micro_bench.php
@@ -279,11 +283,15 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 --enable-intl \
 --with-readline \
 --with-sqlite3=shared,/usr \
---with-pdo-sqlite=/usr
+--with-pdo-sqlite=/usr \
+--enable-shmop \
+--enable-sysvshm \
+--enable-sysvsem \
+--enable-huge-code-pages
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1557283770
+export SOURCE_DATE_EPOCH=1557329106
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
 cp LICENSE %{buildroot}/usr/share/package-licenses/php/LICENSE
@@ -318,6 +326,7 @@ opcache.max_accelerated_files=4000
 opcache.revalidate_freq=180
 opcache.fast_shutdown=1
 opcache.enable_cli=1
+opcache.huge_code_pages=1
 _ASUNAME
 mkdir -p %{buildroot}/usr/share/clr-service-restart
 ln -sf /usr/lib/systemd/system/php-fpm.service %{buildroot}/usr/share/clr-service-restart/php-fpm.service

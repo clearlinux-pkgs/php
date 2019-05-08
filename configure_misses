@@ -109,7 +109,6 @@ Configure miss: PSPELL support
 Configure miss: libedit readline replacement
 Configure miss: recode support
 Configure miss: mm support
-Configure miss: whether to enable shmop support
 Configure miss: SNMP support
 Configure miss: OpenSSL dir for SNMP
 Configure miss: sodium support
@@ -143,8 +142,7 @@ Configure miss: atomic.h usability
 Configure miss: atomic.h presence
 Configure miss: atomic.h
 Configure miss: whether arc4random_buf is declared
-Configure miss: whether to enable System V semaphore support
-Configure miss: whether to enable System V shared memory support
+Configure miss: union semun
 Configure miss: TIDY support
 Configure miss: whether to enable WDDX support
 Configure miss: libexpat dir for WDDX
@@ -278,7 +276,6 @@ Configure miss: PSPELL support
 Configure miss: libedit readline replacement
 Configure miss: recode support
 Configure miss: mm support
-Configure miss: whether to enable shmop support
 Configure miss: SNMP support
 Configure miss: OpenSSL dir for SNMP
 Configure miss: sodium support
@@ -312,8 +309,7 @@ Configure miss: atomic.h usability
 Configure miss: atomic.h presence
 Configure miss: atomic.h
 Configure miss: whether arc4random_buf is declared
-Configure miss: whether to enable System V semaphore support
-Configure miss: whether to enable System V shared memory support
+Configure miss: union semun
 Configure miss: TIDY support
 Configure miss: whether to enable WDDX support
 Configure miss: libexpat dir for WDDX
