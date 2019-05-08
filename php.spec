@@ -6,7 +6,7 @@
 #
 Name     : php
 Version  : 7.3.5
-Release  : 168
+Release  : 169
 URL      : http://us1.php.net/distributions/php-7.3.5.tar.xz
 Source0  : http://us1.php.net/distributions/php-7.3.5.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
@@ -72,6 +72,7 @@ Patch2: 0001-configure-php-fpm-service.patch
 Patch3: 0002-disable-php-openssl-ext-rc4-algo.patch
 Patch4: 0003-reduce-fpm-event-wakeups.patch
 Patch5: 0001-modify-makefile-behavior-to-not-remove-pgo-files-whe.patch
+Patch6: hugepage.patch
 
 %description
 This is an extension that aims to implement some efficient data access
@@ -106,6 +107,7 @@ Requires: php-lib = %{version}-%{release}
 Requires: php-bin = %{version}-%{release}
 Requires: php-data = %{version}-%{release}
 Provides: php-devel = %{version}-%{release}
+Requires: php = %{version}-%{release}
 Requires: php = %{version}-%{release}
 
 %description dev
@@ -156,13 +158,14 @@ cp -r %{_topdir}/BUILD/phpbench-0.8.2/* %{_topdir}/BUILD/php-7.3.5/phpbench
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1557030363
+export SOURCE_DATE_EPOCH=1557283770
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fcf-protection=full -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fcf-protection=full -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong "
 export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fcf-protection=full -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong "
@@ -280,7 +283,7 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1557030363
+export SOURCE_DATE_EPOCH=1557283770
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
 cp LICENSE %{buildroot}/usr/share/package-licenses/php/LICENSE

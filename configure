@@ -45,3 +45,6 @@
 --with-readline
 --with-sqlite3=shared,/usr
 --with-pdo-sqlite=/usr
+--enable-shmop
+--enable-sysvshm
+--enable-sysvsem
