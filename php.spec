@@ -6,7 +6,7 @@
 #
 Name     : php
 Version  : 7.3.5
-Release  : 171
+Release  : 172
 URL      : http://us1.php.net/distributions/php-7.3.5.tar.xz
 Source0  : http://us1.php.net/distributions/php-7.3.5.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
@@ -67,12 +67,11 @@ BuildRequires : systemd-dev
 BuildRequires : valgrind
 BuildRequires : xz-dev
 BuildRequires : zlib-dev
-Patch1: cve-2017-11146.nopatch
-Patch2: 0001-configure-php-fpm-service.patch
-Patch3: 0002-disable-php-openssl-ext-rc4-algo.patch
-Patch4: 0003-reduce-fpm-event-wakeups.patch
-Patch5: 0001-modify-makefile-behavior-to-not-remove-pgo-files-whe.patch
-Patch6: hugepage.patch
+Patch1: 0001-configure-php-fpm-service.patch
+Patch2: 0002-disable-php-openssl-ext-rc4-algo.patch
+Patch3: 0003-reduce-fpm-event-wakeups.patch
+Patch4: 0001-modify-makefile-behavior-to-not-remove-pgo-files-whe.patch
+Patch5: hugepage.patch
 
 %description
 This is an extension that aims to implement some efficient data access
@@ -154,22 +153,22 @@ cd ..
 %setup -q -T -D -n php-7.3.5 -b 1
 mkdir -p phpbench
 cp -r %{_topdir}/BUILD/phpbench-0.8.2/* %{_topdir}/BUILD/php-7.3.5/phpbench
+%patch1 -p1
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
-%patch6 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1557794075
-export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fcf-protection=full -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong "
-export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fcf-protection=full -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong "
-export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fcf-protection=full -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong "
-export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -fcf-protection=full -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong "
+export SOURCE_DATE_EPOCH=1557794991
+export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
+export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
+export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
+export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 export CFLAGS_GENERATE="$CFLAGS -fprofile-generate -fprofile-dir=/var/tmp/pgo -fprofile-update=atomic "
 export FCFLAGS_GENERATE="$FCFLAGS -fprofile-generate -fprofile-dir=/var/tmp/pgo -fprofile-update=atomic "
 export FFLAGS_GENERATE="$FFLAGS -fprofile-generate -fprofile-dir=/var/tmp/pgo -fprofile-update=atomic "
@@ -291,7 +290,7 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1557794075
+export SOURCE_DATE_EPOCH=1557794991
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
 cp LICENSE %{buildroot}/usr/share/package-licenses/php/LICENSE
