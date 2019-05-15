@@ -6,7 +6,7 @@
 #
 Name     : php
 Version  : 7.3.5
-Release  : 172
+Release  : 173
 URL      : http://us1.php.net/distributions/php-7.3.5.tar.xz
 Source0  : http://us1.php.net/distributions/php-7.3.5.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
@@ -164,7 +164,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1557794991
+export SOURCE_DATE_EPOCH=1557935580
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
@@ -185,7 +185,7 @@ CFLAGS="${CFLAGS_GENERATE}" CXXFLAGS="${CXXFLAGS_GENERATE}" FFLAGS="${FFLAGS_GEN
 --enable-sockets \
 --with-gd \
 --enable-zip \
---with-curl \
+--with-curl=shared,/usr \
 --enable-pcntl \
 --with-bz2 \
 --with-zlib \
@@ -244,7 +244,7 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 --enable-sockets \
 --with-gd \
 --enable-zip \
---with-curl \
+--with-curl=shared,/usr \
 --enable-pcntl \
 --with-bz2 \
 --with-zlib \
@@ -290,7 +290,7 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1557794991
+export SOURCE_DATE_EPOCH=1557935580
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
 cp LICENSE %{buildroot}/usr/share/package-licenses/php/LICENSE
@@ -846,6 +846,7 @@ ln -sf /usr/lib/systemd/system/php-fpm.service %{buildroot}/usr/share/clr-servic
 
 %files lib
 %defattr(-,root,root,-)
+/usr/lib64/extensions/no-debug-non-zts-20180731/curl.so
 /usr/lib64/extensions/no-debug-non-zts-20180731/dba.so
 /usr/lib64/extensions/no-debug-non-zts-20180731/opcache.so
 /usr/lib64/extensions/no-debug-non-zts-20180731/sqlite3.so
