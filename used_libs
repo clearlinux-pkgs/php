@@ -8,9 +8,9 @@ libexslt.so.0
 libgcc_s.so.1
 libgdbm.so.4
 libgmp.so.10
-libicui18n.so.63
-libicuio.so.63
-libicuuc.so.63
+libicui18n.so.64
+libicuio.so.64
+libicuuc.so.64
 libjpeg.so.62
 liblmdb.so
 libm.so.6

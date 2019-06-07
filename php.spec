@@ -5,12 +5,12 @@
 # Source0 file verified with key 0xD66C9593118BCCB6 (cmb@php.net)
 #
 Name     : php
-Version  : 7.3.5
-Release  : 173
-URL      : http://us1.php.net/distributions/php-7.3.5.tar.xz
-Source0  : http://us1.php.net/distributions/php-7.3.5.tar.xz
+Version  : 7.3.6
+Release  : 174
+URL      : http://us1.php.net/distributions/php-7.3.6.tar.xz
+Source0  : http://us1.php.net/distributions/php-7.3.6.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
-Source99 : http://us1.php.net/distributions/php-7.3.5.tar.xz.asc
+Source99 : http://us1.php.net/distributions/php-7.3.6.tar.xz.asc
 Summary  : A general-purpose scripting language that is especially suited to web development
 Group    : Development/Tools
 License  : BSD-2-Clause BSD-3-Clause HPND LGPL-2.1 MIT OLDAP-2.8 PHP-3.01 Zend-2.0 Zlib
@@ -148,11 +148,11 @@ services components for the php package.
 
 
 %prep
-%setup -q -n php-7.3.5
+%setup -q -n php-7.3.6
 cd ..
-%setup -q -T -D -n php-7.3.5 -b 1
+%setup -q -T -D -n php-7.3.6 -b 1
 mkdir -p phpbench
-cp -r %{_topdir}/BUILD/phpbench-0.8.2/* %{_topdir}/BUILD/php-7.3.5/phpbench
+cp -r %{_topdir}/BUILD/phpbench-0.8.2/* %{_topdir}/BUILD/php-7.3.6/phpbench
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -164,7 +164,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1557935580
+export SOURCE_DATE_EPOCH=1559869979
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
@@ -187,9 +187,9 @@ CFLAGS="${CFLAGS_GENERATE}" CXXFLAGS="${CXXFLAGS_GENERATE}" FFLAGS="${FFLAGS_GEN
 --enable-zip \
 --with-curl=shared,/usr \
 --enable-pcntl \
---with-bz2 \
---with-zlib \
---with-gmp \
+--with-bz2=shared,/usr \
+--with-zlib=shared,/usr \
+--with-gmp=shared,/usr \
 --enable-phar \
 --enable-fpm \
 --with-fpm-systemd \
@@ -246,9 +246,9 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 --enable-zip \
 --with-curl=shared,/usr \
 --enable-pcntl \
---with-bz2 \
---with-zlib \
---with-gmp \
+--with-bz2=shared,/usr \
+--with-zlib=shared,/usr \
+--with-gmp=shared,/usr \
 --enable-phar \
 --enable-fpm \
 --with-fpm-systemd \
@@ -290,7 +290,7 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1557935580
+export SOURCE_DATE_EPOCH=1559869979
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
 cp LICENSE %{buildroot}/usr/share/package-licenses/php/LICENSE
@@ -846,10 +846,13 @@ ln -sf /usr/lib/systemd/system/php-fpm.service %{buildroot}/usr/share/clr-servic
 
 %files lib
 %defattr(-,root,root,-)
+/usr/lib64/extensions/no-debug-non-zts-20180731/bz2.so
 /usr/lib64/extensions/no-debug-non-zts-20180731/curl.so
 /usr/lib64/extensions/no-debug-non-zts-20180731/dba.so
+/usr/lib64/extensions/no-debug-non-zts-20180731/gmp.so
 /usr/lib64/extensions/no-debug-non-zts-20180731/opcache.so
 /usr/lib64/extensions/no-debug-non-zts-20180731/sqlite3.so
+/usr/lib64/extensions/no-debug-non-zts-20180731/zlib.so
 
 %files license
 %defattr(0644,root,root,0755)
