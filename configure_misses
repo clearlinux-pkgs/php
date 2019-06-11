@@ -60,7 +60,6 @@ Configure miss: libxml2 install dir
 Configure miss: RAND_egd
 Configure miss: sqlite3_key in -lsqlite3
 Configure miss: if the location of ZLIB install directory is defined
-Configure miss: openssl support in libcurl
 Configure miss: gnutls support in libcurl
 Configure miss: QDBM support
 Configure miss: NDBM support
@@ -228,7 +227,6 @@ Configure miss: libxml2 install dir
 Configure miss: RAND_egd
 Configure miss: sqlite3_key in -lsqlite3
 Configure miss: if the location of ZLIB install directory is defined
-Configure miss: openssl support in libcurl
 Configure miss: gnutls support in libcurl
 Configure miss: QDBM support
 Configure miss: NDBM support

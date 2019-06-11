@@ -6,11 +6,11 @@
 --enable-sockets
 --with-gd
 --enable-zip
---with-curl=shared,/usr
+--with-curl
 --enable-pcntl
---with-bz2=shared,/usr
---with-zlib=shared,/usr
---with-gmp=shared,/usr
+--with-bz2
+--with-zlib
+--with-gmp
 --enable-phar
 --enable-fpm
 --with-fpm-systemd
