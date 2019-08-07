@@ -5,15 +5,15 @@
 # Source0 file verified with key 0xD66C9593118BCCB6 (cmb@php.net)
 #
 Name     : php
-Version  : 7.3.7
-Release  : 176
-URL      : http://us1.php.net/distributions/php-7.3.7.tar.xz
-Source0  : http://us1.php.net/distributions/php-7.3.7.tar.xz
+Version  : 7.3.8
+Release  : 177
+URL      : http://us1.php.net/distributions/php-7.3.8.tar.xz
+Source0  : http://us1.php.net/distributions/php-7.3.8.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
-Source99 : http://us1.php.net/distributions/php-7.3.7.tar.xz.asc
+Source2 : http://us1.php.net/distributions/php-7.3.8.tar.xz.asc
 Summary  : A general-purpose scripting language that is especially suited to web development
 Group    : Development/Tools
-License  : BSD-2-Clause BSD-3-Clause HPND LGPL-2.1 MIT OLDAP-2.8 PHP-3.01 Zend-2.0 Zlib
+License  : BSD-2-Clause BSD-3-Clause HPND LGPL-2.1 OLDAP-2.8 PHP-3.01 Zend-2.0 Zlib
 Requires: php-bin = %{version}-%{release}
 Requires: php-data = %{version}-%{release}
 Requires: php-lib = %{version}-%{release}
@@ -148,11 +148,11 @@ services components for the php package.
 
 
 %prep
-%setup -q -n php-7.3.7
+%setup -q -n php-7.3.8
 cd ..
-%setup -q -T -D -n php-7.3.7 -b 1
+%setup -q -T -D -n php-7.3.8 -b 1
 mkdir -p phpbench
-cp -r %{_topdir}/BUILD/phpbench-0.8.2/* %{_topdir}/BUILD/php-7.3.7/phpbench
+cp -r %{_topdir}/BUILD/phpbench-0.8.2/* %{_topdir}/BUILD/php-7.3.8/phpbench
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -164,7 +164,8 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1562241609
+export SOURCE_DATE_EPOCH=1565197472
+# -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
@@ -291,14 +292,13 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1562241609
+export SOURCE_DATE_EPOCH=1565197472
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
 cp LICENSE %{buildroot}/usr/share/package-licenses/php/LICENSE
 cp TSRM/LICENSE %{buildroot}/usr/share/package-licenses/php/TSRM_LICENSE
 cp Zend/LICENSE %{buildroot}/usr/share/package-licenses/php/Zend_LICENSE
 cp ext/bcmath/libbcmath/COPYING.LIB %{buildroot}/usr/share/package-licenses/php/ext_bcmath_libbcmath_COPYING.LIB
-cp ext/date/lib/LICENSE.rst %{buildroot}/usr/share/package-licenses/php/ext_date_lib_LICENSE.rst
 cp ext/fileinfo/libmagic/LICENSE %{buildroot}/usr/share/package-licenses/php/ext_fileinfo_libmagic_LICENSE
 cp ext/mbstring/libmbfl/LICENSE %{buildroot}/usr/share/package-licenses/php/ext_mbstring_libmbfl_LICENSE
 cp ext/mbstring/oniguruma/COPYING %{buildroot}/usr/share/package-licenses/php/ext_mbstring_oniguruma_COPYING
@@ -308,6 +308,8 @@ cp ext/zip/LICENSE_libzip %{buildroot}/usr/share/package-licenses/php/ext_zip_LI
 cp phpbench/LICENSE %{buildroot}/usr/share/package-licenses/php/phpbench_LICENSE
 cp sapi/fpm/LICENSE %{buildroot}/usr/share/package-licenses/php/sapi_fpm_LICENSE
 %make_install
+## Remove excluded files
+rm -f %{buildroot}/etc/pear.conf
 ## install_append content
 mkdir -p %{buildroot}/usr/lib64/php/docs
 mv %{buildroot}/usr/lib64/php/doc/PEAR %{buildroot}/usr/lib64/php/docs/PEAR
@@ -857,7 +859,6 @@ ln -sf /usr/lib/systemd/system/php-fpm.service %{buildroot}/usr/share/clr-servic
 /usr/share/package-licenses/php/TSRM_LICENSE
 /usr/share/package-licenses/php/Zend_LICENSE
 /usr/share/package-licenses/php/ext_bcmath_libbcmath_COPYING.LIB
-/usr/share/package-licenses/php/ext_date_lib_LICENSE.rst
 /usr/share/package-licenses/php/ext_fileinfo_libmagic_LICENSE
 /usr/share/package-licenses/php/ext_mbstring_libmbfl_LICENSE
 /usr/share/package-licenses/php/ext_mbstring_oniguruma_COPYING
