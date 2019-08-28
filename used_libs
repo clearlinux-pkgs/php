@@ -5,6 +5,7 @@ libcrypto.so.1.1
 libcurl.so.4
 libdl.so.2
 libexslt.so.0
+libfreetype.so.6
 libgcc_s.so.1
 libgdbm.so.4
 libgmp.so.10

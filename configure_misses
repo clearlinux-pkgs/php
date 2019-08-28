@@ -74,7 +74,6 @@ Configure miss: pcre install prefix
 Configure miss: OpenSSL dir for FTP
 Configure miss: the location of libpng
 Configure miss: the location of libXpm
-Configure miss: FreeType 2
 Configure miss: whether to enable JIS-mapped Japanese font support in GD
 Configure miss: bindtextdomain in -lintl
 Configure miss: mhash support
@@ -241,7 +240,6 @@ Configure miss: pcre install prefix
 Configure miss: OpenSSL dir for FTP
 Configure miss: the location of libpng
 Configure miss: the location of libXpm
-Configure miss: FreeType 2
 Configure miss: whether to enable JIS-mapped Japanese font support in GD
 Configure miss: bindtextdomain in -lintl
 Configure miss: mhash support

@@ -6,14 +6,14 @@
 #
 Name     : php
 Version  : 7.3.8
-Release  : 177
+Release  : 179
 URL      : http://us1.php.net/distributions/php-7.3.8.tar.xz
 Source0  : http://us1.php.net/distributions/php-7.3.8.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
 Source2 : http://us1.php.net/distributions/php-7.3.8.tar.xz.asc
 Summary  : A general-purpose scripting language that is especially suited to web development
 Group    : Development/Tools
-License  : BSD-2-Clause BSD-3-Clause HPND LGPL-2.1 OLDAP-2.8 PHP-3.01 Zend-2.0 Zlib
+License  : Apache-2.0 BSD-2-Clause BSD-3-Clause HPND LGPL-2.1 MIT OLDAP-2.8 PHP-3.01 Zend-2.0 Zlib
 Requires: php-bin = %{version}-%{release}
 Requires: php-data = %{version}-%{release}
 Requires: php-lib = %{version}-%{release}
@@ -56,6 +56,7 @@ BuildRequires : nghttp2-dev
 BuildRequires : onig-dev
 BuildRequires : openssl-dev
 BuildRequires : pcre-dev
+BuildRequires : pkgconfig(freetype2)
 BuildRequires : pkgconfig(libpng)
 BuildRequires : pkgconfig(libpq)
 BuildRequires : pkgconfig(libwebp)
@@ -74,11 +75,12 @@ Patch4: 0001-modify-makefile-behavior-to-not-remove-pgo-files-whe.patch
 Patch5: hugepage.patch
 
 %description
-This is an extension that aims to implement some efficient data access
-interfaces and classes. You'll find the classes documented using php
-code in the file spl.php or in the corresponding .inc file in the examples
-subdirectory. Based on the internal implementations or the files in the
-examples subdirectory there are also some .php files to experiment with.
+-=- Documentation for PHPBench 0.8.1 -=-
+http://phpbench.pureftpd.org
+PHPBench is a benchmark suite for PHP.
+
+It performs a large number of simple tests in order to bench various
+aspects of the PHP interpreter.
 
 %package bin
 Summary: bin components for the php package.
@@ -106,7 +108,6 @@ Requires: php-lib = %{version}-%{release}
 Requires: php-bin = %{version}-%{release}
 Requires: php-data = %{version}-%{release}
 Provides: php-devel = %{version}-%{release}
-Requires: php = %{version}-%{release}
 Requires: php = %{version}-%{release}
 
 %description dev
@@ -164,8 +165,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1565197472
-# -Werror is for werrorists
+export SOURCE_DATE_EPOCH=1567022636
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
@@ -229,7 +229,8 @@ CFLAGS="${CFLAGS_GENERATE}" CXXFLAGS="${CXXFLAGS_GENERATE}" FFLAGS="${FFLAGS_GEN
 --enable-shmop \
 --enable-sysvshm \
 --enable-sysvsem \
---enable-huge-code-pages
+--enable-huge-code-pages \
+--with-freetype-dir=/usr/lib64
 make  %{?_smp_mflags}
 
 ./sapi/cli/php Zend/micro_bench.php
@@ -288,18 +289,21 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 --enable-shmop \
 --enable-sysvshm \
 --enable-sysvsem \
---enable-huge-code-pages
+--enable-huge-code-pages \
+--with-freetype-dir=/usr/lib64
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1565197472
+export SOURCE_DATE_EPOCH=1567022636
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
 cp LICENSE %{buildroot}/usr/share/package-licenses/php/LICENSE
 cp TSRM/LICENSE %{buildroot}/usr/share/package-licenses/php/TSRM_LICENSE
 cp Zend/LICENSE %{buildroot}/usr/share/package-licenses/php/Zend_LICENSE
 cp ext/bcmath/libbcmath/COPYING.LIB %{buildroot}/usr/share/package-licenses/php/ext_bcmath_libbcmath_COPYING.LIB
+cp ext/date/lib/LICENSE.rst %{buildroot}/usr/share/package-licenses/php/ext_date_lib_LICENSE.rst
 cp ext/fileinfo/libmagic/LICENSE %{buildroot}/usr/share/package-licenses/php/ext_fileinfo_libmagic_LICENSE
+cp ext/gd/tests/Rochester-Regular.otf.LICENSE.txt %{buildroot}/usr/share/package-licenses/php/ext_gd_tests_Rochester-Regular.otf.LICENSE.txt
 cp ext/mbstring/libmbfl/LICENSE %{buildroot}/usr/share/package-licenses/php/ext_mbstring_libmbfl_LICENSE
 cp ext/mbstring/oniguruma/COPYING %{buildroot}/usr/share/package-licenses/php/ext_mbstring_oniguruma_COPYING
 cp ext/mbstring/ucgendat/OPENLDAP_LICENSE %{buildroot}/usr/share/package-licenses/php/ext_mbstring_ucgendat_OPENLDAP_LICENSE
@@ -859,7 +863,9 @@ ln -sf /usr/lib/systemd/system/php-fpm.service %{buildroot}/usr/share/clr-servic
 /usr/share/package-licenses/php/TSRM_LICENSE
 /usr/share/package-licenses/php/Zend_LICENSE
 /usr/share/package-licenses/php/ext_bcmath_libbcmath_COPYING.LIB
+/usr/share/package-licenses/php/ext_date_lib_LICENSE.rst
 /usr/share/package-licenses/php/ext_fileinfo_libmagic_LICENSE
+/usr/share/package-licenses/php/ext_gd_tests_Rochester-Regular.otf.LICENSE.txt
 /usr/share/package-licenses/php/ext_mbstring_libmbfl_LICENSE
 /usr/share/package-licenses/php/ext_mbstring_oniguruma_COPYING
 /usr/share/package-licenses/php/ext_mbstring_ucgendat_OPENLDAP_LICENSE

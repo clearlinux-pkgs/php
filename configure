@@ -48,4 +48,5 @@
 --enable-shmop
 --enable-sysvshm
 --enable-sysvsem
---enable-huge-code-pages  
+--enable-huge-code-pages
+--with-freetype-dir=/usr/lib64
