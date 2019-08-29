@@ -50,3 +50,5 @@
 --enable-sysvsem
 --enable-huge-code-pages
 --with-freetype-dir=/usr/lib64
+--enable-embed
+--with-libdir=lib64

@@ -25,3 +25,5 @@ _ASUNAME
 # clr-service-restart
 mkdir -p %{buildroot}/usr/share/clr-service-restart
 ln -sf /usr/lib/systemd/system/php-fpm.service %{buildroot}/usr/share/clr-service-restart/php-fpm.service
+# SAPI wrong folder
+mv %{buildroot}/usr/lib/libphp7.so %{buildroot}/usr/lib64/
