@@ -5,12 +5,12 @@
 # Source0 file verified with key 0xD66C9593118BCCB6 (cmb@php.net)
 #
 Name     : php
-Version  : 7.3.8
-Release  : 186
-URL      : http://us1.php.net/distributions/php-7.3.8.tar.xz
-Source0  : http://us1.php.net/distributions/php-7.3.8.tar.xz
+Version  : 7.3.9
+Release  : 187
+URL      : http://us1.php.net/distributions/php-7.3.9.tar.xz
+Source0  : http://us1.php.net/distributions/php-7.3.9.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
-Source2 : http://us1.php.net/distributions/php-7.3.8.tar.xz.asc
+Source2 : http://us1.php.net/distributions/php-7.3.9.tar.xz.asc
 Summary  : A general-purpose scripting language that is especially suited to web development
 Group    : Development/Tools
 License  : Apache-2.0 BSD-2-Clause BSD-3-Clause HPND LGPL-2.1 MIT OLDAP-2.8 PHP-3.01 Zend-2.0 Zlib
@@ -75,12 +75,11 @@ Patch4: 0001-modify-makefile-behavior-to-not-remove-pgo-files-whe.patch
 Patch5: hugepage.patch
 
 %description
--=- Documentation for PHPBench 0.8.1 -=-
-http://phpbench.pureftpd.org
-PHPBench is a benchmark suite for PHP.
-
-It performs a large number of simple tests in order to bench various
-aspects of the PHP interpreter.
+This is an extension that aims to implement some efficient data access
+interfaces and classes. You'll find the classes documented using php
+code in the file spl.php or in the corresponding .inc file in the examples
+subdirectory. Based on the internal implementations or the files in the
+examples subdirectory there are also some .php files to experiment with.
 
 %package bin
 Summary: bin components for the php package.
@@ -108,6 +107,7 @@ Requires: php-lib = %{version}-%{release}
 Requires: php-bin = %{version}-%{release}
 Requires: php-data = %{version}-%{release}
 Provides: php-devel = %{version}-%{release}
+Requires: php = %{version}-%{release}
 Requires: php = %{version}-%{release}
 
 %description dev
@@ -157,11 +157,11 @@ services components for the php package.
 
 
 %prep
-%setup -q -n php-7.3.8
+%setup -q -n php-7.3.9
 cd ..
-%setup -q -T -D -n php-7.3.8 -b 1
+%setup -q -T -D -n php-7.3.9 -b 1
 mkdir -p phpbench
-cp -r %{_topdir}/BUILD/phpbench-0.8.2/* %{_topdir}/BUILD/php-7.3.8/phpbench
+cp -r %{_topdir}/BUILD/phpbench-0.8.2/* %{_topdir}/BUILD/php-7.3.9/phpbench
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -173,7 +173,8 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1567108058
+export SOURCE_DATE_EPOCH=1567894760
+# -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
@@ -306,7 +307,7 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1567108058
+export SOURCE_DATE_EPOCH=1567894760
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
 cp LICENSE %{buildroot}/usr/share/package-licenses/php/LICENSE
