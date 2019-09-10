@@ -6,7 +6,7 @@
 #
 Name     : php
 Version  : 7.3.9
-Release  : 187
+Release  : 188
 URL      : http://us1.php.net/distributions/php-7.3.9.tar.xz
 Source0  : http://us1.php.net/distributions/php-7.3.9.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
@@ -75,11 +75,12 @@ Patch4: 0001-modify-makefile-behavior-to-not-remove-pgo-files-whe.patch
 Patch5: hugepage.patch
 
 %description
-This is an extension that aims to implement some efficient data access
-interfaces and classes. You'll find the classes documented using php
-code in the file spl.php or in the corresponding .inc file in the examples
-subdirectory. Based on the internal implementations or the files in the
-examples subdirectory there are also some .php files to experiment with.
+-=- Documentation for PHPBench 0.8.1 -=-
+http://phpbench.pureftpd.org
+PHPBench is a benchmark suite for PHP.
+
+It performs a large number of simple tests in order to bench various
+aspects of the PHP interpreter.
 
 %package bin
 Summary: bin components for the php package.
@@ -107,7 +108,6 @@ Requires: php-lib = %{version}-%{release}
 Requires: php-bin = %{version}-%{release}
 Requires: php-data = %{version}-%{release}
 Provides: php-devel = %{version}-%{release}
-Requires: php = %{version}-%{release}
 Requires: php = %{version}-%{release}
 
 %description dev
@@ -173,8 +173,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1567894760
-# -Werror is for werrorists
+export SOURCE_DATE_EPOCH=1568082896
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
@@ -307,7 +306,7 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1567894760
+export SOURCE_DATE_EPOCH=1568082896
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
 cp LICENSE %{buildroot}/usr/share/package-licenses/php/LICENSE
