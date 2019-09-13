@@ -30,6 +30,7 @@
 --enable-pcre-jit
 --enable-re2c-cgoto
 --with-config-file-path=/usr/share/defaults/php/
+--with-config-file-scan-dir=/etc/php.d
 --with-jpeg-dir=/usr/lib64
 --with-webp-dir=/usr/lib64
 --with-kerberos

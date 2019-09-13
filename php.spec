@@ -6,7 +6,7 @@
 #
 Name     : php
 Version  : 7.3.9
-Release  : 188
+Release  : 189
 URL      : http://us1.php.net/distributions/php-7.3.9.tar.xz
 Source0  : http://us1.php.net/distributions/php-7.3.9.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
@@ -173,7 +173,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1568082896
+export SOURCE_DATE_EPOCH=1568381587
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
@@ -219,6 +219,7 @@ CFLAGS="${CFLAGS_GENERATE}" CXXFLAGS="${CXXFLAGS_GENERATE}" FFLAGS="${FFLAGS_GEN
 --enable-pcre-jit \
 --enable-re2c-cgoto \
 --with-config-file-path=/usr/share/defaults/php/ \
+--with-config-file-scan-dir=/etc/php.d \
 --with-jpeg-dir=/usr/lib64 \
 --with-webp-dir=/usr/lib64 \
 --with-kerberos \
@@ -281,6 +282,7 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 --enable-pcre-jit \
 --enable-re2c-cgoto \
 --with-config-file-path=/usr/share/defaults/php/ \
+--with-config-file-scan-dir=/etc/php.d \
 --with-jpeg-dir=/usr/lib64 \
 --with-webp-dir=/usr/lib64 \
 --with-kerberos \
@@ -306,7 +308,7 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1568082896
+export SOURCE_DATE_EPOCH=1568381587
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
 cp LICENSE %{buildroot}/usr/share/package-licenses/php/LICENSE
