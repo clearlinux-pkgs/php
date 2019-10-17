@@ -7,7 +7,7 @@ libdl.so.2
 libexslt.so.0
 libfreetype.so.6
 libgcc_s.so.1
-libgdbm.so.4
+libgdbm.so.6
 libgmp.so.10
 libicui18n.so.64
 libicuio.so.64
@@ -18,13 +18,13 @@ libm.so.6
 libonig.so.5
 libpng16.so.16
 libpq.so.5
-libreadline.so.7
+libreadline.so.8
 libresolv.so.2
 libsqlite3.so.0
 libssl.so.1.1
 libstdc++.so.6
 libsystemd.so.0
-libtinfow.so.6
+libtinfo.so.6
 libwebp.so.7
 libxml2.so.2
 libxslt.so.1

@@ -6,7 +6,7 @@
 #
 Name     : php
 Version  : 7.3.10
-Release  : 191
+Release  : 192
 URL      : http://us1.php.net/distributions/php-7.3.10.tar.xz
 Source0  : http://us1.php.net/distributions/php-7.3.10.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
@@ -75,11 +75,12 @@ Patch4: 0001-modify-makefile-behavior-to-not-remove-pgo-files-whe.patch
 Patch5: hugepage.patch
 
 %description
-This is an extension that aims to implement some efficient data access
-interfaces and classes. You'll find the classes documented using php
-code in the file spl.php or in the corresponding .inc file in the examples
-subdirectory. Based on the internal implementations or the files in the
-examples subdirectory there are also some .php files to experiment with.
+-=- Documentation for PHPBench 0.8.1 -=-
+http://phpbench.pureftpd.org
+PHPBench is a benchmark suite for PHP.
+
+It performs a large number of simple tests in order to bench various
+aspects of the PHP interpreter.
 
 %package bin
 Summary: bin components for the php package.
@@ -107,7 +108,6 @@ Requires: php-lib = %{version}-%{release}
 Requires: php-bin = %{version}-%{release}
 Requires: php-data = %{version}-%{release}
 Provides: php-devel = %{version}-%{release}
-Requires: php = %{version}-%{release}
 Requires: php = %{version}-%{release}
 
 %description dev
@@ -173,8 +173,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1570113952
-# -Werror is for werrorists
+export SOURCE_DATE_EPOCH=1571339347
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
@@ -184,11 +183,13 @@ export CFLAGS_GENERATE="$CFLAGS -fprofile-generate -fprofile-dir=/var/tmp/pgo -f
 export FCFLAGS_GENERATE="$FCFLAGS -fprofile-generate -fprofile-dir=/var/tmp/pgo -fprofile-update=atomic "
 export FFLAGS_GENERATE="$FFLAGS -fprofile-generate -fprofile-dir=/var/tmp/pgo -fprofile-update=atomic "
 export CXXFLAGS_GENERATE="$CXXFLAGS -fprofile-generate -fprofile-dir=/var/tmp/pgo -fprofile-update=atomic "
+export LDFLAGS_GENERATE="$LDFLAGS -fprofile-generate -fprofile-dir=/var/tmp/pgo -fprofile-update=atomic "
 export CFLAGS_USE="$CFLAGS -fprofile-use -fprofile-dir=/var/tmp/pgo -fprofile-correction "
 export FCFLAGS_USE="$FCFLAGS -fprofile-use -fprofile-dir=/var/tmp/pgo -fprofile-correction "
 export FFLAGS_USE="$FFLAGS -fprofile-use -fprofile-dir=/var/tmp/pgo -fprofile-correction "
 export CXXFLAGS_USE="$CXXFLAGS -fprofile-use -fprofile-dir=/var/tmp/pgo -fprofile-correction "
-CFLAGS="${CFLAGS_GENERATE}" CXXFLAGS="${CXXFLAGS_GENERATE}" FFLAGS="${FFLAGS_GENERATE}" FCFLAGS="${FCFLAGS_GENERATE}" %configure --disable-static --sysconfdir=/usr/share/defaults/php \
+export LDFLAGS_USE="$LDFLAGS -fprofile-use -fprofile-dir=/var/tmp/pgo -fprofile-correction "
+CFLAGS="${CFLAGS_GENERATE}" CXXFLAGS="${CXXFLAGS_GENERATE}" FFLAGS="${FFLAGS_GENERATE}" FCFLAGS="${FCFLAGS_GENERATE}" LDFLAGS="${LDFLAGS_GENERATE}" %configure --disable-static --sysconfdir=/usr/share/defaults/php \
 --enable-dba=shared \
 --enable-calendar \
 --enable-ftp \
@@ -251,7 +252,7 @@ pushd phpbench/
 ../sapi/cli/php phpbench.php
 popd
 make clean
-CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS="${FCFLAGS_USE}" %configure --disable-static --sysconfdir=/usr/share/defaults/php \
+CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS="${FCFLAGS_USE}" LDFLAGS="${LDFLAGS_USE}" %configure --disable-static --sysconfdir=/usr/share/defaults/php \
 --enable-dba=shared \
 --enable-calendar \
 --enable-ftp \
@@ -309,23 +310,23 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1570113952
+export SOURCE_DATE_EPOCH=1571339347
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
-cp LICENSE %{buildroot}/usr/share/package-licenses/php/LICENSE
-cp TSRM/LICENSE %{buildroot}/usr/share/package-licenses/php/TSRM_LICENSE
-cp Zend/LICENSE %{buildroot}/usr/share/package-licenses/php/Zend_LICENSE
-cp ext/bcmath/libbcmath/COPYING.LIB %{buildroot}/usr/share/package-licenses/php/ext_bcmath_libbcmath_COPYING.LIB
-cp ext/date/lib/LICENSE.rst %{buildroot}/usr/share/package-licenses/php/ext_date_lib_LICENSE.rst
-cp ext/fileinfo/libmagic/LICENSE %{buildroot}/usr/share/package-licenses/php/ext_fileinfo_libmagic_LICENSE
-cp ext/gd/tests/Rochester-Regular.otf.LICENSE.txt %{buildroot}/usr/share/package-licenses/php/ext_gd_tests_Rochester-Regular.otf.LICENSE.txt
-cp ext/mbstring/libmbfl/LICENSE %{buildroot}/usr/share/package-licenses/php/ext_mbstring_libmbfl_LICENSE
-cp ext/mbstring/oniguruma/COPYING %{buildroot}/usr/share/package-licenses/php/ext_mbstring_oniguruma_COPYING
-cp ext/mbstring/ucgendat/OPENLDAP_LICENSE %{buildroot}/usr/share/package-licenses/php/ext_mbstring_ucgendat_OPENLDAP_LICENSE
-cp ext/oci8/LICENSE %{buildroot}/usr/share/package-licenses/php/ext_oci8_LICENSE
-cp ext/zip/LICENSE_libzip %{buildroot}/usr/share/package-licenses/php/ext_zip_LICENSE_libzip
-cp phpbench/LICENSE %{buildroot}/usr/share/package-licenses/php/phpbench_LICENSE
-cp sapi/fpm/LICENSE %{buildroot}/usr/share/package-licenses/php/sapi_fpm_LICENSE
+cp %{_builddir}/php-7.3.10/LICENSE %{buildroot}/usr/share/package-licenses/php/075ae77f2a6472bbcdc2c7f6fb623b96361946e4
+cp %{_builddir}/php-7.3.10/TSRM/LICENSE %{buildroot}/usr/share/package-licenses/php/1ffc27ce3b11cd061bfd4882c22602560f2c7931
+cp %{_builddir}/php-7.3.10/Zend/LICENSE %{buildroot}/usr/share/package-licenses/php/e984a92e965a699a63ee739a7eb8b8e2c24cc398
+cp %{_builddir}/php-7.3.10/ext/bcmath/libbcmath/COPYING.LIB %{buildroot}/usr/share/package-licenses/php/07995764e5db9d7f054bf45010fc8927fc47eccb
+cp %{_builddir}/php-7.3.10/ext/date/lib/LICENSE.rst %{buildroot}/usr/share/package-licenses/php/c5ccb7505042b760f304032e80e1e192d4899d02
+cp %{_builddir}/php-7.3.10/ext/fileinfo/libmagic/LICENSE %{buildroot}/usr/share/package-licenses/php/3e3925d5a55f4b83a99f9c960214e3f6024a2469
+cp %{_builddir}/php-7.3.10/ext/gd/tests/Rochester-Regular.otf.LICENSE.txt %{buildroot}/usr/share/package-licenses/php/2b8b815229aa8a61e483fb4ba0588b8b6c491890
+cp %{_builddir}/php-7.3.10/ext/mbstring/libmbfl/LICENSE %{buildroot}/usr/share/package-licenses/php/381f215853f2ca2f5dd75ff5b8928a519d1f4218
+cp %{_builddir}/php-7.3.10/ext/mbstring/oniguruma/COPYING %{buildroot}/usr/share/package-licenses/php/7138c50c38fe42f7c189c60a61aa357ccfcab1be
+cp %{_builddir}/php-7.3.10/ext/mbstring/ucgendat/OPENLDAP_LICENSE %{buildroot}/usr/share/package-licenses/php/bc06cbdf781c87d2df2fe385214f936d010dd2a2
+cp %{_builddir}/php-7.3.10/ext/oci8/LICENSE %{buildroot}/usr/share/package-licenses/php/075ae77f2a6472bbcdc2c7f6fb623b96361946e4
+cp %{_builddir}/php-7.3.10/ext/zip/LICENSE_libzip %{buildroot}/usr/share/package-licenses/php/4237f4a9b6f7a89a4a40db8ff1fd8d3897be0b11
+cp %{_builddir}/php-7.3.10/phpbench/LICENSE %{buildroot}/usr/share/package-licenses/php/9e0b81b219f2fac6ebb6200b8df03e6879cbc80f
+cp %{_builddir}/php-7.3.10/sapi/fpm/LICENSE %{buildroot}/usr/share/package-licenses/php/d0cbc5492bdea8a8437b7c2b6c0ad66947a576a5
 %make_install
 ## Remove excluded files
 rm -f %{buildroot}/etc/pear.conf
@@ -880,20 +881,19 @@ mv %{buildroot}/usr/lib/libphp7.so %{buildroot}/usr/lib64/
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/php/LICENSE
-/usr/share/package-licenses/php/TSRM_LICENSE
-/usr/share/package-licenses/php/Zend_LICENSE
-/usr/share/package-licenses/php/ext_bcmath_libbcmath_COPYING.LIB
-/usr/share/package-licenses/php/ext_date_lib_LICENSE.rst
-/usr/share/package-licenses/php/ext_fileinfo_libmagic_LICENSE
-/usr/share/package-licenses/php/ext_gd_tests_Rochester-Regular.otf.LICENSE.txt
-/usr/share/package-licenses/php/ext_mbstring_libmbfl_LICENSE
-/usr/share/package-licenses/php/ext_mbstring_oniguruma_COPYING
-/usr/share/package-licenses/php/ext_mbstring_ucgendat_OPENLDAP_LICENSE
-/usr/share/package-licenses/php/ext_oci8_LICENSE
-/usr/share/package-licenses/php/ext_zip_LICENSE_libzip
-/usr/share/package-licenses/php/phpbench_LICENSE
-/usr/share/package-licenses/php/sapi_fpm_LICENSE
+/usr/share/package-licenses/php/075ae77f2a6472bbcdc2c7f6fb623b96361946e4
+/usr/share/package-licenses/php/07995764e5db9d7f054bf45010fc8927fc47eccb
+/usr/share/package-licenses/php/1ffc27ce3b11cd061bfd4882c22602560f2c7931
+/usr/share/package-licenses/php/2b8b815229aa8a61e483fb4ba0588b8b6c491890
+/usr/share/package-licenses/php/381f215853f2ca2f5dd75ff5b8928a519d1f4218
+/usr/share/package-licenses/php/3e3925d5a55f4b83a99f9c960214e3f6024a2469
+/usr/share/package-licenses/php/4237f4a9b6f7a89a4a40db8ff1fd8d3897be0b11
+/usr/share/package-licenses/php/7138c50c38fe42f7c189c60a61aa357ccfcab1be
+/usr/share/package-licenses/php/9e0b81b219f2fac6ebb6200b8df03e6879cbc80f
+/usr/share/package-licenses/php/bc06cbdf781c87d2df2fe385214f936d010dd2a2
+/usr/share/package-licenses/php/c5ccb7505042b760f304032e80e1e192d4899d02
+/usr/share/package-licenses/php/d0cbc5492bdea8a8437b7c2b6c0ad66947a576a5
+/usr/share/package-licenses/php/e984a92e965a699a63ee739a7eb8b8e2c24cc398
 
 %files man
 %defattr(0644,root,root,0755)
