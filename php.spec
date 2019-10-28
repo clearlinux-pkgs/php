@@ -5,12 +5,12 @@
 # Source0 file verified with key 0xD66C9593118BCCB6 (cmb@php.net)
 #
 Name     : php
-Version  : 7.3.10
-Release  : 192
-URL      : http://us1.php.net/distributions/php-7.3.10.tar.xz
-Source0  : http://us1.php.net/distributions/php-7.3.10.tar.xz
+Version  : 7.3.11
+Release  : 193
+URL      : https://www.php.net/distributions/php-7.3.11.tar.xz
+Source0  : https://www.php.net/distributions/php-7.3.11.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
-Source2 : http://us1.php.net/distributions/php-7.3.10.tar.xz.asc
+Source2 : https://www.php.net/distributions/php-7.3.11.tar.xz.asc
 Summary  : A general-purpose scripting language that is especially suited to web development
 Group    : Development/Tools
 License  : Apache-2.0 BSD-2-Clause BSD-3-Clause HPND LGPL-2.1 MIT OLDAP-2.8 PHP-3.01 Zend-2.0 Zlib
@@ -65,6 +65,7 @@ BuildRequires : re2c
 BuildRequires : readline-dev
 BuildRequires : sqlite-autoconf-dev
 BuildRequires : systemd-dev
+BuildRequires : util-linux
 BuildRequires : valgrind
 BuildRequires : xz-dev
 BuildRequires : zlib-dev
@@ -157,11 +158,11 @@ services components for the php package.
 
 
 %prep
-%setup -q -n php-7.3.10
+%setup -q -n php-7.3.11
 cd ..
-%setup -q -T -D -n php-7.3.10 -b 1
+%setup -q -T -D -n php-7.3.11 -b 1
 mkdir -p phpbench
-cp -r %{_topdir}/BUILD/phpbench-0.8.2/* %{_topdir}/BUILD/php-7.3.10/phpbench
+cp -r %{_topdir}/BUILD/phpbench-0.8.2/* %{_topdir}/BUILD/php-7.3.11/phpbench
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -173,7 +174,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1571339347
+export SOURCE_DATE_EPOCH=1572277878
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
@@ -310,23 +311,23 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1571339347
+export SOURCE_DATE_EPOCH=1572277878
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
-cp %{_builddir}/php-7.3.10/LICENSE %{buildroot}/usr/share/package-licenses/php/075ae77f2a6472bbcdc2c7f6fb623b96361946e4
-cp %{_builddir}/php-7.3.10/TSRM/LICENSE %{buildroot}/usr/share/package-licenses/php/1ffc27ce3b11cd061bfd4882c22602560f2c7931
-cp %{_builddir}/php-7.3.10/Zend/LICENSE %{buildroot}/usr/share/package-licenses/php/e984a92e965a699a63ee739a7eb8b8e2c24cc398
-cp %{_builddir}/php-7.3.10/ext/bcmath/libbcmath/COPYING.LIB %{buildroot}/usr/share/package-licenses/php/07995764e5db9d7f054bf45010fc8927fc47eccb
-cp %{_builddir}/php-7.3.10/ext/date/lib/LICENSE.rst %{buildroot}/usr/share/package-licenses/php/c5ccb7505042b760f304032e80e1e192d4899d02
-cp %{_builddir}/php-7.3.10/ext/fileinfo/libmagic/LICENSE %{buildroot}/usr/share/package-licenses/php/3e3925d5a55f4b83a99f9c960214e3f6024a2469
-cp %{_builddir}/php-7.3.10/ext/gd/tests/Rochester-Regular.otf.LICENSE.txt %{buildroot}/usr/share/package-licenses/php/2b8b815229aa8a61e483fb4ba0588b8b6c491890
-cp %{_builddir}/php-7.3.10/ext/mbstring/libmbfl/LICENSE %{buildroot}/usr/share/package-licenses/php/381f215853f2ca2f5dd75ff5b8928a519d1f4218
-cp %{_builddir}/php-7.3.10/ext/mbstring/oniguruma/COPYING %{buildroot}/usr/share/package-licenses/php/7138c50c38fe42f7c189c60a61aa357ccfcab1be
-cp %{_builddir}/php-7.3.10/ext/mbstring/ucgendat/OPENLDAP_LICENSE %{buildroot}/usr/share/package-licenses/php/bc06cbdf781c87d2df2fe385214f936d010dd2a2
-cp %{_builddir}/php-7.3.10/ext/oci8/LICENSE %{buildroot}/usr/share/package-licenses/php/075ae77f2a6472bbcdc2c7f6fb623b96361946e4
-cp %{_builddir}/php-7.3.10/ext/zip/LICENSE_libzip %{buildroot}/usr/share/package-licenses/php/4237f4a9b6f7a89a4a40db8ff1fd8d3897be0b11
-cp %{_builddir}/php-7.3.10/phpbench/LICENSE %{buildroot}/usr/share/package-licenses/php/9e0b81b219f2fac6ebb6200b8df03e6879cbc80f
-cp %{_builddir}/php-7.3.10/sapi/fpm/LICENSE %{buildroot}/usr/share/package-licenses/php/d0cbc5492bdea8a8437b7c2b6c0ad66947a576a5
+cp %{_builddir}/php-7.3.11/LICENSE %{buildroot}/usr/share/package-licenses/php/075ae77f2a6472bbcdc2c7f6fb623b96361946e4
+cp %{_builddir}/php-7.3.11/TSRM/LICENSE %{buildroot}/usr/share/package-licenses/php/1ffc27ce3b11cd061bfd4882c22602560f2c7931
+cp %{_builddir}/php-7.3.11/Zend/LICENSE %{buildroot}/usr/share/package-licenses/php/e984a92e965a699a63ee739a7eb8b8e2c24cc398
+cp %{_builddir}/php-7.3.11/ext/bcmath/libbcmath/COPYING.LIB %{buildroot}/usr/share/package-licenses/php/07995764e5db9d7f054bf45010fc8927fc47eccb
+cp %{_builddir}/php-7.3.11/ext/date/lib/LICENSE.rst %{buildroot}/usr/share/package-licenses/php/c5ccb7505042b760f304032e80e1e192d4899d02
+cp %{_builddir}/php-7.3.11/ext/fileinfo/libmagic/LICENSE %{buildroot}/usr/share/package-licenses/php/3e3925d5a55f4b83a99f9c960214e3f6024a2469
+cp %{_builddir}/php-7.3.11/ext/gd/tests/Rochester-Regular.otf.LICENSE.txt %{buildroot}/usr/share/package-licenses/php/2b8b815229aa8a61e483fb4ba0588b8b6c491890
+cp %{_builddir}/php-7.3.11/ext/mbstring/libmbfl/LICENSE %{buildroot}/usr/share/package-licenses/php/381f215853f2ca2f5dd75ff5b8928a519d1f4218
+cp %{_builddir}/php-7.3.11/ext/mbstring/oniguruma/COPYING %{buildroot}/usr/share/package-licenses/php/7138c50c38fe42f7c189c60a61aa357ccfcab1be
+cp %{_builddir}/php-7.3.11/ext/mbstring/ucgendat/OPENLDAP_LICENSE %{buildroot}/usr/share/package-licenses/php/bc06cbdf781c87d2df2fe385214f936d010dd2a2
+cp %{_builddir}/php-7.3.11/ext/oci8/LICENSE %{buildroot}/usr/share/package-licenses/php/075ae77f2a6472bbcdc2c7f6fb623b96361946e4
+cp %{_builddir}/php-7.3.11/ext/zip/LICENSE_libzip %{buildroot}/usr/share/package-licenses/php/4237f4a9b6f7a89a4a40db8ff1fd8d3897be0b11
+cp %{_builddir}/php-7.3.11/phpbench/LICENSE %{buildroot}/usr/share/package-licenses/php/9e0b81b219f2fac6ebb6200b8df03e6879cbc80f
+cp %{_builddir}/php-7.3.11/sapi/fpm/LICENSE %{buildroot}/usr/share/package-licenses/php/d0cbc5492bdea8a8437b7c2b6c0ad66947a576a5
 %make_install
 ## Remove excluded files
 rm -f %{buildroot}/etc/pear.conf
