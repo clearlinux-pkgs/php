@@ -6,7 +6,7 @@
 #
 Name     : php
 Version  : 7.3.11
-Release  : 195
+Release  : 196
 URL      : https://www.php.net/distributions/php-7.3.11.tar.xz
 Source0  : https://www.php.net/distributions/php-7.3.11.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
@@ -74,6 +74,7 @@ Patch2: 0002-disable-php-openssl-ext-rc4-algo.patch
 Patch3: 0003-reduce-fpm-event-wakeups.patch
 Patch4: 0001-modify-makefile-behavior-to-not-remove-pgo-files-whe.patch
 Patch5: hugepage.patch
+Patch6: CVE-2019-18218.patch
 
 %description
 -=- Documentation for PHPBench 0.8.1 -=-
@@ -159,27 +160,29 @@ services components for the php package.
 
 %prep
 %setup -q -n php-7.3.11
-cd ..
-%setup -q -T -D -n php-7.3.11 -b 1
+cd %{_builddir}
+tar xf %{_sourcedir}/phpbench-0.8.2.tar.gz
+cd %{_builddir}/php-7.3.11
 mkdir -p phpbench
-cp -r %{_topdir}/BUILD/phpbench-0.8.2/* %{_topdir}/BUILD/php-7.3.11/phpbench
+cp -r %{_builddir}/phpbench-0.8.2/* %{_builddir}/php-7.3.11/phpbench
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1572277878
+export SOURCE_DATE_EPOCH=1573167387
 export GCC_IGNORE_WERROR=1
-export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
-export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
-export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
-export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
+export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
+export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
 export CFLAGS_GENERATE="$CFLAGS -fprofile-generate -fprofile-dir=/var/tmp/pgo -fprofile-update=atomic "
 export FCFLAGS_GENERATE="$FCFLAGS -fprofile-generate -fprofile-dir=/var/tmp/pgo -fprofile-update=atomic "
 export FFLAGS_GENERATE="$FFLAGS -fprofile-generate -fprofile-dir=/var/tmp/pgo -fprofile-update=atomic "
@@ -311,7 +314,7 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1572277878
+export SOURCE_DATE_EPOCH=1573167387
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
 cp %{_builddir}/php-7.3.11/LICENSE %{buildroot}/usr/share/package-licenses/php/075ae77f2a6472bbcdc2c7f6fb623b96361946e4
