@@ -3,4 +3,3 @@
 0003-reduce-fpm-event-wakeups.patch
 0001-modify-makefile-behavior-to-not-remove-pgo-files-whe.patch
 hugepage.patch
-CVE-2019-18218.patch
