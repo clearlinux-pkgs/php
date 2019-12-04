@@ -6,11 +6,12 @@
 #
 Name     : php
 Version  : 7.3.12
-Release  : 198
+Release  : 199
 URL      : https://www.php.net/distributions/php-7.3.12.tar.xz
 Source0  : https://www.php.net/distributions/php-7.3.12.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
-Source2 : https://www.php.net/distributions/php-7.3.12.tar.xz.asc
+Source2  : https://www.php.net/distributions/php-7.3.12.tar.xz.asc
+Source3  : php.ini
 Summary  : A general-purpose scripting language that is especially suited to web development
 Group    : Development/Tools
 License  : Apache-2.0 BSD-2-Clause BSD-3-Clause HPND LGPL-2.1 MIT OLDAP-2.8 PHP-3.01 Zend-2.0 Zlib
@@ -175,7 +176,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1575400950
+export SOURCE_DATE_EPOCH=1575420341
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -249,9 +250,13 @@ CFLAGS="${CFLAGS_GENERATE}" CXXFLAGS="${CXXFLAGS_GENERATE}" FFLAGS="${FFLAGS_GEN
 make  %{?_smp_mflags}
 
 ./sapi/cli/php Zend/micro_bench.php
+
 ./sapi/cli/php Zend/bench.php
+
 pushd phpbench/
+
 ../sapi/cli/php phpbench.php
+
 popd
 make clean
 CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS="${FCFLAGS_USE}" LDFLAGS="${LDFLAGS_USE}" %configure --disable-static --sysconfdir=/usr/share/defaults/php \
@@ -312,7 +317,7 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1575400950
+export SOURCE_DATE_EPOCH=1575420341
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
 cp %{_builddir}/php-7.3.12/LICENSE %{buildroot}/usr/share/package-licenses/php/075ae77f2a6472bbcdc2c7f6fb623b96361946e4
@@ -330,30 +335,27 @@ cp %{_builddir}/php-7.3.12/ext/zip/LICENSE_libzip %{buildroot}/usr/share/package
 cp %{_builddir}/php-7.3.12/phpbench/LICENSE %{buildroot}/usr/share/package-licenses/php/9e0b81b219f2fac6ebb6200b8df03e6879cbc80f
 cp %{_builddir}/php-7.3.12/sapi/fpm/LICENSE %{buildroot}/usr/share/package-licenses/php/d0cbc5492bdea8a8437b7c2b6c0ad66947a576a5
 %make_install
+mkdir -p %{buildroot}/usr/share/defaults/php
+install -m644 %{_sourcedir}/php.ini %{buildroot}/usr/share/defaults/php/php.ini
 ## Remove excluded files
 rm -f %{buildroot}/etc/pear.conf
 ## install_append content
+# Pear is broken http://pear.php.net/bugs/bug.php?id=20517&edit=2
 mkdir -p %{buildroot}/usr/lib64/php/docs
 mv %{buildroot}/usr/lib64/php/doc/PEAR %{buildroot}/usr/lib64/php/docs/PEAR
+# Setup php-fpm
 mv %{buildroot}/usr/share/defaults/php/php-fpm.conf.default %{buildroot}/usr/share/defaults/php/php-fpm.conf
 install -D -m 644 config/php-fpm.service %{buildroot}/usr/lib/systemd/system/php-fpm.service
+# Configure httpd
 install -D -m 644 config/php-httpd.conf %{buildroot}/usr/share/defaults/httpd/conf.d/php.conf
+# Stray junk files
 rm -rf %{buildroot}/.depdb* %{buildroot}/.lock %{buildroot}/.channels %{buildroot}/.filemap
+# configure php-fpm default "www" pool for OOTB functionality
 mv %{buildroot}/usr/share/defaults/php/php-fpm.d/www.conf.default %{buildroot}/usr/share/defaults/php/php-fpm.d/www.conf
-mkdir -p %{buildroot}/usr/share/defaults/php
-cat > %{buildroot}/usr/share/defaults/php/php.ini  <<_ASUNAME
-[zendopcache]
-zend_extension=/usr/lib64/extensions/no-debug-non-zts-20180731/opcache.so
-opcache.memory_consumption=128
-opcache.interned_strings_buffer=8
-opcache.max_accelerated_files=4000
-opcache.revalidate_freq=180
-opcache.fast_shutdown=1
-opcache.enable_cli=1
-opcache.huge_code_pages=1
-_ASUNAME
+# clr-service-restart
 mkdir -p %{buildroot}/usr/share/clr-service-restart
 ln -sf /usr/lib/systemd/system/php-fpm.service %{buildroot}/usr/share/clr-service-restart/php-fpm.service
+# SAPI wrong folder
 mv %{buildroot}/usr/lib/libphp7.so %{buildroot}/usr/lib64/
 ## install_append end
 
