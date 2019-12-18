@@ -6,7 +6,7 @@
 #
 Name     : php
 Version  : 7.3.12
-Release  : 200
+Release  : 201
 URL      : https://www.php.net/distributions/php-7.3.12.tar.xz
 Source0  : https://www.php.net/distributions/php-7.3.12.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
@@ -176,7 +176,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1575420341
+export SOURCE_DATE_EPOCH=1576654767
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -250,13 +250,9 @@ CFLAGS="${CFLAGS_GENERATE}" CXXFLAGS="${CXXFLAGS_GENERATE}" FFLAGS="${FFLAGS_GEN
 make  %{?_smp_mflags}
 
 ./sapi/cli/php Zend/micro_bench.php
-
 ./sapi/cli/php Zend/bench.php
-
 pushd phpbench/
-
 ../sapi/cli/php phpbench.php
-
 popd
 make clean
 CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS="${FCFLAGS_USE}" LDFLAGS="${LDFLAGS_USE}" %configure --disable-static --sysconfdir=/usr/share/defaults/php \
@@ -317,7 +313,7 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1575420341
+export SOURCE_DATE_EPOCH=1576654767
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
 cp %{_builddir}/php-7.3.12/LICENSE %{buildroot}/usr/share/package-licenses/php/075ae77f2a6472bbcdc2c7f6fb623b96361946e4
@@ -357,6 +353,10 @@ mkdir -p %{buildroot}/usr/share/clr-service-restart
 ln -sf /usr/lib/systemd/system/php-fpm.service %{buildroot}/usr/share/clr-service-restart/php-fpm.service
 # SAPI wrong folder
 mv %{buildroot}/usr/lib/libphp7.so %{buildroot}/usr/lib64/
+# Append zendopcache so option
+pushd %{buildroot}
+find usr/lib64/extensions/ -name opcache.so | xargs -I{} echo "zend_extension=/{}" >> %{buildroot}/usr/share/defaults/php/php.ini
+popd
 ## install_append end
 
 %files
