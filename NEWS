@@ -1,5 +1,53 @@
 PHP                                                                        NEWS
 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+19 Dec 2019, PHP 7.3.13
+
+- Bcmath:
+  . Fixed bug #78878 (Buffer underflow in bc_shift_addsub). (CVE-2019-11046).
+    (cmb)
+
+- Core:
+  . Fixed bug #78862 (link() silently truncates after a null byte on Windows).
+    (CVE-2019-11044). (cmb)
+  . Fixed bug #78863 (DirectoryIterator class silently truncates after a null
+    byte). (CVE-2019-11045). (cmb)
+  . Fixed bug #78943 (mail() may release string with refcount==1 twice).
+    (CVE-2019-11049). (cmb)
+  . Fixed bug #78787 (Segfault with trait overriding inherited private shadow
+    property). (Nikita)
+  . Fixed bug #78868 (Calling __autoload() with incorrect EG(fake_scope) value).
+    (Antony Dovgal, Dmitry)
+  . Fixed bug #78296 (is_file fails to detect file). (cmb)
+
+- EXIF:
+  . Fixed bug #78793 (Use-after-free in exif parsing under memory sanitizer).
+    (CVE-2019-11050). (Nikita)
+  . Fixed bug #78910 (Heap-buffer-overflow READ in exif). (CVE-2019-11047).
+    (Nikita)
+
+- GD:
+  . Fixed bug #78849 (GD build broken with -D SIGNED_COMPARE_SLOW). (cmb)
+
+- MBString:
+  . Upgraded bundled Oniguruma to 6.9.4. (cmb)
+
+- OPcache:
+  . Fixed potential ASLR related invalid opline handler issues. (cmb)
+  . Fixed $x = (bool)$x; with opcache (should emit undeclared variable notice).
+    (Tyson Andre)
+
+- PCRE:
+  . Fixed bug #78853 (preg_match() may return integer > 1). (cmb)
+
+- Standard:
+  . Fixed bug #78759 (array_search in $GLOBALS). (Nikita)
+  . Fixed bug #77638 (var_export'ing certain class instances segfaults). (cmb)
+  . Fixed bug #78840 (imploding $GLOBALS crashes). (cmb)
+  . Fixed bug #78833 (Integer overflow in pack causes out-of-bound access).
+    (cmb)
+  . Fixed bug #78814 (strip_tags allows / in tag name => whitelist bypass).
+    (cmb)
+
 21 Nov 2019, PHP 7.3.12
 
 - Core:
