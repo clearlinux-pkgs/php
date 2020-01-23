@@ -10,14 +10,12 @@ db
 dbus-dev
 expat-dev
 file-dev
-freetype-dev
 gdbm-dev
 gettext-dev
 gmp-dev
 httpd-dev
 libgd-dev
 libidn-dev
-libjpeg-turbo-dev
 libxml2
 libxml2-dev
 libxslt-dev
@@ -32,7 +30,6 @@ onig-dev
 pcre-dev
 expat-dev
 libzip-dev
-freetype-dev
 re2c
 valgrind
 mariadb-dev
@@ -44,7 +41,5 @@ libXpm-dev
 argon2-dev
 e2fsprogs-dev
 lmdb-dev
-libpng-dev
-freetype
 gettext-dev
 sqlite-autoconf-dev

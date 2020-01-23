@@ -1,5 +1,5 @@
-0001-configure-php-fpm-service.patch
-0002-disable-php-openssl-ext-rc4-algo.patch
-0003-reduce-fpm-event-wakeups.patch
-0001-modify-makefile-behavior-to-not-remove-pgo-files-whe.patch
-hugepage.patch
+0001-php-fpm-default-to-ondemand-policy-change-some-defau.patch
+0002-Disable-RC4-algorithm-fallback-for-signature-checks.patch
+0003-Reduce-system-wakeups-by-not-waking-up-PHP-once-per-.patch
+0004-modify-makefile-behavior-to-not-remove-pgo-files-whe.patch
+0005-Enable-hugepages.patch

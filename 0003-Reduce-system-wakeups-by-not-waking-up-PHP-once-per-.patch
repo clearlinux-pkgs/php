@@ -1,11 +1,19 @@
+From e51af5832c4ad48eae305bc077f9cc110ccb1e3f Mon Sep 17 00:00:00 2001
 From: Arjan van de Ven <arjan@linux.intel.com>
+Date: Thu, 23 Jan 2020 12:36:27 -0800
+Subject: [PATCH 3/5] Reduce system wakeups by not waking up PHP once per
+ second
 
-Reduce system wakeups by not waking up PHP once per second
+---
+ sapi/fpm/fpm/fpm_events.c      | 4 ++--
+ sapi/fpm/fpm/fpm_process_ctl.c | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-
---- php-7.1.4/sapi/fpm/fpm/fpm_events.c	2017-04-18 10:15:58.611242467 -0700
-+++ php-7.1.4/sapi/fpm/fpm/fpm_events.c	2017-04-18 10:29:11.051295951 -0700
-@@ -402,10 +402,10 @@
+diff --git a/sapi/fpm/fpm/fpm_events.c b/sapi/fpm/fpm/fpm_events.c
+index 86592050..93cc6511 100644
+--- a/sapi/fpm/fpm/fpm_events.c
++++ b/sapi/fpm/fpm/fpm_events.c
+@@ -413,10 +413,10 @@ void fpm_event_loop(int err) /* {{{ */
  
  		/* 1s timeout if none has been set */
  		if (!timerisset(&ms) || timercmp(&ms, &now, <) || timercmp(&ms, &now, ==)) {
@@ -18,9 +26,11 @@ Reduce system wakeups by not waking up PHP once per second
  		}
  
  		ret = module->wait(fpm_event_queue_fd, timeout);
---- php-5.6.17/sapi/fpm/fpm/fpm_process_ctl.c~	2016-01-06 10:14:47.000000000 -0500
-+++ php-5.6.17/sapi/fpm/fpm/fpm_process_ctl.c	2016-03-12 18:15:18.726600269 -0500
-@@ -191,7 +191,7 @@
+diff --git a/sapi/fpm/fpm/fpm_process_ctl.c b/sapi/fpm/fpm/fpm_process_ctl.c
+index 2bc00178..9ef442cb 100644
+--- a/sapi/fpm/fpm/fpm_process_ctl.c
++++ b/sapi/fpm/fpm/fpm_process_ctl.c
+@@ -193,7 +193,7 @@ static void fpm_pctl_action_next() /* {{{ */
  		} else {
  			sig = SIGKILL;
  		}
@@ -29,9 +39,7 @@ Reduce system wakeups by not waking up PHP once per second
  	}
  
  	fpm_pctl_kill_all(sig);
---- php-7.1.1/sapi/fpm/fpm/fpm_process_ctl.c~	2017-01-17 20:44:41.000000000 +0000
-+++ php-7.1.1/sapi/fpm/fpm/fpm_process_ctl.c	2017-01-30 04:24:06.467900642 +0000
-@@ -454,7 +454,7 @@
+@@ -457,7 +457,7 @@ void fpm_pctl_heartbeat(struct fpm_event_s *ev, short which, void *arg) /* {{{ *
  	}
  
  	/* ensure heartbeat is not lower than FPM_PCTL_MIN_HEARTBEAT */
@@ -40,3 +48,6 @@ Reduce system wakeups by not waking up PHP once per second
  
  	/* first call without setting to initialize the timer */
  	zlog(ZLOG_DEBUG, "heartbeat have been set up with a timeout of %dms", fpm_globals.heartbeat);
+-- 
+2.25.0
+

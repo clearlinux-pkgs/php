@@ -3,3 +3,4 @@
 # undesireable desirable. One name per line, no whitespace.
 #httpd-dev
 buildreq-php
+gd-dev

@@ -1,0 +1,38 @@
+From 3e3d8b90d38a370da2c09c6ed46937ebc0095b65 Mon Sep 17 00:00:00 2001
+From: Arjan van de Ven <arjan@linux.intel.com>
+Date: Thu, 23 Jan 2020 12:36:07 -0800
+Subject: [PATCH 2/5] Disable RC4 algorithm fallback for signature checks.
+
+Our SSL library no longer supports RC4, so this will fail to
+link.
+---
+ ext/openssl/openssl.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/ext/openssl/openssl.c b/ext/openssl/openssl.c
+index f566d4e6..158bb515 100644
+--- a/ext/openssl/openssl.c
++++ b/ext/openssl/openssl.c
+@@ -6182,7 +6182,8 @@ PHP_FUNCTION(openssl_seal)
+ 			RETURN_FALSE;
+ 		}
+ 	} else {
+-		cipher = EVP_rc4();
++		php_error_docref(NULL TSRMLS_CC, E_WARNING, "RC4 disabled, no fallback signature algorithm.");
++		RETURN_FALSE;
+ 	}
+ 
+ 	iv_len = EVP_CIPHER_iv_length(cipher);
+@@ -6317,7 +6318,8 @@ PHP_FUNCTION(openssl_open)
+ 			RETURN_FALSE;
+ 		}
+ 	} else {
+-		cipher = EVP_rc4();
++		php_error_docref(NULL TSRMLS_CC, E_WARNING, "RC4 disabled, no fallback signature algorithm.");
++		RETURN_FALSE;
+ 	}
+ 
+ 	cipher_iv_len = EVP_CIPHER_iv_length(cipher);
+-- 
+2.25.0
+

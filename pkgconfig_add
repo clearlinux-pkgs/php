@@ -2,7 +2,8 @@
 # This file contains extra pkgconfig build requirements that don't get picked up but are 
 # desirable. One name per line, no whitespace.
 #
-libpng
-libwebp
 libpq
-freetype2
+libpcre2-8
+icu-uc
+icu-io
+icu-i18n
