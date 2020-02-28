@@ -1,6 +1,4 @@
-7.4.2
+7.4.3
 freetype-dev
-gd-dev
 intltool-dev
 libwebp-dev
-pkgconfig(libpcre2-8)

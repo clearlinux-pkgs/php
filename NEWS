@@ -1,5 +1,94 @@
 PHP                                                                        NEWS
 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+20 Feb 2020, PHP 7.4.3
+
+- Core:
+  . Fixed bug #79146 (cscript can fail to run on some systems). (clarodeus)
+  . Fixed bug #79155 (Property nullability lost when using multiple property
+    definition). (Nikita)
+  . Fixed bug #78323 (Code 0 is returned on invalid options). (Ivan Mikheykin)
+  . Fixed bug #78989 (Delayed variance check involving trait segfaults).
+    (Nikita)
+  . Fixed bug #79174 (cookie values with spaces fail to round-trip). (cmb)
+  . Fixed bug #76047 (Use-after-free when accessing already destructed
+    backtrace arguments). (Nikita)
+
+- COM:
+  . Fixed bug #79247 (Garbage collecting variant objects segfaults). (cmb)
+
+- CURL:
+  . Fixed bug #79078 (Hypothetical use-after-free in curl_multi_add_handle()).
+    (cmb)
+
+- FFI:
+  . Fixed bug #79096 (FFI Struct Segfault). (cmb)
+
+- IMAP:
+  . Fixed bug #79112 (IMAP extension can't find OpenSSL libraries at configure
+    time). (Nikita)
+
+ -Intl:
+  . Fixed bug #79212 (NumberFormatter::format() may detect wrong type). (cmb)
+
+- Libxml:
+  . Fixed bug #79191 (Error in SoapClient ctor disables DOMDocument::save()).
+    (Nikita, cmb)
+
+- MBString:
+  . Fixed bug #79149 (SEGV in mb_convert_encoding with non-string encodings).
+    (cmb)
+
+- MySQLi:
+  . Fixed bug #78666 (Properties may emit a warning on var_dump()). (kocsismate)
+
+- MySQLnd:
+  . Fixed bug #79084 (mysqlnd may fetch wrong column indexes with MYSQLI_BOTH).
+    (cmb)
+  . Fixed bug #79011 (MySQL caching_sha2_password Access denied for password
+    with more than 20 chars). (Nikita)
+
+- Opcache:
+  . Fixed bug #79114 (Eval class during preload causes class to be only half
+    available). (Laruence)
+  . Fixed bug #79128 (Preloading segfaults if preload_user is used). (Nikita)
+  . Fixed bug #79193 (Incorrect type inference for self::$field =& $field).
+    (Nikita)
+
+- OpenSSL:
+  . Fixed bug #79145 (openssl memory leak). (cmb, Nikita)
+
+- Phar:
+  . Fixed bug #79082 (Files added to tar with Phar::buildFromIterator have
+    all-access permissions). (CVE-2020-7063) (stas)
+  . Fixed bug #79171 (heap-buffer-overflow in phar_extract_file).
+    (CVE-2020-7061) (cmb)
+  . Fixed bug #76584 (PharFileInfo::decompress not working). (cmb)
+
+- Reflection:
+  . Fixed bug #79115 (ReflectionClass::isCloneable call reflected class
+    __destruct). (Nikita)
+
+- Session:
+  . Fixed bug #79221 (Null Pointer Dereference in PHP Session Upload Progress).
+    (CVE-2020-7062) (stas)
+
+- Standard:
+  . Fixed bug #78902 (Memory leak when using stream_filter_append). (liudaixiao)
+  . Fixed bug #78969 (PASSWORD_DEFAULT should match PASSWORD_BCRYPT instead of being null). (kocsismate)
+
+- Testing:
+  . Fixed bug #78090 (bug45161.phpt takes forever to finish). (cmb)
+
+- XSL:
+  . Fixed bug #70078 (XSL callbacks with nodes as parameter leak memory). (cmb)
+
+- Zip:
+  . Add ZipArchive::CM_LZMA2 and ZipArchive::CM_XZ constants (since libzip 1.6.0). (Remi)
+  . Add ZipArchive::RDONLY (since libzip 1.0.0). (Remi)
+  . Add ZipArchive::ER_* missing constants. (Remi)
+  . Add ZipArchive::LIBZIP_VERSION constant. (Remi)
+  . Fixed bug #73119 (Wrong return for ZipArchive::addEmptyDir Method). (Remi)
+
 23 Jan 2020, PHP 7.4.2
 
 - Core:
@@ -45,10 +134,6 @@ PHP                                                                        NEWS
 - Libxml:
   . Fixed bug #79029 (Use After Free's in XMLReader / XMLWriter). (Laruence)
 
-- Mbstring:
-  . Fixed bug #79037 (global buffer-overflow in `mbfl_filt_conv_big5_wchar`).
-    (CVE-2020-7060) (Nikita)
-
 - OPcache:
   . Fixed bug #78961 (erroneous optimization of re-assigned $GLOBALS). (Dmitry)
   . Fixed bug #78950 (Preloading trait method with static variables). (Nikita)
@@ -73,8 +158,6 @@ PHP                                                                        NEWS
     Kentarō)
 
 - Session:
-  . Fixed bug #79091 (heap use-after-free in session_create_id()). (cmb,
-    Nikita)
   . Fixed bug #79031 (Session unserialization problem). (Nikita)
 
 - Shmop:
@@ -88,7 +171,6 @@ PHP                                                                        NEWS
   . Fixed bug #78976 (SplFileObject::fputcsv returns -1 on failure). (cmb)
 
 - Standard:
-  . Fixed bug #79099 (OOB read in php_strip_tags_ex). (CVE-2020-7059). (cmb)
   . Fixed bug #79000 (Non-blocking socket stream reports EAGAIN as error).
     (Nikita)
   . Fixed bug #54298 (Using empty additional_headers adding extraneous CRLF).

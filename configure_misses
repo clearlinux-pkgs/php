@@ -61,7 +61,7 @@ Configure miss: DB1 support
 Configure miss: DBM support
 Configure miss: whether to build with Enchant support
 Configure miss: FFI support
-Configure miss: OpenSSL dir for FTP
+Configure miss: whether to explicitly enable FTP SSL support
 Configure miss: libwebp
 Configure miss: libjpeg
 Configure miss: libXpm
@@ -97,7 +97,6 @@ Configure miss: PSPELL support
 Configure miss: libedit readline replacement
 Configure miss: mm support
 Configure miss: SNMP support
-Configure miss: OpenSSL dir for SNMP
 Configure miss: sodium support
 Configure miss: whether flush should be called explicitly after a buffered io
 Configure miss: extended DES crypt
@@ -208,7 +207,7 @@ Configure miss: DB1 support
 Configure miss: DBM support
 Configure miss: whether to build with Enchant support
 Configure miss: FFI support
-Configure miss: OpenSSL dir for FTP
+Configure miss: whether to explicitly enable FTP SSL support
 Configure miss: libwebp
 Configure miss: libjpeg
 Configure miss: libXpm
@@ -244,7 +243,6 @@ Configure miss: PSPELL support
 Configure miss: libedit readline replacement
 Configure miss: mm support
 Configure miss: SNMP support
-Configure miss: OpenSSL dir for SNMP
 Configure miss: sodium support
 Configure miss: whether flush should be called explicitly after a buffered io
 Configure miss: extended DES crypt
