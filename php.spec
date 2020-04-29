@@ -5,12 +5,12 @@
 # Source0 file verified with key 0x910DEB46F53EA312 (derick@php.net)
 #
 Name     : php
-Version  : 7.4.4
-Release  : 215
-URL      : https://www.php.net/distributions/php-7.4.4.tar.xz
-Source0  : https://www.php.net/distributions/php-7.4.4.tar.xz
+Version  : 7.4.5
+Release  : 216
+URL      : https://www.php.net/distributions/php-7.4.5.tar.xz
+Source0  : https://www.php.net/distributions/php-7.4.5.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
-Source2  : https://www.php.net/distributions/php-7.4.4.tar.xz.asc
+Source2  : https://www.php.net/distributions/php-7.4.5.tar.xz.asc
 Source3  : php.ini
 Summary  : A general-purpose scripting language that is especially suited to web development
 Group    : Development/Tools
@@ -76,12 +76,24 @@ Patch4: 0004-modify-makefile-behavior-to-not-remove-pgo-files-whe.patch
 Patch5: 0005-Enable-hugepages.patch
 
 %description
-# Introduction
-LiteSpeed SAPI module is a dedicated interface for PHP integration with
-LiteSpeed Web Server. LiteSpeed SAPI has similar architecture to the FastCGI
-SAPI with there major enhancements: better performance, dynamic spawning and PHP
-configuration modification through web server configuration and `.htaccess`
-files.
+1. libmagic (ext/fileinfo) see ext/fileinfo/libmagic/LICENSE
+2. libmbfl (ext/mbstring) see ext/mbstring/libmbfl/LICENSE
+3. pcre2lib (ext/pcre)
+4. ext/standard crypt
+5. ext/standard crypt's blowfish implementation
+6. ext/standard/rand
+7. ext/standard/scanf
+8. ext/standard/strnatcmp.c
+9. ext/standard/uuencode
+10. libxmlrpc ext/xmlrpc
+11. main/snprintf.c
+12. main/strlcat
+13. main/strlcpy
+14. libgd (ext/gd)
+15. ext/phar portions of tar implementations
+16. ext/phar/zip.c portion extracted from libzip
+17. libbcmath (ext/bcmath) see ext/bcmath/libbcmath/LICENSE
+18. ext/mbstring/ucgendat portions based on the ucgendat.c from the OpenLDAP
 
 %package bin
 Summary: bin components for the php package.
@@ -109,7 +121,6 @@ Requires: php-lib = %{version}-%{release}
 Requires: php-bin = %{version}-%{release}
 Requires: php-data = %{version}-%{release}
 Provides: php-devel = %{version}-%{release}
-Requires: php = %{version}-%{release}
 Requires: php = %{version}-%{release}
 
 %description dev
@@ -159,12 +170,12 @@ services components for the php package.
 
 
 %prep
-%setup -q -n php-7.4.4
+%setup -q -n php-7.4.5
 cd %{_builddir}
 tar xf %{_sourcedir}/phpbench-0.8.2.tar.gz
-cd %{_builddir}/php-7.4.4
+cd %{_builddir}/php-7.4.5
 mkdir -p phpbench
-cp -r %{_builddir}/phpbench-0.8.2/* %{_builddir}/php-7.4.4/phpbench
+cp -r %{_builddir}/phpbench-0.8.2/* %{_builddir}/php-7.4.5/phpbench
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -176,13 +187,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1584717918
-# -Werror is for werrorists
+export SOURCE_DATE_EPOCH=1588199113
 export GCC_IGNORE_WERROR=1
-export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fcf-protection=full -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong "
-export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fcf-protection=full -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong "
-export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fcf-protection=full -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong "
-export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -fcf-protection=full -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong "
+export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FCFLAGS="$FFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FFLAGS="$FFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
+export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
 export CFLAGS_GENERATE="$CFLAGS -fprofile-generate -fprofile-dir=/var/tmp/pgo -fprofile-update=atomic "
 export FCFLAGS_GENERATE="$FCFLAGS -fprofile-generate -fprofile-dir=/var/tmp/pgo -fprofile-update=atomic "
 export FFLAGS_GENERATE="$FFLAGS -fprofile-generate -fprofile-dir=/var/tmp/pgo -fprofile-update=atomic "
@@ -312,19 +322,19 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1584717918
+export SOURCE_DATE_EPOCH=1588199113
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
-cp %{_builddir}/php-7.4.4/LICENSE %{buildroot}/usr/share/package-licenses/php/27b46923d7341b6bb717d06db4850b1180d565b2
-cp %{_builddir}/php-7.4.4/TSRM/LICENSE %{buildroot}/usr/share/package-licenses/php/1ffc27ce3b11cd061bfd4882c22602560f2c7931
-cp %{_builddir}/php-7.4.4/Zend/LICENSE %{buildroot}/usr/share/package-licenses/php/e984a92e965a699a63ee739a7eb8b8e2c24cc398
-cp %{_builddir}/php-7.4.4/ext/bcmath/libbcmath/LICENSE %{buildroot}/usr/share/package-licenses/php/6e79d515230676f96463980432059843a8d75802
-cp %{_builddir}/php-7.4.4/ext/date/lib/LICENSE.rst %{buildroot}/usr/share/package-licenses/php/c5ccb7505042b760f304032e80e1e192d4899d02
-cp %{_builddir}/php-7.4.4/ext/fileinfo/libmagic/LICENSE %{buildroot}/usr/share/package-licenses/php/3e3925d5a55f4b83a99f9c960214e3f6024a2469
-cp %{_builddir}/php-7.4.4/ext/gd/tests/Rochester-Regular.otf.LICENSE.txt %{buildroot}/usr/share/package-licenses/php/2b8b815229aa8a61e483fb4ba0588b8b6c491890
-cp %{_builddir}/php-7.4.4/ext/mbstring/libmbfl/LICENSE %{buildroot}/usr/share/package-licenses/php/41146e72d0f13320af7a165c543a7cbd59d56323
-cp %{_builddir}/php-7.4.4/ext/oci8/LICENSE %{buildroot}/usr/share/package-licenses/php/27b46923d7341b6bb717d06db4850b1180d565b2
-cp %{_builddir}/php-7.4.4/sapi/fpm/LICENSE %{buildroot}/usr/share/package-licenses/php/d0cbc5492bdea8a8437b7c2b6c0ad66947a576a5
+cp %{_builddir}/php-7.4.5/LICENSE %{buildroot}/usr/share/package-licenses/php/27b46923d7341b6bb717d06db4850b1180d565b2
+cp %{_builddir}/php-7.4.5/TSRM/LICENSE %{buildroot}/usr/share/package-licenses/php/1ffc27ce3b11cd061bfd4882c22602560f2c7931
+cp %{_builddir}/php-7.4.5/Zend/LICENSE %{buildroot}/usr/share/package-licenses/php/e984a92e965a699a63ee739a7eb8b8e2c24cc398
+cp %{_builddir}/php-7.4.5/ext/bcmath/libbcmath/LICENSE %{buildroot}/usr/share/package-licenses/php/6e79d515230676f96463980432059843a8d75802
+cp %{_builddir}/php-7.4.5/ext/date/lib/LICENSE.rst %{buildroot}/usr/share/package-licenses/php/c5ccb7505042b760f304032e80e1e192d4899d02
+cp %{_builddir}/php-7.4.5/ext/fileinfo/libmagic/LICENSE %{buildroot}/usr/share/package-licenses/php/3e3925d5a55f4b83a99f9c960214e3f6024a2469
+cp %{_builddir}/php-7.4.5/ext/gd/tests/Rochester-Regular.otf.LICENSE.txt %{buildroot}/usr/share/package-licenses/php/2b8b815229aa8a61e483fb4ba0588b8b6c491890
+cp %{_builddir}/php-7.4.5/ext/mbstring/libmbfl/LICENSE %{buildroot}/usr/share/package-licenses/php/41146e72d0f13320af7a165c543a7cbd59d56323
+cp %{_builddir}/php-7.4.5/ext/oci8/LICENSE %{buildroot}/usr/share/package-licenses/php/27b46923d7341b6bb717d06db4850b1180d565b2
+cp %{_builddir}/php-7.4.5/sapi/fpm/LICENSE %{buildroot}/usr/share/package-licenses/php/d0cbc5492bdea8a8437b7c2b6c0ad66947a576a5
 cp %{_builddir}/phpbench-0.8.2/LICENSE %{buildroot}/usr/share/package-licenses/php/9e0b81b219f2fac6ebb6200b8df03e6879cbc80f
 %make_install
 mkdir -p %{buildroot}/usr/share/defaults/php
