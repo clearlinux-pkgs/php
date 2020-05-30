@@ -6,7 +6,7 @@
 #
 Name     : php
 Version  : 7.4.5
-Release  : 216
+Release  : 217
 URL      : https://www.php.net/distributions/php-7.4.5.tar.xz
 Source0  : https://www.php.net/distributions/php-7.4.5.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
