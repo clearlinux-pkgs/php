@@ -19,7 +19,6 @@ Configure miss: phpdbg debug build
 Configure miss: phpdbg readline support
 Configure miss: sun_len in sys/un.h
 Configure miss: whether cross-process locking is required by accept()
-Configure miss: sendmail
 Configure miss: whether system uses EBCDIC
 Configure miss: __dlopen
 Configure miss: dns.h
@@ -42,6 +41,7 @@ Configure miss: explicit_memset
 Configure miss: funopen
 Configure miss: std_syslog
 Configure miss: crypt_r
+Configure miss: aarch64 CRC32 API
 Configure miss: whether to include gcov symbols
 Configure miss: whether to include debugging symbols
 Configure miss: whether to dlopen extensions with RTLD_NOW instead of RTLD_LAZY
@@ -50,6 +50,7 @@ Configure miss: whether to explicitly link against libgcc
 Configure miss: whether to enable dmalloc
 Configure miss: whether to enable DTrace support
 Configure miss: RAND_egd
+Configure miss: JIT support in PCRE2
 Configure miss: libcurl linked against old openssl
 Configure miss: QDBM support
 Configure miss: NDBM support
@@ -164,7 +165,6 @@ Configure miss: phpdbg debug build
 Configure miss: phpdbg readline support
 Configure miss: sun_len in sys/un.h
 Configure miss: whether cross-process locking is required by accept()
-Configure miss: sendmail
 Configure miss: whether system uses EBCDIC
 Configure miss: __dlopen
 Configure miss: dns.h
@@ -188,6 +188,7 @@ Configure miss: explicit_memset
 Configure miss: funopen
 Configure miss: std_syslog
 Configure miss: crypt_r
+Configure miss: aarch64 CRC32 API
 Configure miss: whether to include gcov symbols
 Configure miss: whether to include debugging symbols
 Configure miss: whether to dlopen extensions with RTLD_NOW instead of RTLD_LAZY
@@ -196,6 +197,7 @@ Configure miss: whether to explicitly link against libgcc
 Configure miss: whether to enable dmalloc
 Configure miss: whether to enable DTrace support
 Configure miss: RAND_egd
+Configure miss: JIT support in PCRE2
 Configure miss: libcurl linked against old openssl
 Configure miss: QDBM support
 Configure miss: NDBM support
