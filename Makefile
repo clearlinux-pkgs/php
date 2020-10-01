@@ -1,5 +1,5 @@
 PKG_NAME := php
-URL = https://www.php.net/distributions/php-7.4.10.tar.xz
+URL = https://www.php.net/distributions/php-7.4.11.tar.xz
 ARCHIVES = $(CGIT_BASE_URL)/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz phpbench
 
 include ../common/Makefile.common

@@ -1,5 +1,48 @@
 PHP                                                                        NEWS
 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+01 Oct 2020, PHP 7.4.11
+
+- Core:
+  . Fixed bug #79699 (PHP parses encoded cookie names so malicious `__Host-`
+    cookies can be sent). (CVE-2020-7070) (Stas)
+  . Fixed bug #79979 (passing value to by-ref param via CUFA crashes). (cmb,
+    Nikita)
+  . Fixed bug #80037 (Typed property must not be accessed before initialization
+    when __get() declared). (Nikita)
+  . Fixed bug #80048 (Bug #69100 has not been fixed for Windows). (cmb)
+  . Fixed bug #80049 (Memleak when coercing integers to string via variadic
+    argument). (Nikita)
+
+- Calendar:
+  . Fixed bug #80007 (Potential type confusion in unixtojd() parameter parsing).
+    (Andy Postnikov)
+
+- COM:
+  . Fixed bug #64130 (COM obj parameters passed by reference are not updated).
+    (cmb)
+
+- OPcache:
+  . Fixed bug #80002 (calc free space for new interned string is wrong).
+    (t-matsuno)
+  . Fixed bug #80046 (FREE for SWITCH_STRING optimized away). (Nikita)
+  . Fixed bug #79825 (opcache.file_cache causes SIGSEGV when custom opcode
+    handlers changed). (SammyK)
+
+- OpenSSL:
+  . Fixed bug #79601 (Wrong ciphertext/tag in AES-CCM encryption for a 12
+    bytes IV). (CVE-2020-7069) (Jakub Zelenka)
+
+- PDO:
+  . Fixed bug #80027 (Terrible performance using $query->fetch on queries with
+    many bind parameters (Matteo)
+
+- Standard:
+  . Fixed bug #79986 (str_ireplace bug with diacritics characters). (cmb)
+  . Fixed bug #80077 (getmxrr test bug). (Rainer Jung)
+  . Fixed bug #72941 (Modifying bucket->data by-ref has no effect any longer).
+    (cmb)
+  . Fixed bug #80067 (Omitting the port in bindto setting errors). (cmb)
+
 03 Sep 2020, PHP 7.4.10
 
 - Core:
@@ -42,6 +85,10 @@ PHP                                                                        NEWS
 - Session:
   . Fixed bug #79724 (Return type does not match in ext/session/mod_mm.c).
     (Nikita)
+
+- SOAP:
+  . Fixed bug #47021 (SoapClient stumbles over WSDL delivered with
+    "Transfer-Encoding: chunked"). (Matteo)
 
 - Standard:
   . Fixed bug #79930 (array_merge_recursive() crashes when called with array
