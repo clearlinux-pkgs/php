@@ -6,7 +6,7 @@
 #
 Name     : php
 Version  : 7.4.11
-Release  : 222
+Release  : 223
 URL      : https://www.php.net/distributions/php-7.4.11.tar.xz
 Source0  : https://www.php.net/distributions/php-7.4.11.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
@@ -23,6 +23,8 @@ Requires: php-man = %{version}-%{release}
 Requires: php-services = %{version}-%{release}
 BuildRequires : argon2-dev
 BuildRequires : aspell-dev
+BuildRequires : automake
+BuildRequires : automake-dev
 BuildRequires : bison
 BuildRequires : bzip2-dev
 BuildRequires : ca-certs
@@ -35,6 +37,7 @@ BuildRequires : expat-dev
 BuildRequires : file-dev
 BuildRequires : freetype-dev
 BuildRequires : gdbm-dev
+BuildRequires : gettext-bin
 BuildRequires : gettext-dev
 BuildRequires : gmp-dev
 BuildRequires : httpd-dev
@@ -43,18 +46,22 @@ BuildRequires : krb5-dev
 BuildRequires : libXpm-dev
 BuildRequires : libgd-dev
 BuildRequires : libidn-dev
+BuildRequires : libtool
+BuildRequires : libtool-dev
 BuildRequires : libwebp-dev
 BuildRequires : libxml2
 BuildRequires : libxml2-dev
 BuildRequires : libxslt-dev
 BuildRequires : libzip-dev
 BuildRequires : lmdb-dev
+BuildRequires : m4
 BuildRequires : mariadb-dev
 BuildRequires : ncurses-dev
 BuildRequires : nghttp2-dev
 BuildRequires : onig-dev
 BuildRequires : openssl-dev
 BuildRequires : pcre-dev
+BuildRequires : pkg-config-dev
 BuildRequires : pkgconfig(icu-i18n)
 BuildRequires : pkgconfig(icu-io)
 BuildRequires : pkgconfig(icu-uc)
@@ -74,6 +81,9 @@ Patch2: 0002-Disable-RC4-algorithm-fallback-for-signature-checks.patch
 Patch3: 0003-Reduce-system-wakeups-by-not-waking-up-PHP-once-per-.patch
 Patch4: 0004-modify-makefile-behavior-to-not-remove-pgo-files-whe.patch
 Patch5: 0005-Enable-hugepages.patch
+Patch6: 0001-base64-add-avx512-and-vbmi-version.patch
+Patch7: 0001-X86-add-AVX2-version-for-strrev-and-str_rot13.patch
+Patch8: 0001-X86-Fast-CRC32-computation-using-PCLMULQDQ-instructi.patch
 
 %description
 1. libmagic (ext/fileinfo) see ext/fileinfo/libmagic/LICENSE
@@ -181,13 +191,21 @@ cp -r %{_builddir}/phpbench-0.8.2/* %{_builddir}/php-7.4.11/phpbench
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
+%patch7 -p1
+%patch8 -p1
 
 %build
+## build_prepend content
+cp /usr/share/aclocal/libtool.m4 build/
+autoreconf -fi
+libtoolize
+## build_prepend end
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1601568450
+export SOURCE_DATE_EPOCH=1603896324
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$FFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -203,7 +221,7 @@ export FCFLAGS_USE="$FCFLAGS -fprofile-use -fprofile-dir=/var/tmp/pgo -fprofile-
 export FFLAGS_USE="$FFLAGS -fprofile-use -fprofile-dir=/var/tmp/pgo -fprofile-correction "
 export CXXFLAGS_USE="$CXXFLAGS -fprofile-use -fprofile-dir=/var/tmp/pgo -fprofile-correction "
 export LDFLAGS_USE="$LDFLAGS -fprofile-use -fprofile-dir=/var/tmp/pgo -fprofile-correction "
-CFLAGS="${CFLAGS_GENERATE}" CXXFLAGS="${CXXFLAGS_GENERATE}" FFLAGS="${FFLAGS_GENERATE}" FCFLAGS="${FCFLAGS_GENERATE}" LDFLAGS="${LDFLAGS_GENERATE}" %configure --disable-static --enable-gd \
+CFLAGS="${CFLAGS_GENERATE}" CXXFLAGS="${CXXFLAGS_GENERATE}" FFLAGS="${FFLAGS_GENERATE}" FCFLAGS="${FCFLAGS_GENERATE}" LDFLAGS="${LDFLAGS_GENERATE}" %reconfigure --disable-static --enable-gd \
 --with-external-gd \
 --sysconfdir=/usr/share/defaults/php \
 --enable-dba=shared \
@@ -265,7 +283,7 @@ pushd phpbench/
 ../sapi/cli/php phpbench.php
 popd
 make clean
-CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS="${FCFLAGS_USE}" LDFLAGS="${LDFLAGS_USE}" %configure --disable-static --enable-gd \
+CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS="${FCFLAGS_USE}" LDFLAGS="${LDFLAGS_USE}" %reconfigure --disable-static --enable-gd \
 --with-external-gd \
 --sysconfdir=/usr/share/defaults/php \
 --enable-dba=shared \
@@ -322,7 +340,7 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1601568450
+export SOURCE_DATE_EPOCH=1603896324
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
 cp %{_builddir}/php-7.4.11/LICENSE %{buildroot}/usr/share/package-licenses/php/27b46923d7341b6bb717d06db4850b1180d565b2
@@ -751,6 +769,7 @@ mv %{buildroot}/usr/lib64/php/doc/PEAR %{buildroot}/usr/lib64/php/docs/PEAR
 /usr/include/php/ext/standard/base64.h
 /usr/include/php/ext/standard/basic_functions.h
 /usr/include/php/ext/standard/crc32.h
+/usr/include/php/ext/standard/crc32_x86.h
 /usr/include/php/ext/standard/credits.h
 /usr/include/php/ext/standard/credits_ext.h
 /usr/include/php/ext/standard/credits_sapi.h

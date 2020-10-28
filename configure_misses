@@ -140,8 +140,7 @@ Configure miss: usable fpsetprec
 Configure miss: usable _controlfp
 Configure miss: usable _controlfp_s
 Configure miss: whether double cast to long preserves least significant bits
-Configure miss: whether dlsym() requires a leading underscore in symbol names
-Configure miss: whether to enable thread-safety
+Configure miss: whether dlsym() requires a leading underscore in symbol names... checking whether to enable thread-safety
 Configure miss: whether to enable Zend debugging
 Configure miss: target system is Darwin
 Configure miss: icc
@@ -287,7 +286,6 @@ Configure miss: usable fpsetprec
 Configure miss: usable _controlfp
 Configure miss: usable _controlfp_s
 Configure miss: whether double cast to long preserves least significant bits
-Configure miss: whether dlsym() requires a leading underscore in symbol names
-Configure miss: whether to enable thread-safety
+Configure miss: whether dlsym() requires a leading underscore in symbol names... checking whether to enable thread-safety
 Configure miss: whether to enable Zend debugging
 Configure miss: target system is Darwin

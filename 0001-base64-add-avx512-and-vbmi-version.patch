@@ -1,0 +1,722 @@
+From c451fb4f3716753ee60d859c74311d455bff6618 Mon Sep 17 00:00:00 2001
+From: Frank Du <frank.du@intel.com>
+Date: Mon, 19 Oct 2020 01:21:53 +0000
+Subject: [PATCH] base64: add avx512 and vbmi version.
+
+1. Implementation based on https://github.com/WojciechMula/base64simd
+2. Only runtime path is added to reduce the complexity of SIMD variants.
+3. Expand test case to cover SIMD implementation.
+
+Signed-off-by: Frank Du <frank.du@intel.com>
+
+Backport from https://github.com/php/php-src/pull/6361
+---
+ Zend/zend_cpuinfo.h                           |  36 +++
+ Zend/zend_portability.h                       |  40 +++
+ build/php.m4                                  |  55 ++++
+ configure.ac                                  |   4 +
+ ext/standard/base64.c                         | 300 +++++++++++++++++-
+ ext/standard/base64.h                         |   4 +-
+ .../tests/url/base64_decode_basic_002.phpt    |  28 +-
+ .../tests/url/base64_encode_basic_001.phpt    |  29 +-
+ .../tests/url/base64_encode_basic_002.phpt    |  14 +-
+ 9 files changed, 491 insertions(+), 19 deletions(-)
+
+diff --git a/Zend/zend_cpuinfo.h b/Zend/zend_cpuinfo.h
+index e299a163..29c1851b 100644
+--- a/Zend/zend_cpuinfo.h
++++ b/Zend/zend_cpuinfo.h
+@@ -61,6 +61,11 @@ typedef enum _zend_cpu_feature {
+ 
+ 	/* EBX */
+ 	ZEND_CPU_FEATURE_AVX2			= (1<<5 | ZEND_CPU_EBX_MASK),
++	ZEND_CPU_FEATURE_AVX512F		= (1<<16 | ZEND_CPU_EBX_MASK),
++	ZEND_CPU_FEATURE_AVX512DQ		= (1<<17 | ZEND_CPU_EBX_MASK),
++	ZEND_CPU_FEATURE_AVX512CD		= (1<<28 | ZEND_CPU_EBX_MASK),
++	/*intentionally don't support		= (1<<30 | ZEND_CPU_EBX_MASK)*/
++	/*intentionally don't support           = (1<<31 | ZEND_CPU_EBX_MASK)*/
+ 
+ 	/* EDX */
+ 	ZEND_CPU_FEATURE_FPU			= (1<<0 | ZEND_CPU_EDX_MASK),
+@@ -185,6 +190,28 @@ static zend_always_inline int zend_cpu_supports_avx2() {
+ #endif
+ 	return __builtin_cpu_supports("avx2");
+ }
++
++#if PHP_HAVE_AVX512_SUPPORTS
++ZEND_NO_SANITIZE_ADDRESS
++static zend_always_inline int zend_cpu_supports_avx512() {
++#if PHP_HAVE_BUILTIN_CPU_INIT
++	__builtin_cpu_init();
++#endif
++	return __builtin_cpu_supports("avx512f") && __builtin_cpu_supports("avx512dq")
++		&& __builtin_cpu_supports("avx512cd") && __builtin_cpu_supports("avx512bw")
++		&& __builtin_cpu_supports("avx512vl");
++}
++#endif
++
++#if PHP_HAVE_AVX512_VBMI_SUPPORTS
++ZEND_NO_SANITIZE_ADDRESS
++static zend_always_inline int zend_cpu_supports_avx512_vbmi() {
++#if PHP_HAVE_BUILTIN_CPU_INIT
++	__builtin_cpu_init();
++#endif
++	return zend_cpu_supports_avx512() && __builtin_cpu_supports("avx512vbmi");
++}
++#endif
+ #else
+ 
+ static zend_always_inline int zend_cpu_supports_sse2() {
+@@ -219,6 +246,15 @@ static zend_always_inline int zend_cpu_supports_avx2() {
+ 	return zend_cpu_supports(ZEND_CPU_FEATURE_AVX2);
+ }
+ 
++static zend_always_inline int zend_cpu_supports_avx512() {
++	/* TODO: avx512_bw/avx512_vl use bit 30/31 which are reserved for mask */
++	return 0;
++}
++
++static zend_always_inline int zend_cpu_supports_avx512_vbmi() {
++	/* TODO: avx512_vbmi use ECX of cpuid 7 */
++	return 0;
++}
+ #endif
+ 
+ #endif
+diff --git a/Zend/zend_portability.h b/Zend/zend_portability.h
+index bddde777..be28540d 100644
+--- a/Zend/zend_portability.h
++++ b/Zend/zend_portability.h
+@@ -679,6 +679,46 @@ static zend_always_inline double _zend_get_nan(void) /* {{{ */
+ # define ZEND_INTRIN_AVX2_FUNC_DECL(func)
+ #endif
+ 
++#if PHP_HAVE_AVX512_SUPPORTS && defined(HAVE_FUNC_ATTRIBUTE_TARGET) || defined(ZEND_WIN32)
++#define ZEND_INTRIN_AVX512_RESOLVER 1
++#endif
++
++#if defined(ZEND_INTRIN_AVX512_RESOLVER) && defined(ZEND_INTRIN_HAVE_IFUNC_TARGET)
++# define ZEND_INTRIN_AVX512_FUNC_PROTO 1
++#elif defined(ZEND_INTRIN_AVX512_RESOLVER)
++# define ZEND_INTRIN_AVX512_FUNC_PTR 1
++#endif
++
++#ifdef ZEND_INTRIN_AVX512_RESOLVER
++# ifdef HAVE_FUNC_ATTRIBUTE_TARGET
++#  define ZEND_INTRIN_AVX512_FUNC_DECL(func) ZEND_API func __attribute__((target("avx512f,avx512cd,avx512vl,avx512dq,avx512bw")))
++# else
++#  define ZEND_INTRIN_AVX512_FUNC_DECL(func) func
++# endif
++#else
++# define ZEND_INTRIN_AVX512_FUNC_DECL(func)
++#endif
++
++#if PHP_HAVE_AVX512_VBMI_SUPPORTS && defined(HAVE_FUNC_ATTRIBUTE_TARGET)
++#define ZEND_INTRIN_AVX512_VBMI_RESOLVER 1
++#endif
++
++#if defined(ZEND_INTRIN_AVX512_VBMI_RESOLVER) && defined(ZEND_INTRIN_HAVE_IFUNC_TARGET)
++# define ZEND_INTRIN_AVX512_VBMI_FUNC_PROTO 1
++#elif defined(ZEND_INTRIN_AVX512_VBMI_RESOLVER)
++# define ZEND_INTRIN_AVX512_VBMI_FUNC_PTR 1
++#endif
++
++#ifdef ZEND_INTRIN_AVX512_VBMI_RESOLVER
++# ifdef HAVE_FUNC_ATTRIBUTE_TARGET
++#  define ZEND_INTRIN_AVX512_VBMI_FUNC_DECL(func) ZEND_API func __attribute__((target("avx512f,avx512cd,avx512vl,avx512dq,avx512bw,avx512vbmi")))
++# else
++#  define ZEND_INTRIN_AVX512_VBMI_FUNC_DECL(func) func
++# endif
++#else
++# define ZEND_INTRIN_AVX512_VBMI_FUNC_DECL(func)
++#endif
++
+ /* Intrinsics macros end. */
+ 
+ #ifdef ZEND_WIN32
+diff --git a/build/php.m4 b/build/php.m4
+index 0205d01c..04787cbe 100644
+--- a/build/php.m4
++++ b/build/php.m4
+@@ -2708,3 +2708,58 @@ AC_DEFUN([PHP_PATCH_CONFIG_HEADERS], [
+   $SED -e 's/^#undef PACKAGE_[^ ]*/\/\* & \*\//g' < $srcdir/$1 \
+     > $srcdir/$1.tmp && mv $srcdir/$1.tmp $srcdir/$1
+ ])
++
++dnl
++dnl PHP_CHECK_AVX512_SUPPORTS
++dnl
++AC_DEFUN([PHP_CHECK_AVX512_SUPPORTS], [
++  AC_MSG_CHECKING([for avx512 supports in compiler])
++  save_CFLAGS="$CFLAGS"
++  CFLAGS="-mavx512f -mavx512cd -mavx512vl -mavx512dq -mavx512bw $CFLAGS"
++
++  AC_LINK_IFELSE([AC_LANG_SOURCE([[
++    #include <immintrin.h>
++      int main() {
++        __m512i mask = _mm512_set1_epi32(0x1);
++        char out[32];
++        _mm512_storeu_si512(out, _mm512_shuffle_epi8(mask, mask));
++        return 0;
++    }]])], [
++    have_avx512_supports=1
++    AC_MSG_RESULT([yes])
++  ], [
++    have_avx512_supports=0
++    AC_MSG_RESULT([no])
++  ])
++
++  CFLAGS="$save_CFLAGS"
++
++  AC_DEFINE_UNQUOTED([PHP_HAVE_AVX512_SUPPORTS],
++   [$have_avx512_supports], [Whether the compiler supports AVX512])
++])
++
++dnl
++dnl PHP_CHECK_AVX512_VBMI_SUPPORTS
++dnl
++AC_DEFUN([PHP_CHECK_AVX512_VBMI_SUPPORTS], [
++  AC_MSG_CHECKING([for avx512 vbmi supports in compiler])
++  save_CFLAGS="$CFLAGS"
++  CFLAGS="-mavx512f -mavx512cd -mavx512vl -mavx512dq -mavx512bw -mavx512vbmi $CFLAGS"
++  AC_LINK_IFELSE([AC_LANG_SOURCE([[
++    #include <immintrin.h>
++      int main() {
++        __m512i mask = _mm512_set1_epi32(0x1);
++        char out[32];
++        _mm512_storeu_si512(out, _mm512_permutexvar_epi8(mask, mask));
++        return 0;
++    }]])], [
++    have_avx512_vbmi_supports=1
++    AC_MSG_RESULT([yes])
++  ], [
++    have_avx512_vbmi_supports=0
++    AC_MSG_RESULT([no])
++  ])
++  CFLAGS="$save_CFLAGS"
++  AC_DEFINE_UNQUOTED([PHP_HAVE_AVX512_VBMI_SUPPORTS],
++   [$have_avx512_vbmi_supports], [Whether the compiler supports AVX512 VBMI])
++])
+diff --git a/configure.ac b/configure.ac
+index fb06cfb7..7be53388 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -542,6 +542,10 @@ dnl Check __builtin_cpu_init
+ PHP_CHECK_BUILTIN_CPU_INIT
+ dnl Check __builtin_cpu_supports
+ PHP_CHECK_BUILTIN_CPU_SUPPORTS
++dnl Check AVX512
++PHP_CHECK_AVX512_SUPPORTS
++dnl Check AVX512 VBMI
++PHP_CHECK_AVX512_VBMI_SUPPORTS
+ 
+ dnl Check instructions.
+ PHP_CHECK_CPU_SUPPORTS([ssse3])
+diff --git a/ext/standard/base64.c b/ext/standard/base64.c
+index 0dd40458..5dcc64b7 100644
+--- a/ext/standard/base64.c
++++ b/ext/standard/base64.c
+@@ -356,6 +356,20 @@ fail:
+ # endif
+ #endif
+ 
++/* Only enable avx512 resolver if avx2 use resolver also */
++#if ZEND_INTRIN_AVX2_FUNC_PROTO && ZEND_INTRIN_AVX512_FUNC_PROTO
++#define BASE64_INTRIN_AVX512_FUNC_PROTO 1
++#endif
++#if ZEND_INTRIN_AVX2_FUNC_PTR && ZEND_INTRIN_AVX512_FUNC_PTR
++#define BASE64_INTRIN_AVX512_FUNC_PTR 1
++#endif
++#if ZEND_INTRIN_AVX2_FUNC_PROTO && ZEND_INTRIN_AVX512_VBMI_FUNC_PROTO
++#define BASE64_INTRIN_AVX512_VBMI_FUNC_PROTO 1
++#endif
++#if ZEND_INTRIN_AVX2_FUNC_PTR && ZEND_INTRIN_AVX512_VBMI_FUNC_PTR
++#define BASE64_INTRIN_AVX512_VBMI_FUNC_PTR 1
++#endif
++
+ #if ZEND_INTRIN_AVX2_NATIVE
+ # include <immintrin.h>
+ #elif ZEND_INTRIN_SSSE3_NATIVE
+@@ -368,6 +382,15 @@ fail:
+ # endif /* (ZEND_INTRIN_SSSE3_RESOLVER || ZEND_INTRIN_AVX2_RESOLVER) */
+ # include "Zend/zend_cpuinfo.h"
+ 
++# if BASE64_INTRIN_AVX512_FUNC_PROTO || BASE64_INTRIN_AVX512_FUNC_PTR
++ZEND_INTRIN_AVX512_FUNC_DECL(zend_string *php_base64_encode_avx512(const unsigned char *str, size_t length));
++ZEND_INTRIN_AVX512_FUNC_DECL(zend_string *php_base64_decode_ex_avx512(const unsigned char *str, size_t length, zend_bool strict));
++# endif
++# if BASE64_INTRIN_AVX512_VBMI_FUNC_PROTO || BASE64_INTRIN_AVX512_VBMI_FUNC_PTR
++ZEND_INTRIN_AVX512_VBMI_FUNC_DECL(zend_string *php_base64_encode_avx512_vbmi(const unsigned char *str, size_t length));
++ZEND_INTRIN_AVX512_VBMI_FUNC_DECL(zend_string *php_base64_decode_ex_avx512_vbmi(const unsigned char *str, size_t length, zend_bool strict));
++# endif
++
+ # if ZEND_INTRIN_AVX2_RESOLVER
+ ZEND_INTRIN_AVX2_FUNC_DECL(zend_string *php_base64_encode_avx2(const unsigned char *str, size_t length));
+ ZEND_INTRIN_AVX2_FUNC_DECL(zend_string *php_base64_decode_ex_avx2(const unsigned char *str, size_t length, zend_bool strict));
+@@ -381,13 +404,23 @@ ZEND_INTRIN_SSSE3_FUNC_DECL(zend_string *php_base64_decode_ex_ssse3(const unsign
+ zend_string *php_base64_encode_default(const unsigned char *str, size_t length);
+ zend_string *php_base64_decode_ex_default(const unsigned char *str, size_t length, zend_bool strict);
+ 
+-# if (ZEND_INTRIN_AVX2_FUNC_PROTO || ZEND_INTRIN_SSSE3_FUNC_PROTO)
++# if (ZEND_INTRIN_AVX2_FUNC_PROTO || ZEND_INTRIN_SSSE3_FUNC_PROTO || BASE64_INTRIN_AVX512_FUNC_PROTO || BASE64_INTRIN_AVX512_VBMI_FUNC_PROTO)
+ PHPAPI zend_string *php_base64_encode(const unsigned char *str, size_t length) __attribute__((ifunc("resolve_base64_encode")));
+ PHPAPI zend_string *php_base64_decode_ex(const unsigned char *str, size_t length, zend_bool strict) __attribute__((ifunc("resolve_base64_decode")));
+ 
+ ZEND_NO_SANITIZE_ADDRESS
+ ZEND_ATTRIBUTE_UNUSED /* clang mistakenly warns about this */
+ static void *resolve_base64_encode() {
++# if BASE64_INTRIN_AVX512_VBMI_FUNC_PROTO
++       if (zend_cpu_supports_avx512_vbmi()) {
++               return php_base64_encode_avx512_vbmi;
++       } else
++# endif
++# if BASE64_INTRIN_AVX512_FUNC_PROTO
++       if (zend_cpu_supports_avx512()) {
++               return php_base64_encode_avx512;
++       } else
++# endif
+ # if ZEND_INTRIN_AVX2_FUNC_PROTO
+ 	if (zend_cpu_supports_avx2()) {
+ 		return php_base64_encode_avx2;
+@@ -404,6 +437,16 @@ static void *resolve_base64_encode() {
+ ZEND_NO_SANITIZE_ADDRESS
+ ZEND_ATTRIBUTE_UNUSED /* clang mistakenly warns about this */
+ static void *resolve_base64_decode() {
++# if BASE64_INTRIN_AVX512_VBMI_FUNC_PROTO
++       if (zend_cpu_supports_avx512_vbmi()) {
++               return php_base64_decode_ex_avx512_vbmi;
++       } else
++# endif
++# if BASE64_INTRIN_AVX512_FUNC_PROTO
++       if (zend_cpu_supports_avx512()) {
++               return php_base64_decode_ex_avx512;
++       } else
++# endif
+ # if ZEND_INTRIN_AVX2_FUNC_PROTO
+ 	if (zend_cpu_supports_avx2()) {
+ 		return php_base64_decode_ex_avx2;
+@@ -430,6 +473,18 @@ PHPAPI zend_string *php_base64_decode_ex(const unsigned char *str, size_t length
+ 
+ PHP_MINIT_FUNCTION(base64_intrin)
+ {
++# if BASE64_INTRIN_AVX512_VBMI_FUNC_PTR
++	if (zend_cpu_supports_avx512_vbmi()) {
++		php_base64_encode_ptr = php_base64_encode_avx512_vbmi;
++		php_base64_decode_ex_ptr = php_base64_decode_ex_avx512_vbmi;
++	} else
++# endif
++# if BASE64_INTRIN_AVX512_FUNC_PTR
++	if (zend_cpu_supports_avx512()) {
++		php_base64_encode_ptr = php_base64_encode_avx512;
++		php_base64_decode_ex_ptr = php_base64_decode_ex_avx512;
++	} else
++# endif
+ # if ZEND_INTRIN_AVX2_FUNC_PTR
+ 	if (zend_cpu_supports_avx2()) {
+ 		php_base64_encode_ptr = php_base64_encode_avx2;
+@@ -451,6 +506,249 @@ PHP_MINIT_FUNCTION(base64_intrin)
+ # endif /* (ZEND_INTRIN_AVX2_FUNC_PROTO || ZEND_INTRIN_SSSE3_FUNC_PROTO) */
+ #endif /* ZEND_INTRIN_AVX2_NATIVE */
+ 
++#if BASE64_INTRIN_AVX512_VBMI_FUNC_PROTO || BASE64_INTRIN_AVX512_VBMI_FUNC_PTR
++zend_string *php_base64_encode_avx512_vbmi(const unsigned char *str, size_t length)
++{
++	const unsigned char *c = str;
++	unsigned char *o;
++	zend_string *result;
++
++	result = zend_string_safe_alloc(((length + 2) / 3), 4 * sizeof(char), 0, 0);
++	o = (unsigned char *)ZSTR_VAL(result);
++
++	const __m512i shuffle_splitting = _mm512_setr_epi32(
++		0x01020001, 0x04050304, 0x07080607, 0x0a0b090a, 0x0d0e0c0d, 0x10110f10,
++		0x13141213, 0x16171516, 0x191a1819, 0x1c1d1b1c, 0x1f201e1f, 0x22232122,
++		0x25262425, 0x28292728, 0x2b2c2a2b, 0x2e2f2d2e);
++	const __m512i multi_shifts = _mm512_set1_epi64(0x3036242a1016040a);
++	const char *ascii_lookup_tbl = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
++	const __m512i ascii_lookup = _mm512_loadu_si512((__m512i *)ascii_lookup_tbl);
++
++	while (length > 63) {
++		/* Step 1: load input data */
++		__m512i str = _mm512_loadu_si512((const __m512i *)c);
++
++		/* Step 2: splitting 24-bit words into 32-bit lanes */
++		str = _mm512_permutexvar_epi8(shuffle_splitting, str);
++
++		/* Step 3: moving 6-bit word to sperate bytes */
++		str = _mm512_multishift_epi64_epi8(multi_shifts, str);
++
++		/* Step 4: conversion to ASCII */
++		str = _mm512_permutexvar_epi8(str, ascii_lookup);
++
++		/* Step 5: store the final result */
++		_mm512_storeu_si512((__m512i *)o, str);
++		c += 48;
++		o += 64;
++		length -= 48;
++	}
++
++	o = php_base64_encode_impl(c, length, o);
++
++	ZSTR_LEN(result) = (o - (unsigned char *)ZSTR_VAL(result));
++
++	return result;
++}
++
++zend_string *php_base64_decode_ex_avx512_vbmi(const unsigned char *str, size_t length, zend_bool strict)
++{
++	const unsigned char *c = str;
++	unsigned char *o;
++	size_t outl = 0;
++	zend_string *result;
++
++	result = zend_string_alloc(length, 0);
++	o = (unsigned char *)ZSTR_VAL(result);
++
++	const __m512i lookup_0 = _mm512_setr_epi32(
++		0x80808080, 0x80808080, 0x80808080, 0x80808080, 0x80808080, 0x80808080,
++		0x80808080, 0x80808080, 0x80808080, 0x80808080, 0x3e808080, 0x3f808080,
++		0x37363534, 0x3b3a3938, 0x80803d3c, 0x80808080);
++	const __m512i lookup_1 = _mm512_setr_epi32(
++		0x02010080, 0x06050403, 0x0a090807, 0x0e0d0c0b, 0x1211100f, 0x16151413,
++		0x80191817, 0x80808080, 0x1c1b1a80, 0x201f1e1d, 0x24232221, 0x28272625,
++		0x2c2b2a29, 0x302f2e2d, 0x80333231, 0x80808080);
++
++	const __m512i merge_mask1 = _mm512_set1_epi32(0x01400140);
++	const __m512i merge_mask2 = _mm512_set1_epi32(0x00011000);
++
++	const __m512i continuous_mask = _mm512_setr_epi32(
++		0x06000102, 0x090a0405, 0x0c0d0e08, 0x16101112, 0x191a1415, 0x1c1d1e18,
++		0x26202122, 0x292a2425, 0x2c2d2e28, 0x36303132, 0x393a3435, 0x3c3d3e38,
++		0x00000000, 0x00000000, 0x00000000, 0x00000000);
++
++	while (length > 64) {
++		/* Step 1: load input data */
++		const __m512i input = _mm512_loadu_si512((__m512i *)c);
++
++		/* Step 2: translation into 6-bit values(saved on bytes) from ASCII and error detection */
++		__m512i str = _mm512_permutex2var_epi8(lookup_0, input, lookup_1);
++		const uint64_t mask = _mm512_movepi8_mask(_mm512_or_epi64(str, input)); /* convert MSBs to the mask */
++		if (mask) {
++			break;
++		}
++
++		/* Step 3: pack four fields within 32-bit words into 24-bit words. */
++		const __m512i merge_ab_and_bc = _mm512_maddubs_epi16(str, merge_mask1);
++		str = _mm512_madd_epi16(merge_ab_and_bc, merge_mask2);
++
++		/* Step 4: move 3-byte words into the continuous array. */
++		str = _mm512_permutexvar_epi8(continuous_mask, str);
++
++		/* Step 5: store the final result */
++		_mm512_storeu_si512((__m512i *)o, str);
++
++		c += 64;
++		o += 48;
++		outl += 48;
++		length -= 64;
++	}
++
++	if (!php_base64_decode_impl(c, length, (unsigned char*)ZSTR_VAL(result), &outl, strict)) {
++		zend_string_efree(result);
++		return NULL;
++	}
++
++	ZSTR_LEN(result) = outl;
++
++	return result;
++}
++#endif
++
++#if BASE64_INTRIN_AVX512_FUNC_PROTO || BASE64_INTRIN_AVX512_FUNC_PTR
++zend_string *php_base64_encode_avx512(const unsigned char *str, size_t length)
++{
++	const unsigned char *c = str;
++	unsigned char *o;
++	zend_string *result;
++
++	result = zend_string_safe_alloc(((length + 2) / 3), 4 * sizeof(char), 0, 0);
++	o = (unsigned char *)ZSTR_VAL(result);
++
++	while (length > 63) {
++		/* Step 1: load input data */
++		/* [????|????|????|????|PPPO|OONN|NMMM|LLLK|KKJJ|JIII|HHHG|GGFF|FEEE|DDDC|CCBB|BAAA] */
++		__m512i str = _mm512_loadu_si512((const __m512i *)c);
++
++		/* Step 2: splitting 24-bit words into 32-bit lanes */
++		/* [0000|PPPO|OONN|NMMM|0000|LLLK|KKJJ|JIII|0000|HHHG|GGFF|FEEE|0000|DDDC|CCBB|BAAA] */
++		str = _mm512_permutexvar_epi32(
++			_mm512_set_epi32(-1, 11, 10, 9, -1, 8, 7, 6, -1, 5, 4, 3, -1, 2, 1, 0), str);
++		/* [D1 D2 D0 D1|C1 C2 C0 C1|B1 B2 B0 B1|A1 A2 A0 A1] x 4 */
++		str = _mm512_shuffle_epi8(str, _mm512_set4_epi32(0x0a0b090a, 0x07080607, 0x04050304, 0x01020001));
++
++		/* Step 3: moving 6-bit word to sperate bytes */
++		/* in:  [bbbbcccc|ccdddddd|aaaaaabb|bbbbcccc] */
++		/* t0:  [0000cccc|cc000000|aaaaaa00|00000000] */
++		const __m512i t0 = _mm512_and_si512(str, _mm512_set1_epi32(0x0fc0fc00));
++		/* t1:  [00000000|00cccccc|00000000|00aaaaaa] */
++		const __m512i t1 = _mm512_srlv_epi16(t0, _mm512_set1_epi32(0x0006000a));
++		/* t2:  [ccdddddd|00000000|aabbbbbb|cccc0000] */
++		const __m512i t2 = _mm512_sllv_epi16(str, _mm512_set1_epi32(0x00080004));
++		/* str: [00dddddd|00cccccc|00bbbbbb|00aaaaaa] */
++		str = _mm512_ternarylogic_epi32(_mm512_set1_epi32(0x3f003f00), t2, t1, 0xca);
++
++		/* Step 4: conversion to ASCII */
++		__m512i result = _mm512_subs_epu8(str, _mm512_set1_epi8(51));
++		const __mmask64 less = _mm512_cmpgt_epi8_mask(_mm512_set1_epi8(26), str);
++		result = _mm512_mask_mov_epi8(result, less, _mm512_set1_epi8(13));
++		const __m512i lut = _mm512_set4_epi32(0x000041f0, 0xedfcfcfc, 0xfcfcfcfc, 0xfcfcfc47);
++		result = _mm512_shuffle_epi8(lut, result);
++		result = _mm512_add_epi8(result, str);
++
++		/* Step 5: store the final result */
++		_mm512_storeu_si512((__m512i *)o, result);
++		c += 48;
++		o += 64;
++		length -= 48;
++	}
++
++	o = php_base64_encode_impl(c, length, o);
++
++	ZSTR_LEN(result) = (o - (unsigned char *)ZSTR_VAL(result));
++
++	return result;
++}
++
++#define build_dword(b0, b1, b2, b3)					\
++	((uint32_t)(uint8_t)b0 << 0) | ((uint32_t)(uint8_t)b1 << 8) |	\
++	((uint32_t)(uint8_t)b2 << 16) | ((uint32_t)(uint8_t)b3 << 24)
++
++#define _mm512_set4lanes_epi8(b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15)	\
++	_mm512_setr4_epi32(build_dword(b0, b1, b2, b3), build_dword(b4, b5, b6, b7),			\
++			   build_dword(b8, b9, b10, b11), build_dword(b12, b13, b14, b15))
++
++zend_string *php_base64_decode_ex_avx512(const unsigned char *str, size_t length, zend_bool strict)
++{
++	const unsigned char *c = str;
++	unsigned char *o;
++	size_t outl = 0;
++	zend_string *result;
++
++	result = zend_string_alloc(length, 0);
++	o = (unsigned char *)ZSTR_VAL(result);
++
++	while (length > 64) {
++		/* Step 1: load input data */
++		__m512i str = _mm512_loadu_si512((__m512i *)c);
++
++		/* Step 2: translation into 6-bit values(saved on bytes) from ASCII and error detection */
++		const __m512i higher_nibble = _mm512_and_si512(_mm512_srli_epi32(str, 4), _mm512_set1_epi8(0x0f));
++		const __m512i lower_nibble = _mm512_and_si512(str, _mm512_set1_epi8(0x0f));
++		const __m512i shiftLUT = _mm512_set4lanes_epi8(
++				0, 0, 19, 4, -65, -65, -71, -71, 0, 0, 0, 0, 0, 0, 0, 0);
++		const __m512i maskLUT = _mm512_set4lanes_epi8(
++				/* 0        : 0b1010_1000*/ 0xa8,
++				/* 1 .. 9   : 0b1111_1000*/ 0xf8, 0xf8, 0xf8, 0xf8, 0xf8, 0xf8, 0xf8, 0xf8, 0xf8,
++				/* 10       : 0b1111_0000*/ 0xf0,
++				/* 11       : 0b0101_0100*/ 0x54,
++				/* 12 .. 14 : 0b0101_0000*/ 0x50, 0x50, 0x50,
++				/* 15       : 0b0101_0100*/ 0x54);
++		const __m512i bitposLUT = _mm512_set4lanes_epi8(
++				0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80,
++				0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00);
++		const __m512i M = _mm512_shuffle_epi8(maskLUT, lower_nibble);
++		const __m512i bit = _mm512_shuffle_epi8(bitposLUT, higher_nibble);
++		const uint64_t match = _mm512_test_epi8_mask(M, bit);
++		if (match != (uint64_t)-1) {
++			break;
++		}
++		const __m512i sh = _mm512_shuffle_epi8(shiftLUT, higher_nibble);
++		const __mmask64 eq_2f = _mm512_cmpeq_epi8_mask(str, _mm512_set1_epi8(0x2f));
++		const __m512i shift = _mm512_mask_mov_epi8(sh, eq_2f, _mm512_set1_epi8(16));
++		str = _mm512_add_epi8(str, shift);
++
++		/* Step 3: pack four fields within 32-bit words into 24-bit words. */
++		const __m512i merge_ab_and_bc = _mm512_maddubs_epi16(str, _mm512_set1_epi32(0x01400140));
++		str = _mm512_madd_epi16(merge_ab_and_bc, _mm512_set1_epi32(0x00011000));
++
++		/* Step 4: move 3-byte words into the continuous array. */
++		const __m512i t1 = _mm512_shuffle_epi8(str,
++			_mm512_set4lanes_epi8(2, 1, 0, 6, 5, 4, 10, 9, 8, 14, 13, 12, -1, -1, -1, -1));
++		const __m512i s6 = _mm512_setr_epi32(0, 1, 2, 4, 5, 6, 8, 9, 10, 12, 13, 14, 0, 0, 0, 0);
++		const __m512i t2 = _mm512_permutexvar_epi32(s6, t1);
++
++		/* Step 5: store the final result */
++		_mm512_storeu_si512((__m512i *)o, t2);
++
++		c += 64;
++		o += 48;
++		outl += 48;
++		length -= 64;
++	}
++
++	if (!php_base64_decode_impl(c, length, (unsigned char*)ZSTR_VAL(result), &outl, strict)) {
++		zend_string_efree(result);
++		return NULL;
++	}
++
++	ZSTR_LEN(result) = outl;
++
++	return result;
++}
++#endif
++
+ #if ZEND_INTRIN_AVX2_NATIVE || ZEND_INTRIN_AVX2_RESOLVER
+ # if ZEND_INTRIN_AVX2_RESOLVER && defined(HAVE_FUNC_ATTRIBUTE_TARGET)
+ static __m256i php_base64_encode_avx2_reshuffle(__m256i in) __attribute__((target("avx2")));
+diff --git a/ext/standard/base64.h b/ext/standard/base64.h
+index faf245c5..0d410c60 100644
+--- a/ext/standard/base64.h
++++ b/ext/standard/base64.h
+@@ -21,7 +21,7 @@
+ #define BASE64_H
+ 
+ /*
+- * NEON implementation is based on https://github.com/WojciechMula/base64simd
++ * NEON and AVX512 implementation are based on https://github.com/WojciechMula/base64simd
+  * which is copyrighted to:
+  * Copyright (c) 2015-2018, Wojciech Mula
+  * All rights reserved.
+@@ -62,7 +62,7 @@
+ PHP_FUNCTION(base64_decode);
+ PHP_FUNCTION(base64_encode);
+ 
+-#if (ZEND_INTRIN_AVX2_FUNC_PTR || ZEND_INTRIN_SSSE3_FUNC_PTR) && !ZEND_INTRIN_AVX2_NATIVE
++#if (ZEND_INTRIN_AVX2_FUNC_PTR || ZEND_INTRIN_SSSE3_FUNC_PTR || ZEND_INTRIN_AVX512_FUNC_PTR || ZEND_INTRIN_AVX512_VBMI_FUNC_PTR) && !ZEND_INTRIN_AVX2_NATIVE
+ PHP_MINIT_FUNCTION(base64_intrin);
+ #endif
+ 
+diff --git a/ext/standard/tests/url/base64_decode_basic_002.phpt b/ext/standard/tests/url/base64_decode_basic_002.phpt
+index c538d159..a1a36702 100644
+--- a/ext/standard/tests/url/base64_decode_basic_002.phpt
++++ b/ext/standard/tests/url/base64_decode_basic_002.phpt
+@@ -8,15 +8,15 @@ Test base64_decode() function : basic functionality - strict vs non-strict with
+  * Alias to functions:
+  */
+ 
+-echo "Decode 'hello world!':\n";
+-$noWhiteSpace = "aGVsbG8gd29ybGQh";
++echo "Decode 'PHP is a popular general-purpose scripting language that is especially suited to web development':\n";
++$noWhiteSpace = "UEhQIGlzIGEgcG9wdWxhciBnZW5lcmFsLXB1cnBvc2Ugc2NyaXB0aW5nIGxhbmd1YWdlIHRoYXQgaXMgZXNwZWNpYWxseSBzdWl0ZWQgdG8gd2ViIGRldmVsb3BtZW50";
+ var_dump(base64_decode($noWhiteSpace));
+ var_dump(base64_decode($noWhiteSpace, false));
+ var_dump(base64_decode($noWhiteSpace, true));
+ 
+ echo "\nWhitespace does not affect base64_decode, even with \$strict===true:\n";
+-$withWhiteSpace = "a GVs   bG8gd2
+-		 				9ybGQh";
++$withWhiteSpace = "UEhQIGlzIGE gcG9wdWxhciBnZW5lcmFsLXB1cnBvc2Ugc2NyaXB0aW5nIGxhbmd1YWdl IHRoYXQga
++                        XMgZXNwZWNpYWxseSBzdWl0ZWQgdG8gd2ViIGRldmVsb3BtZW50";
+ var_dump(base64_decode($withWhiteSpace));
+ var_dump(base64_decode($withWhiteSpace, false));
+ var_dump(base64_decode($withWhiteSpace, true));
+@@ -27,21 +27,21 @@ var_dump(base64_decode($badChars));
+ var_dump(base64_decode($badChars, false));
+ var_dump(base64_decode($badChars, true));
+ 
+-echo "Done";
++echo "Done\n";
+ ?>
+ --EXPECT--
+-Decode 'hello world!':
+-string(12) "hello world!"
+-string(12) "hello world!"
+-string(12) "hello world!"
++Decode 'PHP is a popular general-purpose scripting language that is especially suited to web development':
++string(96) "PHP is a popular general-purpose scripting language that is especially suited to web development"
++string(96) "PHP is a popular general-purpose scripting language that is especially suited to web development"
++string(96) "PHP is a popular general-purpose scripting language that is especially suited to web development"
+ 
+ Whitespace does not affect base64_decode, even with $strict===true:
+-string(12) "hello world!"
+-string(12) "hello world!"
+-string(12) "hello world!"
++string(96) "PHP is a popular general-purpose scripting language that is especially suited to web development"
++string(96) "PHP is a popular general-purpose scripting language that is especially suited to web development"
++string(96) "PHP is a popular general-purpose scripting language that is especially suited to web development"
+ 
+ Other chars outside the base64 alphabet are ignored when $strict===false, but cause failure with $strict===true:
+-string(12) "hello world!"
+-string(12) "hello world!"
++string(96) "PHP is a popular general-purpose scripting language that is especially suited to web development"
++string(96) "PHP is a popular general-purpose scripting language that is especially suited to web development"
+ bool(false)
+ Done
+diff --git a/ext/standard/tests/url/base64_encode_basic_001.phpt b/ext/standard/tests/url/base64_encode_basic_001.phpt
+index 764e15f3..a1b094d2 100644
+--- a/ext/standard/tests/url/base64_encode_basic_001.phpt
++++ b/ext/standard/tests/url/base64_encode_basic_001.phpt
+@@ -20,7 +20,25 @@ for ($i=0; $i<256; $i++) {
+ 	printf("0x%X: %s\n", $i, $enc);
+ }
+ 
+-echo "Done";
++$values = array(
++    "Hello World",
++    "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!%^&*(){}[]",
++    "\n\t Line with control characters\r\n",
++    "\xC1\xC2\xC3\xC4\xC5\xC6",
++    "\75\76\77\78\79\80",
++    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789%!",
++    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789%!\75\76\77\78\79\80",
++    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789%!ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789%!",
++    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789%!ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789%!\75\76\77\78\79\80"
++);
++
++foreach($values as $str) {
++    $enc = base64_encode($str);
++    printf("%s\n", $enc);
++}
++
++echo "Done\n";
++
+ ?>
+ --EXPECT--
+ *** Testing base64_encode() : basic functionality ***
+@@ -280,4 +298,13 @@ echo "Done";
+ 0xFD: /Q==
+ 0xFE: /g==
+ 0xFF: /w==
++SGVsbG8gV29ybGQ=
++QUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVoxMjM0NTY3ODkwISVeJiooKXt9W10=
++CgkgTGluZSB3aXRoIGNvbnRyb2wgY2hhcmFjdGVycw0K
++wcLDxMXG
++PT4/BzgHOVw4MA==
++QUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVphYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5ejAxMjM0NTY3ODklIQ==
++QUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVphYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5ejAxMjM0NTY3ODklIT0+Pwc4BzlcODA=
++QUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVphYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5ejAxMjM0NTY3ODklIUFCQ0RFRkdISUpLTE1OT1BRUlNUVVZXWFlaYWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXowMTIzNDU2Nzg5JSE=
++QUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVphYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5ejAxMjM0NTY3ODklIUFCQ0RFRkdISUpLTE1OT1BRUlNUVVZXWFlaYWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXowMTIzNDU2Nzg5JSE9Pj8HOAc5XDgw
+ Done
+diff --git a/ext/standard/tests/url/base64_encode_basic_002.phpt b/ext/standard/tests/url/base64_encode_basic_002.phpt
+index 2bcb7519..e76dffed 100644
+--- a/ext/standard/tests/url/base64_encode_basic_002.phpt
++++ b/ext/standard/tests/url/base64_encode_basic_002.phpt
+@@ -19,7 +19,11 @@ $values = array(
+ 	"ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!%^&*(){}[]",
+ 	"\n\t Line with control characters\r\n",
+ 	"\xC1\xC2\xC3\xC4\xC5\xC6",
+-	"\75\76\77\78\79\80"
++	"\75\76\77\78\79\80",
++	"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789%!",
++	"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789%!\75\76\77\78\79\80",
++	"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789%!ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789%!",
++	"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789%!ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789%!\75\76\77\78\79\80"
+ );
+ 
+ echo "\n--- Testing base64_encode() with binary string input ---\n";
+@@ -56,4 +60,12 @@ TEST PASSED
+ TEST PASSED
+ -- Iteration 5 --
+ TEST PASSED
++-- Iteration 6 --
++TEST PASSED
++-- Iteration 7 --
++TEST PASSED
++-- Iteration 8 --
++TEST PASSED
++-- Iteration 9 --
++TEST PASSED
+ ===Done===
+-- 
+2.28.0
+

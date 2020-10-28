@@ -3,3 +3,6 @@
 0003-Reduce-system-wakeups-by-not-waking-up-PHP-once-per-.patch
 0004-modify-makefile-behavior-to-not-remove-pgo-files-whe.patch
 0005-Enable-hugepages.patch
+0001-base64-add-avx512-and-vbmi-version.patch
+0001-X86-add-AVX2-version-for-strrev-and-str_rot13.patch
+0001-X86-Fast-CRC32-computation-using-PCLMULQDQ-instructi.patch
