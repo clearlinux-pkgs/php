@@ -6,7 +6,7 @@
 #
 Name     : php
 Version  : 7.4.12
-Release  : 224
+Release  : 225
 URL      : https://www.php.net/distributions/php-7.4.12.tar.xz
 Source0  : https://www.php.net/distributions/php-7.4.12.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
@@ -84,6 +84,7 @@ Patch5: 0005-Enable-hugepages.patch
 Patch6: 0001-base64-add-avx512-and-vbmi-version.patch
 Patch7: 0001-X86-add-AVX2-version-for-strrev-and-str_rot13.patch
 Patch8: 0001-X86-Fast-CRC32-computation-using-PCLMULQDQ-instructi.patch
+Patch9: 0001-Install-and-process-auxiliary-libtool-m4-files.patch
 
 %description
 1. libmagic (ext/fileinfo) see ext/fileinfo/libmagic/LICENSE
@@ -194,10 +195,18 @@ cp -r %{_builddir}/phpbench-0.8.2/* %{_builddir}/php-7.4.12/phpbench
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
+%patch9 -p1
 
 %build
 ## build_prepend content
 cp /usr/share/aclocal/libtool.m4 build/
+cp /usr/share/libtool/build-aux/ltmain.sh build/
+
+cp /usr/share/aclocal/ltoptions.m4 build/
+cp /usr/share/aclocal/ltsugar.m4 build/
+cp /usr/share/aclocal/ltversion.m4 build/
+cp /usr/share/aclocal/lt~obsolete.m4 build/
+
 autoreconf -fi
 libtoolize
 ## build_prepend end
@@ -205,7 +214,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1604020395
+export SOURCE_DATE_EPOCH=1604256025
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$FFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -340,7 +349,7 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1604020395
+export SOURCE_DATE_EPOCH=1604256025
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
 cp %{_builddir}/php-7.4.12/LICENSE %{buildroot}/usr/share/package-licenses/php/27b46923d7341b6bb717d06db4850b1180d565b2
@@ -392,6 +401,10 @@ mv %{buildroot}/usr/lib64/php/doc/PEAR %{buildroot}/usr/lib64/php/docs/PEAR
 /usr/lib64/build/config.sub
 /usr/lib64/build/libtool.m4
 /usr/lib64/build/ltmain.sh
+/usr/lib64/build/ltoptions.m4
+/usr/lib64/build/ltsugar.m4
+/usr/lib64/build/ltversion.m4
+/usr/lib64/build/lt~obsolete.m4
 /usr/lib64/build/php.m4
 /usr/lib64/build/php_cxx_compile_stdcxx.m4
 /usr/lib64/build/phpize.m4
