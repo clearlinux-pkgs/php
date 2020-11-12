@@ -6,7 +6,7 @@
 #
 Name     : php
 Version  : 7.4.12
-Release  : 226
+Release  : 227
 URL      : https://www.php.net/distributions/php-7.4.12.tar.xz
 Source0  : https://www.php.net/distributions/php-7.4.12.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
