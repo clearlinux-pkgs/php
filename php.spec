@@ -6,7 +6,7 @@
 #
 Name     : php
 Version  : 7.4.12
-Release  : 227
+Release  : 228
 URL      : https://www.php.net/distributions/php-7.4.12.tar.xz
 Source0  : https://www.php.net/distributions/php-7.4.12.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
@@ -46,6 +46,7 @@ BuildRequires : krb5-dev
 BuildRequires : libXpm-dev
 BuildRequires : libgd-dev
 BuildRequires : libidn-dev
+BuildRequires : libsodium-dev
 BuildRequires : libtool
 BuildRequires : libtool-dev
 BuildRequires : libwebp-dev
@@ -214,7 +215,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1605107904
+export SOURCE_DATE_EPOCH=1605661778
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 export FCFLAGS="$FFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
@@ -256,6 +257,7 @@ CFLAGS="${CFLAGS_GENERATE}" CXXFLAGS="${CXXFLAGS_GENERATE}" FFLAGS="${FFLAGS_GEN
 --without-readline \
 --enable-mbstring \
 --with-openssl \
+--with-sodium \
 --enable-sysvmsg \
 --with-system-ciphers \
 --enable-opcache \
@@ -318,6 +320,7 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 --without-readline \
 --enable-mbstring \
 --with-openssl \
+--with-sodium \
 --enable-sysvmsg \
 --with-system-ciphers \
 --enable-opcache \
@@ -349,7 +352,7 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1605107904
+export SOURCE_DATE_EPOCH=1605661778
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
 cp %{_builddir}/php-7.4.12/LICENSE %{buildroot}/usr/share/package-licenses/php/27b46923d7341b6bb717d06db4850b1180d565b2

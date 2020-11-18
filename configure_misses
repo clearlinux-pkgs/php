@@ -50,7 +50,6 @@ Configure miss: whether to explicitly link against libgcc
 Configure miss: whether to enable dmalloc
 Configure miss: whether to enable DTrace support
 Configure miss: RAND_egd
-Configure miss: JIT support in PCRE2
 Configure miss: libcurl linked against old openssl
 Configure miss: QDBM support
 Configure miss: NDBM support
@@ -98,7 +97,6 @@ Configure miss: PSPELL support
 Configure miss: libedit readline replacement
 Configure miss: mm support
 Configure miss: SNMP support
-Configure miss: sodium support
 Configure miss: whether flush should be called explicitly after a buffered io
 Configure miss: extended DES crypt
 Configure miss: Blowfish crypt
@@ -196,7 +194,6 @@ Configure miss: whether to explicitly link against libgcc
 Configure miss: whether to enable dmalloc
 Configure miss: whether to enable DTrace support
 Configure miss: RAND_egd
-Configure miss: JIT support in PCRE2
 Configure miss: libcurl linked against old openssl
 Configure miss: QDBM support
 Configure miss: NDBM support
@@ -244,7 +241,6 @@ Configure miss: PSPELL support
 Configure miss: libedit readline replacement
 Configure miss: mm support
 Configure miss: SNMP support
-Configure miss: sodium support
 Configure miss: whether flush should be called explicitly after a buffered io
 Configure miss: extended DES crypt
 Configure miss: Blowfish crypt

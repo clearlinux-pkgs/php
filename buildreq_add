@@ -43,3 +43,4 @@ e2fsprogs-dev
 lmdb-dev
 gettext-dev
 sqlite-autoconf-dev
+libsodium-dev

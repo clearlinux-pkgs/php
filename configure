@@ -24,6 +24,7 @@
 --without-readline
 --enable-mbstring
 --with-openssl
+--with-sodium
 --enable-sysvmsg
 --with-system-ciphers
 --enable-opcache
