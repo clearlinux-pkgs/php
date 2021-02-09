@@ -6,8 +6,6 @@ Configure miss: whether atof() accepts NAN
 Configure miss: whether atof() accepts INF
 Configure miss: whether HUGE_VAL + -HUGEVAL == NAN
 Configure miss: Apache 2 handler module support via DSO through APXS
-Configure miss: sys/pstat.h usability
-Configure miss: sys/pstat.h presence
 Configure miss: PS_STRINGS
 Configure miss: setproctitle_fast
 Configure miss: port framework
@@ -26,6 +24,7 @@ Configure miss: sys/sysexits.h
 Configure miss: unix.h
 Configure miss: broken getcwd
 Configure miss: broken gcc optimize-strlen
+Configure miss: gcc options needed to detect all undeclared functions
 Configure miss: int8
 Configure miss: int16
 Configure miss: int32
@@ -72,6 +71,7 @@ Configure miss: mhash support
 Configure miss: if iconv supports //IGNORE
 Configure miss: IMAP support
 Configure miss: IMAP SSL support
+Configure miss: g++ option to enable C++11 features
 Configure miss: LDAP support
 Configure miss: whether to build with LDAP Cyrus SASL support
 Configure miss: Oracle Database OCI8 support
@@ -122,8 +122,6 @@ Configure miss: __dns_search in -lsocket
 Configure miss: dn_expand
 Configure miss: dn_skipname
 Configure miss: res_search
-Configure miss: atomic.h usability
-Configure miss: atomic.h presence
 Configure miss: atomic.h
 Configure miss: whether arc4random_buf is declared
 Configure miss: union semun
@@ -149,8 +147,6 @@ Configure miss: whether atof() accepts NAN
 Configure miss: whether atof() accepts INF
 Configure miss: whether HUGE_VAL + -HUGEVAL == NAN
 Configure miss: Apache 2 handler module support via DSO through APXS
-Configure miss: sys/pstat.h usability
-Configure miss: sys/pstat.h presence
 Configure miss: PS_STRINGS
 Configure miss: setproctitle_fast
 Configure miss: port framework
@@ -169,6 +165,7 @@ Configure miss: sys/sysexits.h
 Configure miss: unix.h
 Configure miss: broken getcwd
 Configure miss: broken gcc optimize-strlen
+Configure miss: gcc options needed to detect all undeclared functions
 Configure miss: int8
 Configure miss: int16
 Configure miss: int32
@@ -216,6 +213,7 @@ Configure miss: mhash support
 Configure miss: if iconv supports //IGNORE
 Configure miss: IMAP support
 Configure miss: IMAP SSL support
+Configure miss: g++ option to enable C++11 features
 Configure miss: LDAP support
 Configure miss: whether to build with LDAP Cyrus SASL support
 Configure miss: Oracle Database OCI8 support
@@ -266,8 +264,6 @@ Configure miss: __dns_search in -lsocket
 Configure miss: dn_expand
 Configure miss: dn_skipname
 Configure miss: res_search
-Configure miss: atomic.h usability
-Configure miss: atomic.h presence
 Configure miss: atomic.h
 Configure miss: whether arc4random_buf is declared
 Configure miss: union semun

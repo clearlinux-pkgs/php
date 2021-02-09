@@ -5,12 +5,12 @@
 # Source0 file verified with key 0x910DEB46F53EA312 (derick@php.net)
 #
 Name     : php
-Version  : 7.4.12
-Release  : 228
-URL      : https://www.php.net/distributions/php-7.4.12.tar.xz
-Source0  : https://www.php.net/distributions/php-7.4.12.tar.xz
+Version  : 7.4.15
+Release  : 229
+URL      : https://www.php.net/distributions/php-7.4.15.tar.xz
+Source0  : https://www.php.net/distributions/php-7.4.15.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
-Source2  : https://www.php.net/distributions/php-7.4.12.tar.xz.asc
+Source2  : https://www.php.net/distributions/php-7.4.15.tar.xz.asc
 Source3  : php.ini
 Summary  : A general-purpose scripting language that is especially suited to web development
 Group    : Development/Tools
@@ -182,12 +182,12 @@ services components for the php package.
 
 
 %prep
-%setup -q -n php-7.4.12
+%setup -q -n php-7.4.15
 cd %{_builddir}
 tar xf %{_sourcedir}/phpbench-0.8.2.tar.gz
-cd %{_builddir}/php-7.4.12
+cd %{_builddir}/php-7.4.15
 mkdir -p phpbench
-cp -r %{_builddir}/phpbench-0.8.2/* %{_builddir}/php-7.4.12/phpbench
+cp -r %{_builddir}/phpbench-0.8.2/* %{_builddir}/php-7.4.15/phpbench
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -215,7 +215,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1605661778
+export SOURCE_DATE_EPOCH=1612896708
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 export FCFLAGS="$FFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
@@ -352,19 +352,19 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1605661778
+export SOURCE_DATE_EPOCH=1612896708
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
-cp %{_builddir}/php-7.4.12/LICENSE %{buildroot}/usr/share/package-licenses/php/27b46923d7341b6bb717d06db4850b1180d565b2
-cp %{_builddir}/php-7.4.12/TSRM/LICENSE %{buildroot}/usr/share/package-licenses/php/1ffc27ce3b11cd061bfd4882c22602560f2c7931
-cp %{_builddir}/php-7.4.12/Zend/LICENSE %{buildroot}/usr/share/package-licenses/php/e984a92e965a699a63ee739a7eb8b8e2c24cc398
-cp %{_builddir}/php-7.4.12/ext/bcmath/libbcmath/LICENSE %{buildroot}/usr/share/package-licenses/php/6e79d515230676f96463980432059843a8d75802
-cp %{_builddir}/php-7.4.12/ext/date/lib/LICENSE.rst %{buildroot}/usr/share/package-licenses/php/c5ccb7505042b760f304032e80e1e192d4899d02
-cp %{_builddir}/php-7.4.12/ext/fileinfo/libmagic/LICENSE %{buildroot}/usr/share/package-licenses/php/3e3925d5a55f4b83a99f9c960214e3f6024a2469
-cp %{_builddir}/php-7.4.12/ext/gd/tests/Rochester-Regular.otf.LICENSE.txt %{buildroot}/usr/share/package-licenses/php/2b8b815229aa8a61e483fb4ba0588b8b6c491890
-cp %{_builddir}/php-7.4.12/ext/mbstring/libmbfl/LICENSE %{buildroot}/usr/share/package-licenses/php/41146e72d0f13320af7a165c543a7cbd59d56323
-cp %{_builddir}/php-7.4.12/ext/oci8/LICENSE %{buildroot}/usr/share/package-licenses/php/27b46923d7341b6bb717d06db4850b1180d565b2
-cp %{_builddir}/php-7.4.12/sapi/fpm/LICENSE %{buildroot}/usr/share/package-licenses/php/d0cbc5492bdea8a8437b7c2b6c0ad66947a576a5
+cp %{_builddir}/php-7.4.15/LICENSE %{buildroot}/usr/share/package-licenses/php/27b46923d7341b6bb717d06db4850b1180d565b2
+cp %{_builddir}/php-7.4.15/TSRM/LICENSE %{buildroot}/usr/share/package-licenses/php/1ffc27ce3b11cd061bfd4882c22602560f2c7931
+cp %{_builddir}/php-7.4.15/Zend/LICENSE %{buildroot}/usr/share/package-licenses/php/e984a92e965a699a63ee739a7eb8b8e2c24cc398
+cp %{_builddir}/php-7.4.15/ext/bcmath/libbcmath/LICENSE %{buildroot}/usr/share/package-licenses/php/6e79d515230676f96463980432059843a8d75802
+cp %{_builddir}/php-7.4.15/ext/date/lib/LICENSE.rst %{buildroot}/usr/share/package-licenses/php/c5ccb7505042b760f304032e80e1e192d4899d02
+cp %{_builddir}/php-7.4.15/ext/fileinfo/libmagic/LICENSE %{buildroot}/usr/share/package-licenses/php/3e3925d5a55f4b83a99f9c960214e3f6024a2469
+cp %{_builddir}/php-7.4.15/ext/gd/tests/Rochester-Regular.otf.LICENSE.txt %{buildroot}/usr/share/package-licenses/php/2b8b815229aa8a61e483fb4ba0588b8b6c491890
+cp %{_builddir}/php-7.4.15/ext/mbstring/libmbfl/LICENSE %{buildroot}/usr/share/package-licenses/php/41146e72d0f13320af7a165c543a7cbd59d56323
+cp %{_builddir}/php-7.4.15/ext/oci8/LICENSE %{buildroot}/usr/share/package-licenses/php/27b46923d7341b6bb717d06db4850b1180d565b2
+cp %{_builddir}/php-7.4.15/sapi/fpm/LICENSE %{buildroot}/usr/share/package-licenses/php/d0cbc5492bdea8a8437b7c2b6c0ad66947a576a5
 cp %{_builddir}/phpbench-0.8.2/LICENSE %{buildroot}/usr/share/package-licenses/php/9e0b81b219f2fac6ebb6200b8df03e6879cbc80f
 %make_install
 mkdir -p %{buildroot}/usr/share/defaults/php
