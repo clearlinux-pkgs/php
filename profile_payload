@@ -1,5 +1,5 @@
 ./sapi/cli/php Zend/micro_bench.php
 ./sapi/cli/php Zend/bench.php
 pushd phpbench/
-../sapi/cli/php phpbench.php
+../sapi/cli/php phpbench.php ||:
 popd

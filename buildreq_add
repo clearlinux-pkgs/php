@@ -44,3 +44,5 @@ lmdb-dev
 gettext-dev
 sqlite-autoconf-dev
 libsodium-dev
+libffi-dev
+re2c

@@ -11,7 +11,7 @@ mv %{buildroot}/usr/share/defaults/php/php-fpm.d/www.conf.default %{buildroot}/u
 mkdir -p %{buildroot}/usr/share/clr-service-restart
 ln -sf /usr/lib/systemd/system/php-fpm.service %{buildroot}/usr/share/clr-service-restart/php-fpm.service
 # SAPI wrong folder
-mv %{buildroot}/usr/lib/libphp7.so %{buildroot}/usr/lib64/
+mv %{buildroot}/usr/lib/libphp.so %{buildroot}/usr/lib64/
 # Append zendopcache so option
 pushd %{buildroot}
 find usr/lib64/extensions/ -name opcache.so | xargs -I{} echo "zend_extension=/{}" >> %{buildroot}/usr/share/defaults/php/php.ini
