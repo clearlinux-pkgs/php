@@ -6,7 +6,7 @@
 #
 Name     : php
 Version  : 8.0.5
-Release  : 230
+Release  : 231
 URL      : http://us1.php.net/distributions/php-8.0.5.tar.xz
 Source0  : http://us1.php.net/distributions/php-8.0.5.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
@@ -74,6 +74,7 @@ BuildRequires : zlib-dev
 Patch1: 0001-php-fpm-default-to-ondemand-policy-change-some-defau.patch
 Patch2: 0003-Reduce-system-wakeups-by-not-waking-up-PHP-once-per-.patch
 Patch3: 0005-Enable-hugepages.patch
+Patch4: 0001-Install-and-process-auxiliary-libtool-m4-files.patch
 
 %description
 <div align="center">
@@ -161,6 +162,7 @@ cp -r %{_builddir}/phpbench-0.8.2/* %{_builddir}/php-8.0.5/phpbench
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 ## build_prepend content
@@ -179,7 +181,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1620172393
+export SOURCE_DATE_EPOCH=1620176793
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 export FCFLAGS="$FFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
@@ -316,7 +318,7 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1620172393
+export SOURCE_DATE_EPOCH=1620176793
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
 cp %{_builddir}/php-8.0.5/LICENSE %{buildroot}/usr/share/package-licenses/php/8c12894c6c25a643d94339ff9cdf591806fbd052
@@ -370,6 +372,10 @@ mv %{buildroot}/usr/lib64/php/doc/PEAR %{buildroot}/usr/lib64/php/docs/PEAR
 /usr/lib64/build/gen_stub.php
 /usr/lib64/build/libtool.m4
 /usr/lib64/build/ltmain.sh
+/usr/lib64/build/ltoptions.m4
+/usr/lib64/build/ltsugar.m4
+/usr/lib64/build/ltversion.m4
+/usr/lib64/build/lt~obsolete.m4
 /usr/lib64/build/php.m4
 /usr/lib64/build/php_cxx_compile_stdcxx.m4
 /usr/lib64/build/phpize.m4
