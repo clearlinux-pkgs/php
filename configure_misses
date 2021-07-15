@@ -263,6 +263,8 @@ Configure miss: whether to include debugging symbols
 Configure miss: whether to include debugging symbols
 Configure miss: whether to include gcov symbols
 Configure miss: whether to include gcov symbols
+Configure miss: whether we are using musl libc
+Configure miss: whether we are using musl libc
 Configure miss: zip_compression_method_supported in -lzip
 Configure miss: zip_compression_method_supported in -lzip
 Configure miss: zip_register_cancel_callback_with_state in -lzip

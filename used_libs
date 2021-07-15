@@ -14,6 +14,7 @@ libicuio.so.67
 libicuuc.so.67
 liblmdb.so
 libm.so.6
+libmvec.so.1
 libonig.so.5
 libpcre2-8.so.0
 libpq.so.5

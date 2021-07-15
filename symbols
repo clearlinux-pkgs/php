@@ -1757,6 +1757,7 @@ libphp.so:zend_set_hash_symbol
 libphp.so:zend_set_local_var
 libphp.so:zend_set_local_var_str
 libphp.so:zend_set_memory_limit
+libphp.so:zend_set_memory_limit_ex
 libphp.so:zend_set_timeout
 libphp.so:zend_set_user_opcode_handler
 libphp.so:zend_shutdown_fpu
