@@ -1,6 +1,43 @@
 PHP                                                                        NEWS
 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-01 Jul 2021, PHP 8.0.8
+29 Jul 2021, PHP 8.0.9
+
+- Core:
+  . Fixed bug #81145 (copy() and stream_copy_to_stream() fail for +4GB files).
+    (cmb, Nikita)
+  . Fixed bug #81163 (incorrect handling of indirect vars in __sleep).
+    (krakjoe)
+  . Fixed bug #81159 (Object to int warning when using an object as a string
+    offset). (girgias)
+  . Fixed bug #80728 (PHP built-in web server resets timeout when it can kill
+    the process). (Calvin Buckley)
+  . Fixed bug #73630 (Built-in Weberver - overwrite $_SERVER['request_uri']).
+    (cmb)
+  . Fixed bug #80173 (Using return value of zend_assign_to_variable() is not
+    safe). (Nikita)
+  . Fixed bug #73226 (--r[fcez] always return zero exit code). (cmb)
+
+- Intl:
+  . Fixed bug #72809 (Locale::lookup() wrong result with canonicalize option).
+    (cmb)
+  . Fixed bug #68471 (IntlDateFormatter fails for "GMT+00:00" timezone). (cmb)
+  . Fixed bug #74264 (grapheme_strrpos() broken for negative offsets). (cmb)
+
+- OpenSSL:
+  . Fixed bug #52093 (openssl_csr_sign truncates $serial). (cmb)
+
+- PCRE:
+  . Fixed bug #81101 (PCRE2 10.37 shows unexpected result). (Anatol)
+  . Fixed bug #81243 (Too much memory is allocated for preg_replace()). (cmb)
+
+- Reflection:
+  . Fixed bug #81208 (Segmentation fault while create newInstance from
+    attribute). (Nikita)
+
+- Standard:
+  . Fixed bug #81223 (flock() only locks first byte of file). (cmb)
+
+17 Jun 2021, PHP 8.0.8
 
 - Core:
   . Fixed bug #81076 (incorrect debug info on Closures with implicit binds).
@@ -11,8 +48,6 @@ PHP                                                                        NEWS
     (Nikita)
   . Fixed bug #81070 (Integer underflow in memory limit comparison).
     (Peter van Dommelen)
-  . Fixed bug #81122 (SSRF bypass in FILTER_VALIDATE_URL).
-    (CVE-2021-21705) (cmb)
 
 - Bzip2:
   . Fixed bug #81092 (fflush before stream_filter_remove corrupts stream).
@@ -41,16 +76,6 @@ PHP                                                                        NEWS
 
 - MySQLnd:
   . Fixed bug #80761 (PDO uses too much memory). (Nikita)
-
-- PDO_Firebird:
-   . Fixed bug #76448 (Stack buffer overflow in firebird_info_cb).
-    (CVE-2021-21704) (cmb)
-   . Fixed bug #76449 (SIGSEGV in firebird_handle_doer).
-    (CVE-2021-21704) (cmb)
-   . Fixed bug #76450 (SIGSEGV in firebird_stmt_execute).
-    (CVE-2021-21704) (cmb)
-   . Fixed bug #76452 (Crash while parsing blob data in firebird_fetch_blob).
-    (CVE-2021-21704) (cmb)
 
 - readline:
   . Fixed bug #72998 (invalid read in readline completion). (krakjoe)
