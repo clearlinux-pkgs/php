@@ -73,8 +73,6 @@ Configure miss: __attribute__((target))
 Configure miss: __attribute__((target))
 Configure miss: __crypt
 Configure miss: __crypt
-Configure miss: __dlopen
-Configure miss: __dlopen
 Configure miss: __dns_search
 Configure miss: __dns_search
 Configure miss: __dns_search in -lbind
@@ -83,8 +81,6 @@ Configure miss: __dns_search in -lresolv
 Configure miss: __dns_search in -lresolv
 Configure miss: __dns_search in -lsocket
 Configure miss: __dns_search in -lsocket
-Configure miss: __openpty
-Configure miss: __openpty
 Configure miss: __res_ndestroy
 Configure miss: __res_ndestroy
 Configure miss: __res_ndestroy in -lbind
@@ -93,8 +89,6 @@ Configure miss: __res_ndestroy in -lresolv
 Configure miss: __res_ndestroy in -lresolv
 Configure miss: __res_ndestroy in -lsocket
 Configure miss: __res_ndestroy in -lsocket
-Configure miss: __res_nsearch
-Configure miss: __res_nsearch
 Configure miss: __setsockopt in -lnetwork
 Configure miss: __setsockopt in -lnetwork
 Configure miss: a custom ODBC support
@@ -113,10 +107,6 @@ Configure miss: clang fuzzer SAPI
 Configure miss: clang fuzzer SAPI
 Configure miss: crypt
 Configure miss: crypt
-Configure miss: dn_expand
-Configure miss: dn_expand
-Configure miss: dn_skipname
-Configure miss: dn_skipname
 Configure miss: dns.h
 Configure miss: dns.h
 Configure miss: dns_search
@@ -161,8 +151,6 @@ Configure miss: mm support
 Configure miss: mm support
 Configure miss: opagent in default path
 Configure miss: opagent in default path
-Configure miss: openpty
-Configure miss: openpty
 Configure miss: phpdbg debug build
 Configure miss: phpdbg debug build
 Configure miss: phpdbg readline support
@@ -179,12 +167,6 @@ Configure miss: res_ndestroy in -lresolv
 Configure miss: res_ndestroy in -lresolv
 Configure miss: res_ndestroy in -lsocket
 Configure miss: res_ndestroy in -lsocket
-Configure miss: res_nsearch
-Configure miss: res_nsearch
-Configure miss: res_nsearch in -lresolv
-Configure miss: res_nsearch in -lresolv
-Configure miss: res_search
-Configure miss: res_search
 Configure miss: setproctitle_fast
 Configure miss: setproctitle_fast
 Configure miss: setsockopt in -lnetwork

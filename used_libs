@@ -3,7 +3,6 @@ libbz2.so.1.0
 libc.so.6
 libcrypto.so.1.1
 libcurl.so.4
-libdl.so.2
 libexslt.so.0
 libgcc_s.so.1
 libgd.so.3
@@ -19,15 +18,12 @@ libonig.so.5
 libpcre2-8.so.0
 libpq.so.5
 libreadline.so.8
-libresolv.so.2
-librt.so.1
 libsodium.so.23
 libsqlite3.so.0
 libssl.so.1.1
 libstdc++.so.6
 libsystemd.so.0
 libtinfo.so.6
-libutil.so.1
 libxml2.so.2
 libxslt.so.1
 libz.so.1

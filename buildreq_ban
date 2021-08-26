@@ -1,6 +1,4 @@
-#
-# This file contains banned pkgconfig build requirements that get picked up but are 
-# undesireable desirable. One name per line, no whitespace.
-#httpd-dev
+# This file contains build requirements that get picked up but are
+# undesirable. One entry per line, no whitespace.
 buildreq-php
 gd-dev
