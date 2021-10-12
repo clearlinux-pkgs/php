@@ -6,7 +6,7 @@
 #
 Name     : php
 Version  : 8.0.11
-Release  : 243
+Release  : 244
 URL      : https://us1.php.net/distributions/php-8.0.11.tar.xz
 Source0  : https://us1.php.net/distributions/php-8.0.11.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
@@ -195,7 +195,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1633910345
+export SOURCE_DATE_EPOCH=1634077165
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -fno-lto -fno-semantic-interposition -mno-vzeroupper -mprefer-vector-width=256 "
 export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fno-lto -fno-semantic-interposition -mno-vzeroupper -mprefer-vector-width=256 "
@@ -408,7 +408,7 @@ export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3"
 make  %{?_smp_mflags}
 popd
 %install
-export SOURCE_DATE_EPOCH=1633910345
+export SOURCE_DATE_EPOCH=1634077165
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
 cp %{_builddir}/php-8.0.11/LICENSE %{buildroot}/usr/share/package-licenses/php/8c12894c6c25a643d94339ff9cdf591806fbd052
@@ -425,13 +425,12 @@ cp %{_builddir}/php-8.0.11/sapi/fpm/LICENSE %{buildroot}/usr/share/package-licen
 cp %{_builddir}/phpbench-0.8.2/LICENSE %{buildroot}/usr/share/package-licenses/php/9e0b81b219f2fac6ebb6200b8df03e6879cbc80f
 pushd ../buildavx2/
 %make_install_v3
-/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 popd
 %make_install
 mkdir -p %{buildroot}/usr/share/defaults/php
 install -m644 %{_sourcedir}/php.ini %{buildroot}/usr/share/defaults/php/php.ini
 ## Remove excluded files
-rm -f %{buildroot}/etc/pear.conf
+rm -f %{buildroot}*/etc/pear.conf
 ## install_append content
 # Setup php-fpm
 mv %{buildroot}/usr/share/defaults/php/php-fpm.conf.default %{buildroot}/usr/share/defaults/php/php-fpm.conf
@@ -447,6 +446,7 @@ mkdir -p %{buildroot}/usr/share/clr-service-restart
 ln -sf /usr/lib/systemd/system/php-fpm.service %{buildroot}/usr/share/clr-service-restart/php-fpm.service
 # SAPI wrong folder
 mv %{buildroot}/usr/lib/libphp.so %{buildroot}/usr/lib64/
+mv %{buildroot}-v3/usr/lib/libphp.so %{buildroot}-v3/usr/lib64/
 # Append zendopcache so option
 pushd %{buildroot}
 find usr/lib64/extensions/ -name opcache.so | xargs -I{} echo "zend_extension=/{}" >> %{buildroot}/usr/share/defaults/php/php.ini
@@ -455,6 +455,7 @@ popd
 mkdir -p %{buildroot}/usr/lib64/php/docs
 mv %{buildroot}/usr/lib64/php/doc/PEAR %{buildroot}/usr/lib64/php/docs/PEAR
 ## install_append end
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
@@ -966,7 +967,6 @@ mv %{buildroot}/usr/lib64/php/doc/PEAR %{buildroot}/usr/lib64/php/docs/PEAR
 /usr/lib64/extensions/no-debug-non-zts-20200930/opcache.so
 /usr/lib64/extensions/no-debug-non-zts-20200930/sqlite3.so
 /usr/share/clear/optimized-elf/lib*
-/usr/share/clear/optimized-elf/other*
 
 %files license
 %defattr(0644,root,root,0755)
