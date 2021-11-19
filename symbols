@@ -1942,6 +1942,8 @@ libphp.so:zend_vm_stack_init
 libphp.so:zend_vm_stack_init_ex
 libphp.so:zend_vspprintf
 libphp.so:zend_vstrpprintf
+libphp.so:zend_weakrefs_hash_add
+libphp.so:zend_weakrefs_hash_del
 libphp.so:zend_weakrefs_notify
 libphp.so:zend_wrong_callback_error
 libphp.so:zend_wrong_param_count
