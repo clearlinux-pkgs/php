@@ -156,6 +156,9 @@ Configure miss: broken gcc optimize-strlen
 Configure miss: broken getcwd
 Configure miss: broken getcwd
 Configure miss: broken getcwd
+Configure miss: capstone >= 3.0.0
+Configure miss: capstone >= 3.0.0
+Configure miss: capstone >= 3.0.0
 Configure miss: clang fuzzer SAPI
 Configure miss: clang fuzzer SAPI
 Configure miss: clang fuzzer SAPI
@@ -183,6 +186,9 @@ Configure miss: explicit_memset
 Configure miss: extended DES crypt
 Configure miss: extended DES crypt
 Configure miss: extended DES crypt
+Configure miss: external libcrypt or libxcrypt
+Configure miss: external libcrypt or libxcrypt
+Configure miss: external libcrypt or libxcrypt
 Configure miss: field sa_len in struct sockaddr
 Configure miss: field sa_len in struct sockaddr
 Configure miss: field sa_len in struct sockaddr
@@ -204,6 +210,9 @@ Configure miss: if iconv supports //IGNORE
 Configure miss: libXpm
 Configure miss: libXpm
 Configure miss: libXpm
+Configure miss: libavif
+Configure miss: libavif
+Configure miss: libavif
 Configure miss: libcurl linked against old openssl
 Configure miss: libcurl linked against old openssl
 Configure miss: libcurl linked against old openssl
@@ -234,9 +243,6 @@ Configure miss: phpdbg debug build
 Configure miss: phpdbg readline support
 Configure miss: phpdbg readline support
 Configure miss: phpdbg readline support
-Configure miss: phpdbg web SAPI support
-Configure miss: phpdbg web SAPI support
-Configure miss: phpdbg web SAPI support
 Configure miss: port framework
 Configure miss: port framework
 Configure miss: port framework
@@ -252,6 +258,9 @@ Configure miss: res_ndestroy in -lresolv
 Configure miss: res_ndestroy in -lsocket
 Configure miss: res_ndestroy in -lsocket
 Configure miss: res_ndestroy in -lsocket
+Configure miss: rfork
+Configure miss: rfork
+Configure miss: rfork
 Configure miss: setproctitle_fast
 Configure miss: setproctitle_fast
 Configure miss: setproctitle_fast
