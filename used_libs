@@ -8,9 +8,9 @@ libgcc_s.so.1
 libgd.so.3
 libgdbm.so.6
 libgmp.so.10
-libicui18n.so.67
-libicuio.so.67
-libicuuc.so.67
+libicui18n.so.70
+libicuio.so.70
+libicuuc.so.70
 liblmdb.so
 libm.so.6
 libmvec.so.1

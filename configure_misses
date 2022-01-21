@@ -204,6 +204,9 @@ Configure miss: gcc options needed to detect all undeclared functions
 Configure miss: icc
 Configure miss: icc
 Configure miss: icc
+Configure miss: if ancillary credentials uses cmsgcred
+Configure miss: if ancillary credentials uses cmsgcred
+Configure miss: if ancillary credentials uses cmsgcred
 Configure miss: if iconv supports //IGNORE
 Configure miss: if iconv supports //IGNORE
 Configure miss: if iconv supports //IGNORE
