@@ -384,6 +384,9 @@ Configure miss: whether to include gcov symbols
 Configure miss: whether we are using musl libc
 Configure miss: whether we are using musl libc
 Configure miss: whether we are using musl libc
+Configure miss: x86_64-generic-linux-gnu-file
+Configure miss: x86_64-generic-linux-gnu-file
+Configure miss: x86_64-generic-linux-gnu-file
 Configure miss: zip_compression_method_supported in -lzip
 Configure miss: zip_compression_method_supported in -lzip
 Configure miss: zip_compression_method_supported in -lzip

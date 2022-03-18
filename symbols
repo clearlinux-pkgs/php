@@ -1505,6 +1505,7 @@ libphp.so:zend_get_module_started
 libphp.so:zend_get_module_version
 libphp.so:zend_get_object_type
 libphp.so:zend_get_op_array_extension_handle
+libphp.so:zend_get_op_array_extension_handles
 libphp.so:zend_get_opcode_flags
 libphp.so:zend_get_opcode_handler_func
 libphp.so:zend_get_opcode_id
@@ -1760,6 +1761,7 @@ libphp.so:zend_observer_fiber_init_register
 libphp.so:zend_observer_fiber_switch_notify
 libphp.so:zend_observer_fiber_switch_register
 libphp.so:zend_observer_generator_resume
+libphp.so:zend_observer_post_startup
 libphp.so:zend_observer_shutdown
 libphp.so:zend_observer_startup
 libphp.so:zend_oct_strtod
@@ -1997,6 +1999,7 @@ libphp.so:zend_use_resource_as_offset
 libphp.so:zend_user_exception_handler
 libphp.so:zend_user_it_get_current_data
 libphp.so:zend_user_it_get_current_key
+libphp.so:zend_user_it_get_gc
 libphp.so:zend_user_it_get_new_iterator
 libphp.so:zend_user_it_invalidate_current
 libphp.so:zend_user_it_move_forward
