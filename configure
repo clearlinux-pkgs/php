@@ -14,6 +14,7 @@
 --with-gmp
 --enable-phar
 --enable-fpm
+--with-ffi
 --with-fpm-systemd
 --enable-mysqlnd
 --with-mysqli=mysqlnd
@@ -46,6 +47,7 @@
 --with-readline
 --with-sqlite3=shared,/usr
 --with-pdo-sqlite=/usr
+--with-freetype
 --enable-shmop
 --enable-sysvshm
 --enable-sysvsem
