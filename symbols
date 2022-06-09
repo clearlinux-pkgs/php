@@ -1822,6 +1822,7 @@ libphp.so:zend_register_double_constant
 libphp.so:zend_register_extension
 libphp.so:zend_register_functions
 libphp.so:zend_register_ini_entries
+libphp.so:zend_register_ini_entries_ex
 libphp.so:zend_register_interfaces
 libphp.so:zend_register_internal_class
 libphp.so:zend_register_internal_class_ex
@@ -1973,6 +1974,7 @@ libphp.so:zend_unexpected_extra_named_error
 libphp.so:zend_unmangle_property_name_ex
 libphp.so:zend_unregister_functions
 libphp.so:zend_unregister_ini_entries
+libphp.so:zend_unregister_ini_entries_ex
 libphp.so:zend_unset_property
 libphp.so:zend_unset_timeout
 libphp.so:zend_update_class_constants

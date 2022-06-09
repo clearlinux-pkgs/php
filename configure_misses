@@ -37,15 +37,9 @@ Configure miss: Empress local access support
 Configure miss: Empress support
 Configure miss: Empress support
 Configure miss: Empress support
-Configure miss: FFI support
-Configure miss: FFI support
-Configure miss: FFI support
 Configure miss: Firebird support for PDO
 Configure miss: Firebird support for PDO
 Configure miss: Firebird support for PDO
-Configure miss: FreeType 2
-Configure miss: FreeType 2
-Configure miss: FreeType 2
 Configure miss: IBM DB2 support
 Configure miss: IBM DB2 support
 Configure miss: IBM DB2 support
@@ -189,6 +183,9 @@ Configure miss: extended DES crypt
 Configure miss: external libcrypt or libxcrypt
 Configure miss: external libcrypt or libxcrypt
 Configure miss: external libcrypt or libxcrypt
+Configure miss: fastcall calling convention
+Configure miss: fastcall calling convention
+Configure miss: fastcall calling convention
 Configure miss: field sa_len in struct sockaddr
 Configure miss: field sa_len in struct sockaddr
 Configure miss: field sa_len in struct sockaddr
@@ -237,9 +234,15 @@ Configure miss: mhash support
 Configure miss: mm support
 Configure miss: mm support
 Configure miss: mm support
+Configure miss: ms_cdecl calling convention
+Configure miss: ms_cdecl calling convention
+Configure miss: ms_cdecl calling convention
 Configure miss: opagent in default path
 Configure miss: opagent in default path
 Configure miss: opagent in default path
+Configure miss: pascal calling convention
+Configure miss: pascal calling convention
+Configure miss: pascal calling convention
 Configure miss: phpdbg debug build
 Configure miss: phpdbg debug build
 Configure miss: phpdbg debug build
@@ -249,6 +252,9 @@ Configure miss: phpdbg readline support
 Configure miss: port framework
 Configure miss: port framework
 Configure miss: port framework
+Configure miss: register calling convention
+Configure miss: register calling convention
+Configure miss: register calling convention
 Configure miss: res_ndestroy
 Configure miss: res_ndestroy
 Configure miss: res_ndestroy
@@ -276,6 +282,9 @@ Configure miss: sigsetjmp
 Configure miss: std_syslog
 Configure miss: std_syslog
 Configure miss: std_syslog
+Configure miss: stdcall calling convention
+Configure miss: stdcall calling convention
+Configure miss: stdcall calling convention
 Configure miss: sun_len in sys/un.h
 Configure miss: sun_len in sys/un.h
 Configure miss: sun_len in sys/un.h
@@ -285,12 +294,18 @@ Configure miss: suncc
 Configure miss: sys/sysexits.h
 Configure miss: sys/sysexits.h
 Configure miss: sys/sysexits.h
+Configure miss: sysv calling convention
+Configure miss: sysv calling convention
+Configure miss: sysv calling convention
 Configure miss: target system is Darwin
 Configure miss: target system is Darwin
 Configure miss: target system is Darwin
 Configure miss: the location of libz
 Configure miss: the location of libz
 Configure miss: the location of libz
+Configure miss: thiscall calling convention
+Configure miss: thiscall calling convention
+Configure miss: thiscall calling convention
 Configure miss: union semun
 Configure miss: union semun
 Configure miss: union semun
@@ -360,6 +375,9 @@ Configure miss: whether to enable Zend debugging
 Configure miss: whether to enable debug assertions in release mode
 Configure miss: whether to enable debug assertions in release mode
 Configure miss: whether to enable debug assertions in release mode
+Configure miss: whether to enable dl-test extension
+Configure miss: whether to enable dl-test extension
+Configure miss: whether to enable dl-test extension
 Configure miss: whether to enable dmalloc
 Configure miss: whether to enable dmalloc
 Configure miss: whether to enable dmalloc
