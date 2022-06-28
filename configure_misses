@@ -405,9 +405,3 @@ Configure miss: whether we are using musl libc
 Configure miss: x86_64-generic-linux-gnu-file
 Configure miss: x86_64-generic-linux-gnu-file
 Configure miss: x86_64-generic-linux-gnu-file
-Configure miss: zip_compression_method_supported in -lzip
-Configure miss: zip_compression_method_supported in -lzip
-Configure miss: zip_compression_method_supported in -lzip
-Configure miss: zip_register_cancel_callback_with_state in -lzip
-Configure miss: zip_register_cancel_callback_with_state in -lzip
-Configure miss: zip_register_cancel_callback_with_state in -lzip
