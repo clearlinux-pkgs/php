@@ -6,7 +6,7 @@
 #
 Name     : php
 Version  : 8.1.7
-Release  : 260
+Release  : 261
 URL      : https://us1.php.net/distributions/php-8.1.7.tar.xz
 Source0  : https://us1.php.net/distributions/php-8.1.7.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
@@ -204,7 +204,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1656379378
+export SOURCE_DATE_EPOCH=1656700442
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -fno-lto -fno-semantic-interposition -mprefer-vector-width=256 "
 export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fno-lto -fno-semantic-interposition -mprefer-vector-width=256 "
@@ -423,7 +423,7 @@ export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3"
 make  %{?_smp_mflags}
 popd
 %install
-export SOURCE_DATE_EPOCH=1656379378
+export SOURCE_DATE_EPOCH=1656700442
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
 cp %{_builddir}/php-8.1.7/LICENSE %{buildroot}/usr/share/package-licenses/php/8c12894c6c25a643d94339ff9cdf591806fbd052
@@ -995,6 +995,7 @@ mv %{buildroot}/usr/lib64/php/doc/PEAR %{buildroot}/usr/lib64/php/docs/PEAR
 /usr/lib64/extensions/no-debug-non-zts-20210902/dba.so
 /usr/lib64/extensions/no-debug-non-zts-20210902/opcache.so
 /usr/lib64/extensions/no-debug-non-zts-20210902/sqlite3.so
+/usr/share/clear/optimized-elf/other*
 
 %files license
 %defattr(0644,root,root,0755)
