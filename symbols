@@ -703,6 +703,7 @@ libphp.so:php_check_open_basedir
 libphp.so:php_check_open_basedir_ex
 libphp.so:php_check_specific_open_basedir
 libphp.so:php_clear_stat_cache
+libphp.so:php_closelog
 libphp.so:php_com_initialize
 libphp.so:php_combined_lcg
 libphp.so:php_conv_fp
@@ -1263,6 +1264,7 @@ libphp.so:zend_analyze_calls
 libphp.so:zend_append_version_info
 libphp.so:zend_argument_count_error
 libphp.so:zend_argument_error
+libphp.so:zend_argument_error_variadic
 libphp.so:zend_argument_type_error
 libphp.so:zend_argument_value_error
 libphp.so:zend_array_count
