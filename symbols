@@ -1809,6 +1809,7 @@ libphp.so:zend_read_property
 libphp.so:zend_read_property_ex
 libphp.so:zend_read_static_property
 libphp.so:zend_read_static_property_ex
+libphp.so:zend_readonly_property_indirect_modification_error
 libphp.so:zend_readonly_property_modification_error
 libphp.so:zend_rebuild_symbol_table
 libphp.so:zend_recalc_live_ranges

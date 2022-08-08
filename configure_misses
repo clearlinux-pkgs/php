@@ -19,6 +19,9 @@ Configure miss: Berkeley DB4 support
 Configure miss: Blowfish crypt
 Configure miss: Blowfish crypt
 Configure miss: Blowfish crypt
+Configure miss: CommonCrypto/CommonRandom.h
+Configure miss: CommonCrypto/CommonRandom.h
+Configure miss: CommonCrypto/CommonRandom.h
 Configure miss: DB1 support
 Configure miss: DB1 support
 Configure miss: DB1 support
@@ -321,9 +324,6 @@ Configure miss: usable _controlfp_s
 Configure miss: usable fpsetprec
 Configure miss: usable fpsetprec
 Configure miss: usable fpsetprec
-Configure miss: whether arc4random_buf is declared
-Configure miss: whether arc4random_buf is declared
-Configure miss: whether arc4random_buf is declared
 Configure miss: whether cross-process locking is required by accept()
 Configure miss: whether cross-process locking is required by accept()
 Configure miss: whether cross-process locking is required by accept()
