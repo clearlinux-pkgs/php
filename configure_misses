@@ -330,9 +330,6 @@ Configure miss: whether cross-process locking is required by accept()
 Configure miss: whether dlsym() requires a leading underscore in symbol names... checking whether to enable thread-safety
 Configure miss: whether dlsym() requires a leading underscore in symbol names... checking whether to enable thread-safety
 Configure miss: whether dlsym() requires a leading underscore in symbol names... checking whether to enable thread-safety
-Configure miss: whether double cast to long preserves least significant bits
-Configure miss: whether double cast to long preserves least significant bits
-Configure miss: whether double cast to long preserves least significant bits
 Configure miss: whether flush should be called explicitly after a buffered io
 Configure miss: whether flush should be called explicitly after a buffered io
 Configure miss: whether flush should be called explicitly after a buffered io

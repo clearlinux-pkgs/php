@@ -1396,6 +1396,7 @@ libphp.so:zend_dump_op_line
 libphp.so:zend_dump_ssa_var
 libphp.so:zend_dump_var
 libphp.so:zend_dval_to_lval_slow
+libphp.so:zend_emit_recorded_errors
 libphp.so:zend_ensure_fpu_mode
 libphp.so:zend_enum_add_case
 libphp.so:zend_enum_add_case_cstr
