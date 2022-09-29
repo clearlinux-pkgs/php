@@ -216,9 +216,6 @@ Configure miss: libXpm
 Configure miss: libavif
 Configure miss: libavif
 Configure miss: libavif
-Configure miss: libcurl linked against old openssl
-Configure miss: libcurl linked against old openssl
-Configure miss: libcurl linked against old openssl
 Configure miss: libedit readline replacement
 Configure miss: libedit readline replacement
 Configure miss: libedit readline replacement

@@ -1154,6 +1154,8 @@ libphp.so:sapi_add_header_ex
 libphp.so:sapi_add_request_header
 libphp.so:sapi_apply_default_charset
 libphp.so:sapi_deactivate
+libphp.so:sapi_deactivate_destroy
+libphp.so:sapi_deactivate_module
 libphp.so:sapi_flush
 libphp.so:sapi_force_http_10
 libphp.so:sapi_free_header

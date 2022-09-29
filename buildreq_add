@@ -44,3 +44,4 @@ sqlite-autoconf-dev
 libsodium-dev
 libffi-dev
 re2c
+libjpeg-turbo-dev
