@@ -6,7 +6,7 @@
 #
 Name     : php
 Version  : 8.1.11
-Release  : 273
+Release  : 274
 URL      : https://us1.php.net/distributions/php-8.1.11.tar.xz
 Source0  : https://us1.php.net/distributions/php-8.1.11.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
@@ -44,6 +44,7 @@ BuildRequires : libXpm-dev
 BuildRequires : libffi-dev
 BuildRequires : libgd-dev
 BuildRequires : libidn-dev
+BuildRequires : libjpeg-turbo-dev
 BuildRequires : libsodium-dev
 BuildRequires : libwebp-dev
 BuildRequires : libxml2
@@ -195,7 +196,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1664470852
+export SOURCE_DATE_EPOCH=1664472447
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -fno-lto -fno-semantic-interposition -mprefer-vector-width=256 "
 export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fno-lto -fno-semantic-interposition -mprefer-vector-width=256 "
@@ -414,7 +415,7 @@ export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3"
 make  %{?_smp_mflags}
 popd
 %install
-export SOURCE_DATE_EPOCH=1664470852
+export SOURCE_DATE_EPOCH=1664472447
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
 cp %{_builddir}/php-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/php/8c12894c6c25a643d94339ff9cdf591806fbd052 || :
