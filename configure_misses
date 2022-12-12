@@ -16,9 +16,6 @@ Configure miss: Berkeley DB3 support
 Configure miss: Berkeley DB4 support
 Configure miss: Berkeley DB4 support
 Configure miss: Berkeley DB4 support
-Configure miss: Blowfish crypt
-Configure miss: Blowfish crypt
-Configure miss: Blowfish crypt
 Configure miss: CommonCrypto/CommonRandom.h
 Configure miss: CommonCrypto/CommonRandom.h
 Configure miss: CommonCrypto/CommonRandom.h
@@ -97,6 +94,9 @@ Configure miss: Solid support
 Configure miss: TCADB support
 Configure miss: TCADB support
 Configure miss: TCADB support
+Configure miss: TCP_CONNECTION_INFO
+Configure miss: TCP_CONNECTION_INFO
+Configure miss: TCP_CONNECTION_INFO
 Configure miss: TIDY support
 Configure miss: TIDY support
 Configure miss: TIDY support
@@ -105,9 +105,6 @@ Configure miss: __attribute__((ifunc))
 Configure miss: __attribute__((target))
 Configure miss: __attribute__((target))
 Configure miss: __attribute__((target))
-Configure miss: __crypt
-Configure miss: __crypt
-Configure miss: __crypt
 Configure miss: __dns_search
 Configure miss: __dns_search
 Configure miss: __dns_search
@@ -159,9 +156,6 @@ Configure miss: capstone >= 3.0.0
 Configure miss: clang fuzzer SAPI
 Configure miss: clang fuzzer SAPI
 Configure miss: clang fuzzer SAPI
-Configure miss: crypt
-Configure miss: crypt
-Configure miss: crypt
 Configure miss: dns.h
 Configure miss: dns.h
 Configure miss: dns.h
@@ -180,9 +174,6 @@ Configure miss: dns_search in -lsocket
 Configure miss: explicit_memset
 Configure miss: explicit_memset
 Configure miss: explicit_memset
-Configure miss: extended DES crypt
-Configure miss: extended DES crypt
-Configure miss: extended DES crypt
 Configure miss: external libcrypt or libxcrypt
 Configure miss: external libcrypt or libxcrypt
 Configure miss: external libcrypt or libxcrypt
@@ -192,6 +183,9 @@ Configure miss: fastcall calling convention
 Configure miss: field sa_len in struct sockaddr
 Configure miss: field sa_len in struct sockaddr
 Configure miss: field sa_len in struct sockaddr
+Configure miss: forkx
+Configure miss: forkx
+Configure miss: forkx
 Configure miss: funopen
 Configure miss: funopen
 Configure miss: funopen
@@ -228,6 +222,9 @@ Configure miss: libwebp
 Configure miss: makedev
 Configure miss: makedev
 Configure miss: makedev
+Configure miss: memcntl
+Configure miss: memcntl
+Configure miss: memcntl
 Configure miss: mhash support
 Configure miss: mhash support
 Configure miss: mhash support
@@ -240,6 +237,9 @@ Configure miss: ms_cdecl calling convention
 Configure miss: opagent in default path
 Configure miss: opagent in default path
 Configure miss: opagent in default path
+Configure miss: os/signpost.h
+Configure miss: os/signpost.h
+Configure miss: os/signpost.h
 Configure miss: pascal calling convention
 Configure miss: pascal calling convention
 Configure miss: pascal calling convention
@@ -252,6 +252,12 @@ Configure miss: phpdbg readline support
 Configure miss: port framework
 Configure miss: port framework
 Configure miss: port framework
+Configure miss: procctl
+Configure miss: procctl
+Configure miss: procctl
+Configure miss: pthread_jit_write_protect_np
+Configure miss: pthread_jit_write_protect_np
+Configure miss: pthread_jit_write_protect_np
 Configure miss: register calling convention
 Configure miss: register calling convention
 Configure miss: register calling convention
@@ -270,6 +276,9 @@ Configure miss: res_ndestroy in -lsocket
 Configure miss: rfork
 Configure miss: rfork
 Configure miss: rfork
+Configure miss: setpflags
+Configure miss: setpflags
+Configure miss: setpflags
 Configure miss: setproctitle_fast
 Configure miss: setproctitle_fast
 Configure miss: setproctitle_fast
