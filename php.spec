@@ -6,7 +6,7 @@
 #
 Name     : php
 Version  : 8.2.0
-Release  : 276
+Release  : 277
 URL      : https://us1.php.net/distributions/php-8.2.0.tar.xz
 Source0  : https://us1.php.net/distributions/php-8.2.0.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
@@ -73,6 +73,9 @@ BuildRequires : systemd-dev
 BuildRequires : valgrind
 BuildRequires : xz-dev
 BuildRequires : zlib-dev
+# Suppress stripping binaries
+%define __strip /bin/true
+%define debug_package %{nil}
 Patch1: 0001-php-fpm-default-to-ondemand-policy-change-some-defau.patch
 Patch2: 0003-Reduce-system-wakeups-by-not-waking-up-PHP-once-per-.patch
 Patch3: 0005-Enable-hugepages.patch
@@ -206,12 +209,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1670879329
+export SOURCE_DATE_EPOCH=1672254337
 export GCC_IGNORE_WERROR=1
-export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -fno-lto -fno-semantic-interposition "
-export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fno-lto -fno-semantic-interposition "
-export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fno-lto -fno-semantic-interposition "
-export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -fno-lto -fno-semantic-interposition "
+export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz -mprefer-vector-width=256 "
+export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz -mprefer-vector-width=256 "
+export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz -mprefer-vector-width=256 "
+export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz -mprefer-vector-width=256 "
 export CFLAGS_GENERATE="$CFLAGS -fprofile-generate -fprofile-dir=/var/tmp/pgo -fprofile-update=atomic "
 export FCFLAGS_GENERATE="$FCFLAGS -fprofile-generate -fprofile-dir=/var/tmp/pgo -fprofile-update=atomic "
 export FFLAGS_GENERATE="$FFLAGS -fprofile-generate -fprofile-dir=/var/tmp/pgo -fprofile-update=atomic "
@@ -425,20 +428,20 @@ export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3"
 make  %{?_smp_mflags}
 popd
 %install
-export SOURCE_DATE_EPOCH=1670879329
+export SOURCE_DATE_EPOCH=1672254337
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
-cp %{_builddir}/php-%{version}/TSRM/LICENSE %{buildroot}/usr/share/package-licenses/php/1ffc27ce3b11cd061bfd4882c22602560f2c7931 || :
-cp %{_builddir}/php-%{version}/Zend/LICENSE %{buildroot}/usr/share/package-licenses/php/e984a92e965a699a63ee739a7eb8b8e2c24cc398 || :
-cp %{_builddir}/php-%{version}/Zend/asm/LICENSE %{buildroot}/usr/share/package-licenses/php/3cba29011be2b9d59f6204d6fa0a386b1b2dbd90 || :
-cp %{_builddir}/php-%{version}/ext/bcmath/libbcmath/LICENSE %{buildroot}/usr/share/package-licenses/php/6e79d515230676f96463980432059843a8d75802 || :
-cp %{_builddir}/php-%{version}/ext/date/lib/LICENSE.rst %{buildroot}/usr/share/package-licenses/php/874c5eb185037727cbd03576c2a1ce542ee93348 || :
-cp %{_builddir}/php-%{version}/ext/fileinfo/libmagic/LICENSE %{buildroot}/usr/share/package-licenses/php/3e3925d5a55f4b83a99f9c960214e3f6024a2469 || :
-cp %{_builddir}/php-%{version}/ext/gd/tests/Rochester-Regular.otf.LICENSE.txt %{buildroot}/usr/share/package-licenses/php/2b8b815229aa8a61e483fb4ba0588b8b6c491890 || :
-cp %{_builddir}/php-%{version}/ext/mbstring/libmbfl/LICENSE %{buildroot}/usr/share/package-licenses/php/41146e72d0f13320af7a165c543a7cbd59d56323 || :
-cp %{_builddir}/php-%{version}/ext/opcache/jit/libudis86/LICENSE %{buildroot}/usr/share/package-licenses/php/5cfc18f7533f0a6d802dc838e806f24604759484 || :
-cp %{_builddir}/php-%{version}/sapi/fpm/LICENSE %{buildroot}/usr/share/package-licenses/php/d0cbc5492bdea8a8437b7c2b6c0ad66947a576a5 || :
-cp %{_builddir}/phpbench-0.8.2/LICENSE %{buildroot}/usr/share/package-licenses/php/9e0b81b219f2fac6ebb6200b8df03e6879cbc80f || :
+cp %{_builddir}/php-%{version}/TSRM/LICENSE %{buildroot}/usr/share/package-licenses/php/1ffc27ce3b11cd061bfd4882c22602560f2c7931
+cp %{_builddir}/php-%{version}/Zend/LICENSE %{buildroot}/usr/share/package-licenses/php/e984a92e965a699a63ee739a7eb8b8e2c24cc398
+cp %{_builddir}/php-%{version}/Zend/asm/LICENSE %{buildroot}/usr/share/package-licenses/php/3cba29011be2b9d59f6204d6fa0a386b1b2dbd90
+cp %{_builddir}/php-%{version}/ext/bcmath/libbcmath/LICENSE %{buildroot}/usr/share/package-licenses/php/6e79d515230676f96463980432059843a8d75802
+cp %{_builddir}/php-%{version}/ext/date/lib/LICENSE.rst %{buildroot}/usr/share/package-licenses/php/874c5eb185037727cbd03576c2a1ce542ee93348
+cp %{_builddir}/php-%{version}/ext/fileinfo/libmagic/LICENSE %{buildroot}/usr/share/package-licenses/php/3e3925d5a55f4b83a99f9c960214e3f6024a2469
+cp %{_builddir}/php-%{version}/ext/gd/tests/Rochester-Regular.otf.LICENSE.txt %{buildroot}/usr/share/package-licenses/php/2b8b815229aa8a61e483fb4ba0588b8b6c491890
+cp %{_builddir}/php-%{version}/ext/mbstring/libmbfl/LICENSE %{buildroot}/usr/share/package-licenses/php/41146e72d0f13320af7a165c543a7cbd59d56323
+cp %{_builddir}/php-%{version}/ext/opcache/jit/libudis86/LICENSE %{buildroot}/usr/share/package-licenses/php/5cfc18f7533f0a6d802dc838e806f24604759484
+cp %{_builddir}/php-%{version}/sapi/fpm/LICENSE %{buildroot}/usr/share/package-licenses/php/d0cbc5492bdea8a8437b7c2b6c0ad66947a576a5
+cp %{_builddir}/phpbench-0.8.2/LICENSE %{buildroot}/usr/share/package-licenses/php/9e0b81b219f2fac6ebb6200b8df03e6879cbc80f
 pushd ../buildavx2/
 %make_install_v3
 popd
