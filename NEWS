@@ -1,5 +1,74 @@
 PHP                                                                        NEWS
 |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+05 Jan 2023, PHP 8.2.1
+
+- Core:
+  . Fixed bug GH-9905 (constant() behaves inconsistent when class is undefined).
+    (cmb)
+  . Fixed bug GH-9918 (License information for xxHash is not included in
+    README.REDIST.BINS file). (Akama Hitoshi)
+  . Fixed bug GH-9890 (OpenSSL legacy providers not available on Windows). (cmb)
+  . Fixed bug GH-9650 (Can't initialize heap: [0x000001e7]). (Michael Voříšek)
+  . Fixed potentially undefined behavior in Windows ftok(3) emulation. (cmb)
+  . Fixed GH-9769 (Misleading error message for unpacking of objects). (jhdxr)
+
+- Apache:
+  . Fixed bug GH-9949 (Partial content on incomplete POST request). (cmb)
+
+- FPM:
+  . Fixed bug GH-9959 (Solaris port event mechanism is still broken after bug
+    #66694). (Petr Sumbera)
+  . Fixed bug #68207 (Setting fastcgi.error_header can result in a WARNING).
+    (Jakub Zelenka)
+  . Fixed bug #80669 (FPM numeric user fails to set groups). (Jakub Zelenka)
+  . Fixed bug GH-8517 (Random crash of FPM master process in
+    fpm_stdio_child_said). (Jakub Zelenka)
+
+- Imap:
+  . Fixed bug GH-10051 (IMAP: there's no way to check if a IMAP\Connection is
+    still open). (Girgias)
+
+- MBString:
+  . Fixed bug GH-9535 (The behavior of mb_strcut in mbstring has been changed in
+    PHP8.1). (Nathan Freeman)
+
+- Opcache:
+  . Fixed bug GH-9968 (Segmentation Fault during OPCache Preload).
+    (Arnaud, michdingpayc)
+
+- OpenSSL:
+  . Fixed bug GH-9997 (OpenSSL engine clean up segfault). (Jakub Zelenka)
+  . Fixed bug GH-9064 (PHP fails to build if openssl was built with --no-ec).
+    (Jakub Zelenka)
+  . Fixed bug GH-10000 (OpenSSL test failures when OpenSSL compiled with
+    no-dsa). (Jakub Zelenka)
+
+- Pcntl:
+  . Fixed bug GH-9298 (Signal handler called after rshutdown leads to crash).
+    (Erki Aring)
+
+- PDO_Firebird:
+  . Fixed bug GH-9971 (Incorrect NUMERIC value returned from PDO_Firebird).
+    (cmb)
+
+- PDO/SQLite:
+  . Fixed bug #81740 (PDO::quote() may return unquoted string). (CVE-2022-31631)
+    (cmb)
+
+- Session:
+  . Fixed GH-9932 (session name silently fails with . and [). (David Carlier)
+
+- SPL:
+  . Fixed GH-9883 (SplFileObject::__toString() reads next line). (Girgias)
+  . Fixed GH-10011 (Trampoline autoloader will get reregistered and cannot be
+    unregistered). (Girgias)
+
+- SQLite3:
+  . Fixed bug #81742 (open_basedir bypass in SQLite3 by using file URI). (cmb)
+
+- TSRM:
+  . Fixed Windows shmget() wrt. IPC_PRIVATE. (Tyson Andre)
+
 08 Dec 2022, PHP 8.2.0
 
 - CLI:
@@ -82,8 +151,6 @@ PHP                                                                        NEWS
     promotion. (kooldev)
   . Fixed bug GH-9750 (Generator memory leak when interrupted during argument
     evaluation. (Arnaud)
-  . Move observer_declared_function_notify until after pass_two(). (Bob)
-  . Do not report MINIT stage internal class aliases in extensions. (Bob)
 
 - Curl:
   . Added support for CURLOPT_XFERINFOFUNCTION. (David Carlier)
@@ -158,6 +225,7 @@ PHP                                                                        NEWS
 - Hash:
   . Fixed bug #81738: buffer overflow in hash_update() on long parameter.
     (CVE-2022-37454) (nicky at mouha dot be)
+  . Fixed bug GH-10077: Fix compilation on RHEL 7 ppc64le. (Mattias Ellert)
 
 - Intl:
   . Update all grandfathered language tags with preferred values
@@ -205,9 +273,10 @@ PHP                                                                        NEWS
   . Fixed bug GH-9259 (opcache.interned_strings_buffer setting integer
     overflow). (Arnaud)
   . Added indirect call reduction for jit on x86 architectures. (wxue1)
+
+- OPcache:
   . Fixed bug GH-9164 (Segfault in zend_accel_class_hash_copy).
     (Arnaud, Sergei Turchanov)
-  . Fix opcache preload with observers enabled. (Bob)
 
 - OpenSSL:
   . Discard poll calls on socket when no timeout/non blocking/MSG_DONTWAIT. (Max Kellermann)
@@ -366,8 +435,6 @@ PHP                                                                        NEWS
     (cmb)
   . Revert "Fixed parse_url(): can not recognize port without scheme."
     (andypost)
-  . Fix crash reading module_entry after DL_UNLOAD() when module already
-    loaded. (Bob)
 
 - Streams:
   . Set IP_BIND_ADDRESS_NO_PORT if available when connecting to remote host.
