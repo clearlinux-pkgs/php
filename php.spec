@@ -6,7 +6,7 @@
 #
 Name     : php
 Version  : 8.2.1
-Release  : 279
+Release  : 280
 URL      : https://us1.php.net/distributions/php-8.2.1.tar.xz
 Source0  : https://us1.php.net/distributions/php-8.2.1.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
