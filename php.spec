@@ -5,12 +5,12 @@
 # Source0 file verified with key 0x286AF1F9897469DC (pierrick@php.net)
 #
 Name     : php
-Version  : 8.2.1
-Release  : 280
-URL      : https://us1.php.net/distributions/php-8.2.1.tar.xz
-Source0  : https://us1.php.net/distributions/php-8.2.1.tar.xz
+Version  : 8.2.3
+Release  : 281
+URL      : https://us1.php.net/distributions/php-8.2.3.tar.xz
+Source0  : https://us1.php.net/distributions/php-8.2.3.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
-Source2  : https://us1.php.net/distributions/php-8.2.1.tar.xz.asc
+Source2  : https://us1.php.net/distributions/php-8.2.3.tar.xz.asc
 Source3  : php.ini
 Summary  : A general-purpose scripting language that is especially suited to web development
 Group    : Development/Tools
@@ -179,18 +179,18 @@ services components for the php package.
 
 
 %prep
-%setup -q -n php-8.2.1
+%setup -q -n php-8.2.3
 cd %{_builddir}
 tar xf %{_sourcedir}/phpbench-0.8.2.tar.gz
-cd %{_builddir}/php-8.2.1
+cd %{_builddir}/php-8.2.3
 mkdir -p phpbench
-cp -r %{_builddir}/phpbench-0.8.2/* %{_builddir}/php-8.2.1/phpbench
+cp -r %{_builddir}/phpbench-0.8.2/* %{_builddir}/php-8.2.3/phpbench
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
 pushd ..
-cp -a php-8.2.1 buildavx2
+cp -a php-8.2.3 buildavx2
 popd
 
 %build
@@ -210,7 +210,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1673281688
+export SOURCE_DATE_EPOCH=1676402106
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz "
 export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz "
@@ -429,7 +429,7 @@ export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3"
 make  %{?_smp_mflags}
 popd
 %install
-export SOURCE_DATE_EPOCH=1673281688
+export SOURCE_DATE_EPOCH=1676402106
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
 cp %{_builddir}/php-%{version}/TSRM/LICENSE %{buildroot}/usr/share/package-licenses/php/1ffc27ce3b11cd061bfd4882c22602560f2c7931 || :

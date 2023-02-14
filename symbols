@@ -2033,6 +2033,7 @@ libphp.so:zend_undefined_index_write
 libphp.so:zend_undefined_offset_write
 libphp.so:zend_unexpected_extra_named_error
 libphp.so:zend_unfinished_calls_gc
+libphp.so:zend_unfinished_execution_gc
 libphp.so:zend_unmangle_property_name_ex
 libphp.so:zend_unregister_functions
 libphp.so:zend_unregister_ini_entries
