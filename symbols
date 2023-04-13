@@ -1982,6 +1982,7 @@ libphp.so:zend_stream_init_filename
 libphp.so:zend_stream_init_filename_ex
 libphp.so:zend_stream_init_fp
 libphp.so:zend_stream_open
+libphp.so:zend_strerror_noreturn
 libphp.so:zend_string_concat2
 libphp.so:zend_string_concat3
 libphp.so:zend_string_equal_val
