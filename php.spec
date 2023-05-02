@@ -7,7 +7,7 @@
 #
 Name     : php
 Version  : 8.2.5
-Release  : 283
+Release  : 284
 URL      : https://us1.php.net/distributions/php-8.2.5.tar.xz
 Source0  : https://us1.php.net/distributions/php-8.2.5.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
@@ -18,7 +18,6 @@ Group    : Development/Tools
 License  : Apache-2.0 BSD-2-Clause BSD-3-Clause BSL-1.0 HPND LGPL-2.1 MIT PHP-3.01 Zend-2.0 Zlib
 Requires: php-bin = %{version}-%{release}
 Requires: php-data = %{version}-%{release}
-Requires: php-filemap = %{version}-%{release}
 Requires: php-lib = %{version}-%{release}
 Requires: php-license = %{version}-%{release}
 Requires: php-man = %{version}-%{release}
@@ -99,7 +98,6 @@ Group: Binaries
 Requires: php-data = %{version}-%{release}
 Requires: php-license = %{version}-%{release}
 Requires: php-services = %{version}-%{release}
-Requires: php-filemap = %{version}-%{release}
 
 %description bin
 bin components for the php package.
@@ -126,20 +124,11 @@ Requires: php = %{version}-%{release}
 dev components for the php package.
 
 
-%package filemap
-Summary: filemap components for the php package.
-Group: Default
-
-%description filemap
-filemap components for the php package.
-
-
 %package lib
 Summary: lib components for the php package.
 Group: Libraries
 Requires: php-data = %{version}-%{release}
 Requires: php-license = %{version}-%{release}
-Requires: php-filemap = %{version}-%{release}
 
 %description lib
 lib components for the php package.
@@ -202,12 +191,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1681411977
+export SOURCE_DATE_EPOCH=1683037374
 export GCC_IGNORE_WERROR=1
-export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz "
-export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz "
-export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz "
-export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz "
+export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 export CFLAGS_GENERATE="$CFLAGS -fprofile-generate -fprofile-dir=/var/tmp/pgo -fprofile-update=atomic "
 export FCFLAGS_GENERATE="$FCFLAGS -fprofile-generate -fprofile-dir=/var/tmp/pgo -fprofile-update=atomic "
 export FFLAGS_GENERATE="$FFLAGS -fprofile-generate -fprofile-dir=/var/tmp/pgo -fprofile-update=atomic "
@@ -421,7 +410,7 @@ export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3"
 make  %{?_smp_mflags}
 popd
 %install
-export SOURCE_DATE_EPOCH=1681411977
+export SOURCE_DATE_EPOCH=1683037374
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
 cp %{_builddir}/php-%{version}/TSRM/LICENSE %{buildroot}/usr/share/package-licenses/php/1ffc27ce3b11cd061bfd4882c22602560f2c7931 || :
@@ -648,6 +637,10 @@ mv %{buildroot}/usr/lib64/php/doc/PEAR %{buildroot}/usr/lib64/php/docs/PEAR
 
 %files bin
 %defattr(-,root,root,-)
+/V3/usr/bin/php
+/V3/usr/bin/php-cgi
+/V3/usr/bin/php-fpm
+/V3/usr/bin/phpdbg
 /usr/bin/pear
 /usr/bin/peardev
 /usr/bin/pecl
@@ -659,7 +652,6 @@ mv %{buildroot}/usr/lib64/php/doc/PEAR %{buildroot}/usr/lib64/php/docs/PEAR
 /usr/bin/php-fpm
 /usr/bin/phpdbg
 /usr/bin/phpize
-/usr/share/clear/optimized-elf/bin*
 
 %files data
 %defattr(-,root,root,-)
@@ -673,6 +665,7 @@ mv %{buildroot}/usr/lib64/php/doc/PEAR %{buildroot}/usr/lib64/php/docs/PEAR
 
 %files dev
 %defattr(-,root,root,-)
+/V3/usr/lib64/libphp.so
 /usr/include/php/TSRM/TSRM.h
 /usr/include/php/TSRM/tsrm_win32.h
 /usr/include/php/Zend/Optimizer/zend_call_graph.h
@@ -986,19 +979,16 @@ mv %{buildroot}/usr/lib64/php/doc/PEAR %{buildroot}/usr/lib64/php/docs/PEAR
 /usr/include/php/main/streams/php_streams_int.h
 /usr/include/php/sapi/cli/cli.h
 /usr/include/php/sapi/embed/php_embed.h
-/usr/lib64/glibc-hwcaps/x86-64-v3/libphp.so
 /usr/lib64/libphp.so
-
-%files filemap
-%defattr(-,root,root,-)
-/usr/share/clear/filemap/filemap-php
 
 %files lib
 %defattr(-,root,root,-)
+/V3/usr/lib64/extensions/no-debug-non-zts-20220829/dba.so
+/V3/usr/lib64/extensions/no-debug-non-zts-20220829/opcache.so
+/V3/usr/lib64/extensions/no-debug-non-zts-20220829/sqlite3.so
 /usr/lib64/extensions/no-debug-non-zts-20220829/dba.so
 /usr/lib64/extensions/no-debug-non-zts-20220829/opcache.so
 /usr/lib64/extensions/no-debug-non-zts-20220829/sqlite3.so
-/usr/share/clear/optimized-elf/other*
 
 %files license
 %defattr(0644,root,root,0755)
