@@ -831,6 +831,7 @@ libphp.so:php_is_image_avif
 libphp.so:php_json_decode_ex
 libphp.so:php_json_encode
 libphp.so:php_json_encode_ex
+libphp.so:php_json_encode_string
 libphp.so:php_json_parse
 libphp.so:php_json_parser_error_code
 libphp.so:php_json_parser_init
