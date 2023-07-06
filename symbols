@@ -1360,6 +1360,7 @@ libphp.so:zend_call_known_function
 libphp.so:zend_call_known_instance_method_with_2_params
 libphp.so:zend_call_method
 libphp.so:zend_call_method_if_exists
+libphp.so:zend_cannot_add_element
 libphp.so:zend_cannot_pass_by_reference
 libphp.so:zend_cfg_build_predecessors
 libphp.so:zend_cfg_compute_dominators_tree
