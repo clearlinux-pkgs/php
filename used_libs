@@ -24,7 +24,6 @@ libsqlite3.so.0
 libssl.so.3
 libstdc++.so.6
 libsystemd.so.0
-libtinfo.so.6
 libxml2.so.2
 libxslt.so.1
 libz.so.1
