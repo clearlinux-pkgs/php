@@ -1116,8 +1116,6 @@ libphp.so:php_strip_url_passwd
 libphp.so:php_stripcslashes
 libphp.so:php_stripslashes
 libphp.so:php_stristr
-libphp.so:php_strlcat
-libphp.so:php_strlcpy
 libphp.so:php_strspn
 libphp.so:php_strtolower
 libphp.so:php_strtoupper
