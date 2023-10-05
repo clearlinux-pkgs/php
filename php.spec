@@ -59,7 +59,6 @@ BuildRequires : nghttp2-dev
 BuildRequires : onig-dev
 BuildRequires : openssl-dev
 BuildRequires : pcre-dev
-BuildRequires : php
 BuildRequires : pkgconfig(icu-i18n)
 BuildRequires : pkgconfig(icu-io)
 BuildRequires : pkgconfig(icu-uc)
