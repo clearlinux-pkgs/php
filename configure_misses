@@ -150,9 +150,6 @@ Configure miss: broken gcc optimize-strlen
 Configure miss: broken getcwd
 Configure miss: broken getcwd
 Configure miss: broken getcwd
-Configure miss: capstone >= 3.0.0
-Configure miss: capstone >= 3.0.0
-Configure miss: capstone >= 3.0.0
 Configure miss: clang fuzzer SAPI
 Configure miss: clang fuzzer SAPI
 Configure miss: clang fuzzer SAPI
@@ -234,9 +231,6 @@ Configure miss: mm support
 Configure miss: ms_cdecl calling convention
 Configure miss: ms_cdecl calling convention
 Configure miss: ms_cdecl calling convention
-Configure miss: opagent in default path
-Configure miss: opagent in default path
-Configure miss: opagent in default path
 Configure miss: os/signpost.h
 Configure miss: os/signpost.h
 Configure miss: os/signpost.h
@@ -258,9 +252,18 @@ Configure miss: port framework
 Configure miss: procctl
 Configure miss: procctl
 Configure miss: procctl
+Configure miss: pthread_attr_get_np
+Configure miss: pthread_attr_get_np
+Configure miss: pthread_attr_get_np
+Configure miss: pthread_get_stackaddr_np
+Configure miss: pthread_get_stackaddr_np
+Configure miss: pthread_get_stackaddr_np
 Configure miss: pthread_jit_write_protect_np
 Configure miss: pthread_jit_write_protect_np
 Configure miss: pthread_jit_write_protect_np
+Configure miss: pthread_stackseg_np
+Configure miss: pthread_stackseg_np
+Configure miss: pthread_stackseg_np
 Configure miss: register calling convention
 Configure miss: register calling convention
 Configure miss: register calling convention
@@ -303,6 +306,9 @@ Configure miss: sun_len in sys/un.h
 Configure miss: suncc
 Configure miss: suncc
 Configure miss: suncc
+Configure miss: sys/procctl.h
+Configure miss: sys/procctl.h
+Configure miss: sys/procctl.h
 Configure miss: sys/sysexits.h
 Configure miss: sys/sysexits.h
 Configure miss: sys/sysexits.h
@@ -345,6 +351,9 @@ Configure miss: whether flush should be called explicitly after a buffered io
 Configure miss: whether re2c -g works
 Configure miss: whether re2c -g works
 Configure miss: whether re2c -g works
+Configure miss: whether syscall to create shadow stack exists
+Configure miss: whether syscall to create shadow stack exists
+Configure miss: whether syscall to create shadow stack exists
 Configure miss: whether system uses EBCDIC
 Configure miss: whether system uses EBCDIC
 Configure miss: whether system uses EBCDIC
@@ -387,6 +396,9 @@ Configure miss: whether to enable dl-test extension
 Configure miss: whether to enable dmalloc
 Configure miss: whether to enable dmalloc
 Configure miss: whether to enable dmalloc
+Configure miss: whether to enable valgrind support
+Configure miss: whether to enable valgrind support
+Configure miss: whether to enable valgrind support
 Configure miss: whether to enable zend max execution timers
 Configure miss: whether to enable zend max execution timers
 Configure miss: whether to enable zend max execution timers
