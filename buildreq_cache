@@ -1,3 +1,4 @@
 8.3.0
 intltool-dev
 libwebp-dev
+perl(Getopt::Long)

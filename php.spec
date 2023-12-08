@@ -9,7 +9,7 @@
 #
 Name     : php
 Version  : 8.3.0
-Release  : 300
+Release  : 301
 URL      : https://us1.php.net/distributions/php-8.3.0.tar.xz
 Source0  : https://us1.php.net/distributions/php-8.3.0.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
@@ -61,6 +61,7 @@ BuildRequires : nghttp2-dev
 BuildRequires : onig-dev
 BuildRequires : openssl-dev
 BuildRequires : pcre-dev
+BuildRequires : perl(Getopt::Long)
 BuildRequires : pkgconfig(icu-i18n)
 BuildRequires : pkgconfig(icu-io)
 BuildRequires : pkgconfig(icu-uc)
@@ -192,7 +193,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1701825927
+export SOURCE_DATE_EPOCH=1702052767
 export GCC_IGNORE_WERROR=1
 CLEAR_INTERMEDIATE_CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 CLEAR_INTERMEDIATE_FCFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
@@ -438,7 +439,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1701825927
+export SOURCE_DATE_EPOCH=1702052767
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
 cp %{_builddir}/php-%{version}/TSRM/LICENSE %{buildroot}/usr/share/package-licenses/php/1ffc27ce3b11cd061bfd4882c22602560f2c7931 || :
