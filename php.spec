@@ -5,15 +5,15 @@
 # autospec version: v3
 # autospec commit: c1050fe
 #
-# Source0 file verified with key 0x1C0779DC5C0A9DE4 (bukka@php.net)
+# Source0 file verified with key 0x286AF1F9897469DC (pierrick@php.net)
 #
 Name     : php
-Version  : 8.3.0
-Release  : 301
-URL      : https://us1.php.net/distributions/php-8.3.0.tar.xz
-Source0  : https://us1.php.net/distributions/php-8.3.0.tar.xz
+Version  : 8.3.1
+Release  : 302
+URL      : https://us1.php.net/distributions/php-8.3.1.tar.xz
+Source0  : https://us1.php.net/distributions/php-8.3.1.tar.xz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
-Source2  : https://us1.php.net/distributions/php-8.3.0.tar.xz.asc
+Source2  : https://us1.php.net/distributions/php-8.3.1.tar.xz.asc
 Source3  : php.ini
 Summary  : A general-purpose scripting language that is especially suited to web development
 Group    : Development/Tools
@@ -61,7 +61,6 @@ BuildRequires : nghttp2-dev
 BuildRequires : onig-dev
 BuildRequires : openssl-dev
 BuildRequires : pcre-dev
-BuildRequires : perl(Getopt::Long)
 BuildRequires : pkgconfig(icu-i18n)
 BuildRequires : pkgconfig(icu-io)
 BuildRequires : pkgconfig(icu-uc)
@@ -85,14 +84,25 @@ Patch3: 0005-Enable-hugepages.patch
 Patch4: 0001-Install-and-process-auxiliary-libtool-m4-files.patch
 
 %description
-<div align="center">
-<a href="https://php.net">
-<img
-alt="PHP"
-src="https://www.php.net/images/logos/new-php-logo.svg"
-width="150">
-</a>
-</div>
+1. libmagic (ext/fileinfo) see ext/fileinfo/libmagic/LICENSE
+2. libmbfl (ext/mbstring) see ext/mbstring/libmbfl/LICENSE
+3. pcre2lib (ext/pcre)
+4. ext/standard crypt
+5. ext/standard crypt's blowfish implementation
+6. ext/standard/rand
+7. ext/standard/scanf
+8. ext/standard/strnatcmp.c
+9. ext/standard/uuencode
+10. main/snprintf.c
+11. main/strlcat
+12. main/strlcpy
+13. libgd (ext/gd)
+14. ext/phar portions of tar implementations
+15. ext/phar/zip.c portion extracted from libzip
+16. libbcmath (ext/bcmath) see ext/bcmath/libbcmath/LICENSE
+17. ext/mbstring/ucgendat portions based on the ucgendat.c from the OpenLDAP
+18. avifinfo (ext/standard/libavifinfo) see ext/standard/libavifinfo/LICENSE
+19. xxHash (ext/hash/xxhash)
 
 %package bin
 Summary: bin components for the php package.
@@ -162,18 +172,18 @@ services components for the php package.
 
 
 %prep
-%setup -q -n php-8.3.0
+%setup -q -n php-8.3.1
 cd %{_builddir}
 tar xf %{_sourcedir}/phpbench-0.8.2.tar.gz
-cd %{_builddir}/php-8.3.0
+cd %{_builddir}/php-8.3.1
 mkdir -p phpbench
-cp -r %{_builddir}/phpbench-0.8.2/* %{_builddir}/php-8.3.0/phpbench
+cp -r %{_builddir}/phpbench-0.8.2/* %{_builddir}/php-8.3.1/phpbench
 %patch -P 1 -p1
 %patch -P 2 -p1
 %patch -P 3 -p1
 %patch -P 4 -p1
 pushd ..
-cp -a php-8.3.0 buildavx2
+cp -a php-8.3.1 buildavx2
 popd
 
 %build
@@ -193,7 +203,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1702052767
+export SOURCE_DATE_EPOCH=1703204770
 export GCC_IGNORE_WERROR=1
 CLEAR_INTERMEDIATE_CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 CLEAR_INTERMEDIATE_FCFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
@@ -439,7 +449,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1702052767
+export SOURCE_DATE_EPOCH=1703204770
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
 cp %{_builddir}/php-%{version}/TSRM/LICENSE %{buildroot}/usr/share/package-licenses/php/1ffc27ce3b11cd061bfd4882c22602560f2c7931 || :
