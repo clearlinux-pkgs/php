@@ -3,3 +3,4 @@
 buildreq-php
 gd-dev
 php
+xz-dev
