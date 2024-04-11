@@ -105,8 +105,6 @@ Configure miss: TIDY support
 Configure miss: TIDY support
 Configure miss: __attribute__((ifunc))
 Configure miss: __attribute__((target))
-Configure miss: __attribute__((target))
-Configure miss: __attribute__((target))
 Configure miss: __dns_search
 Configure miss: __dns_search
 Configure miss: __dns_search
