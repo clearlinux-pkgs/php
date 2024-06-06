@@ -201,6 +201,9 @@ Configure miss: if ancillary credentials uses cmsgcred
 Configure miss: if iconv supports //IGNORE
 Configure miss: if iconv supports //IGNORE
 Configure miss: if iconv supports //IGNORE
+Configure miss: if intl requires -std=gnu++17
+Configure miss: if intl requires -std=gnu++17
+Configure miss: if intl requires -std=gnu++17
 Configure miss: libXpm
 Configure miss: libXpm
 Configure miss: libXpm
