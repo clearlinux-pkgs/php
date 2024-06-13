@@ -55,3 +55,4 @@
 --enable-embed
 --with-libdir=lib64
 --with-pear=/usr/lib64/php
+--with-ldap

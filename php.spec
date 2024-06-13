@@ -9,7 +9,7 @@
 #
 Name     : php
 Version  : 8.3.8
-Release  : 318
+Release  : 319
 URL      : https://us1.php.net/distributions/php-8.3.8.tar.gz
 Source0  : https://us1.php.net/distributions/php-8.3.8.tar.gz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
@@ -62,6 +62,7 @@ BuildRequires : mariadb-dev
 BuildRequires : ncurses-dev
 BuildRequires : nghttp2-dev
 BuildRequires : onig-dev
+BuildRequires : openldap-dev
 BuildRequires : openssl-dev
 BuildRequires : pcre-dev
 BuildRequires : pkgconfig(icu-i18n)
@@ -210,7 +211,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1717698766
+export SOURCE_DATE_EPOCH=1718291839
 export GCC_IGNORE_WERROR=1
 CLEAR_INTERMEDIATE_CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -O3 -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 CLEAR_INTERMEDIATE_FCFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
@@ -288,7 +289,8 @@ CFLAGS="${CFLAGS_GENERATE}" CXXFLAGS="${CXXFLAGS_GENERATE}" FFLAGS="${FFLAGS_GEN
 --enable-huge-code-pages \
 --enable-embed \
 --with-libdir=lib64 \
---with-pear=/usr/lib64/php
+--with-pear=/usr/lib64/php \
+--with-ldap
 make  %{?_smp_mflags}
 
 ./sapi/cli/php Zend/micro_bench.php
@@ -354,7 +356,8 @@ CFLAGS="${CFLAGS_USE}" CXXFLAGS="${CXXFLAGS_USE}" FFLAGS="${FFLAGS_USE}" FCFLAGS
 --enable-huge-code-pages \
 --enable-embed \
 --with-libdir=lib64 \
---with-pear=/usr/lib64/php
+--with-pear=/usr/lib64/php \
+--with-ldap
 make  %{?_smp_mflags}
 unset PKG_CONFIG_PATH
 pushd ../buildavx2/
@@ -432,7 +435,8 @@ LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS -march=x86-64-v3 "
 --enable-huge-code-pages \
 --enable-embed \
 --with-libdir=lib64 \
---with-pear=/usr/lib64/php
+--with-pear=/usr/lib64/php \
+--with-ldap
 make  %{?_smp_mflags}
 popd
 
@@ -458,7 +462,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1717698766
+export SOURCE_DATE_EPOCH=1718291839
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
 cp %{_builddir}/php-%{version}/TSRM/LICENSE %{buildroot}/usr/share/package-licenses/php/1ffc27ce3b11cd061bfd4882c22602560f2c7931 || :

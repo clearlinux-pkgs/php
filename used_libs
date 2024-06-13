@@ -12,6 +12,8 @@ libgmp.so.10
 libicui18n.so.73
 libicuio.so.73
 libicuuc.so.73
+liblber.so.2
+libldap.so.2
 liblmdb.so
 libm.so.6
 libonig.so.5
