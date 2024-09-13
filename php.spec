@@ -9,7 +9,7 @@
 #
 Name     : php
 Version  : 8.3.10
-Release  : 320
+Release  : 321
 URL      : https://us1.php.net/distributions/php-8.3.10.tar.gz
 Source0  : https://us1.php.net/distributions/php-8.3.10.tar.gz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
