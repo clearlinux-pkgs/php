@@ -8,12 +8,12 @@
 # Source0 file verified with key 0x1C0779DC5C0A9DE4 (bukka@php.net)
 #
 Name     : php
-Version  : 8.3.11
-Release  : 322
-URL      : https://us1.php.net/distributions/php-8.3.11.tar.gz
-Source0  : https://us1.php.net/distributions/php-8.3.11.tar.gz
+Version  : 8.3.13
+Release  : 323
+URL      : https://us1.php.net/distributions/php-8.3.13.tar.gz
+Source0  : https://us1.php.net/distributions/php-8.3.13.tar.gz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
-Source2  : https://us1.php.net/distributions/php-8.3.11.tar.gz.asc
+Source2  : https://us1.php.net/distributions/php-8.3.13.tar.gz.asc
 Source3  : 1C0779DC5C0A9DE4.pkey
 Source4  : php.ini
 Summary  : A general-purpose scripting language that is especially suited to web development
@@ -180,18 +180,18 @@ chmod 700 .gnupg
 gpg --homedir .gnupg --import %{SOURCE3}
 gpg --homedir .gnupg --status-fd 1 --verify %{SOURCE2} %{SOURCE0} > gpg.status
 grep -E '^\[GNUPG:\] (GOODSIG|EXPKEYSIG) 1C0779DC5C0A9DE4' gpg.status
-%setup -q -n php-8.3.11
+%setup -q -n php-8.3.13
 cd %{_builddir}
 tar xf %{_sourcedir}/phpbench-0.8.2.tar.gz
-cd %{_builddir}/php-8.3.11
+cd %{_builddir}/php-8.3.13
 mkdir -p phpbench
-cp -r %{_builddir}/phpbench-0.8.2/* %{_builddir}/php-8.3.11/phpbench
+cp -r %{_builddir}/phpbench-0.8.2/* %{_builddir}/php-8.3.13/phpbench
 %patch -P 1 -p1
 %patch -P 2 -p1
 %patch -P 3 -p1
 %patch -P 4 -p1
 pushd ..
-cp -a php-8.3.11 buildavx2
+cp -a php-8.3.13 buildavx2
 popd
 
 %build
@@ -211,7 +211,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1727215481
+export SOURCE_DATE_EPOCH=1729783927
 export GCC_IGNORE_WERROR=1
 CLEAR_INTERMEDIATE_CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -O3 -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 CLEAR_INTERMEDIATE_FCFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
@@ -462,7 +462,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1727215481
+export SOURCE_DATE_EPOCH=1729783927
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
 cp %{_builddir}/php-%{version}/TSRM/LICENSE %{buildroot}/usr/share/package-licenses/php/1ffc27ce3b11cd061bfd4882c22602560f2c7931 || :
