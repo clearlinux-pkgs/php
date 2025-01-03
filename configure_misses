@@ -1,12 +1,6 @@
-Configure miss: /dev/poll
-Configure miss: /dev/poll
-Configure miss: /dev/poll
 Configure miss: Adabas support
 Configure miss: Adabas support
 Configure miss: Adabas support
-Configure miss: Apache 2 handler module support via DSO through APXS
-Configure miss: Apache 2 handler module support via DSO through APXS
-Configure miss: Apache 2 handler module support via DSO through APXS
 Configure miss: Berkeley DB2 support
 Configure miss: Berkeley DB2 support
 Configure miss: Berkeley DB2 support
@@ -16,6 +10,9 @@ Configure miss: Berkeley DB3 support
 Configure miss: Berkeley DB4 support
 Configure miss: Berkeley DB4 support
 Configure miss: Berkeley DB4 support
+Configure miss: Clang fuzzer SAPI
+Configure miss: Clang fuzzer SAPI
+Configure miss: Clang fuzzer SAPI
 Configure miss: CommonCrypto/CommonRandom.h
 Configure miss: CommonCrypto/CommonRandom.h
 Configure miss: CommonCrypto/CommonRandom.h
@@ -43,12 +40,6 @@ Configure miss: Firebird support for PDO
 Configure miss: IBM DB2 support
 Configure miss: IBM DB2 support
 Configure miss: IBM DB2 support
-Configure miss: IMAP SSL support
-Configure miss: IMAP SSL support
-Configure miss: IMAP SSL support
-Configure miss: IMAP support
-Configure miss: IMAP support
-Configure miss: IMAP support
 Configure miss: LiteSpeed support
 Configure miss: LiteSpeed support
 Configure miss: LiteSpeed support
@@ -58,33 +49,39 @@ Configure miss: NDBM support
 Configure miss: ODBC v3 support for PDO
 Configure miss: ODBC v3 support for PDO
 Configure miss: ODBC v3 support for PDO
-Configure miss: Oracle Database OCI8 support
-Configure miss: Oracle Database OCI8 support
-Configure miss: Oracle Database OCI8 support
-Configure miss: Oracle OCI support for PDO
-Configure miss: Oracle OCI support for PDO
-Configure miss: Oracle OCI support for PDO
 Configure miss: PDO_DBLIB support via FreeTDS
 Configure miss: PDO_DBLIB support via FreeTDS
 Configure miss: PDO_DBLIB support via FreeTDS
-Configure miss: PSPELL support
-Configure miss: PSPELL support
-Configure miss: PSPELL support
+Configure miss: PQchangePassword in -lpq
+Configure miss: PQchangePassword in -lpq
+Configure miss: PQchangePassword in -lpq
+Configure miss: PQclosePrepared in -lpq
+Configure miss: PQclosePrepared in -lpq
+Configure miss: PQclosePrepared in -lpq
+Configure miss: PQsetChunkedRowsMode in -lpq
+Configure miss: PQsetChunkedRowsMode in -lpq
+Configure miss: PQsetChunkedRowsMode in -lpq
+Configure miss: PQsocketPoll in -lpq
+Configure miss: PQsocketPoll in -lpq
+Configure miss: PQsocketPoll in -lpq
 Configure miss: PS_STRINGS
 Configure miss: PS_STRINGS
 Configure miss: PS_STRINGS
 Configure miss: QDBM support
 Configure miss: QDBM support
 Configure miss: QDBM support
-Configure miss: RAND_egd
-Configure miss: RAND_egd
-Configure miss: RAND_egd
+Configure miss: RAND_egd in -lcrypto
+Configure miss: RAND_egd in -lcrypto
+Configure miss: RAND_egd in -lcrypto
 Configure miss: SAP DB support
 Configure miss: SAP DB support
 Configure miss: SAP DB support
 Configure miss: SNMP support
 Configure miss: SNMP support
 Configure miss: SNMP support
+Configure miss: SO_LISTENQLEN
+Configure miss: SO_LISTENQLEN
+Configure miss: SO_LISTENQLEN
 Configure miss: Solid support
 Configure miss: Solid support
 Configure miss: Solid support
@@ -97,14 +94,15 @@ Configure miss: TCP_CONNECTION_INFO
 Configure miss: TIDY support
 Configure miss: TIDY support
 Configure miss: TIDY support
+Configure miss: WIFCONTINUED
+Configure miss: WIFCONTINUED
+Configure miss: WIFCONTINUED
 Configure miss: __attribute__((ifunc))
 Configure miss: __attribute__((target))
+Configure miss: __attribute__((visibility))
 Configure miss: __dns_search
 Configure miss: __dns_search
 Configure miss: __dns_search
-Configure miss: __dns_search in -lbind
-Configure miss: __dns_search in -lbind
-Configure miss: __dns_search in -lbind
 Configure miss: __dns_search in -lresolv
 Configure miss: __dns_search in -lresolv
 Configure miss: __dns_search in -lresolv
@@ -114,18 +112,12 @@ Configure miss: __dns_search in -lsocket
 Configure miss: __res_ndestroy
 Configure miss: __res_ndestroy
 Configure miss: __res_ndestroy
-Configure miss: __res_ndestroy in -lbind
-Configure miss: __res_ndestroy in -lbind
-Configure miss: __res_ndestroy in -lbind
 Configure miss: __res_ndestroy in -lresolv
 Configure miss: __res_ndestroy in -lresolv
 Configure miss: __res_ndestroy in -lresolv
 Configure miss: __res_ndestroy in -lsocket
 Configure miss: __res_ndestroy in -lsocket
 Configure miss: __res_ndestroy in -lsocket
-Configure miss: __setsockopt in -lnetwork
-Configure miss: __setsockopt in -lnetwork
-Configure miss: __setsockopt in -lnetwork
 Configure miss: a custom ODBC support
 Configure miss: a custom ODBC support
 Configure miss: a custom ODBC support
@@ -144,36 +136,27 @@ Configure miss: broken gcc optimize-strlen
 Configure miss: broken getcwd
 Configure miss: broken getcwd
 Configure miss: broken getcwd
-Configure miss: clang fuzzer SAPI
-Configure miss: clang fuzzer SAPI
-Configure miss: clang fuzzer SAPI
 Configure miss: dns.h
 Configure miss: dns.h
 Configure miss: dns.h
 Configure miss: dns_search
 Configure miss: dns_search
 Configure miss: dns_search
-Configure miss: dns_search in -lbind
-Configure miss: dns_search in -lbind
-Configure miss: dns_search in -lbind
 Configure miss: dns_search in -lresolv
 Configure miss: dns_search in -lresolv
 Configure miss: dns_search in -lresolv
 Configure miss: dns_search in -lsocket
 Configure miss: dns_search in -lsocket
 Configure miss: dns_search in -lsocket
+Configure miss: elf_aux_info
+Configure miss: elf_aux_info
+Configure miss: elf_aux_info
 Configure miss: explicit_memset
 Configure miss: explicit_memset
 Configure miss: explicit_memset
 Configure miss: external libcrypt or libxcrypt
 Configure miss: external libcrypt or libxcrypt
 Configure miss: external libcrypt or libxcrypt
-Configure miss: fastcall calling convention
-Configure miss: fastcall calling convention
-Configure miss: fastcall calling convention
-Configure miss: field sa_len in struct sockaddr
-Configure miss: field sa_len in struct sockaddr
-Configure miss: field sa_len in struct sockaddr
 Configure miss: forkx
 Configure miss: forkx
 Configure miss: forkx
@@ -186,12 +169,12 @@ Configure miss: g++ option to enable C++11 features
 Configure miss: gcc options needed to detect all undeclared functions
 Configure miss: gcc options needed to detect all undeclared functions
 Configure miss: gcc options needed to detect all undeclared functions
+Configure miss: getcpuid
+Configure miss: getcpuid
+Configure miss: getcpuid
 Configure miss: icc
 Configure miss: icc
 Configure miss: icc
-Configure miss: if ancillary credentials uses cmsgcred
-Configure miss: if ancillary credentials uses cmsgcred
-Configure miss: if ancillary credentials uses cmsgcred
 Configure miss: if iconv supports //IGNORE
 Configure miss: if iconv supports //IGNORE
 Configure miss: if iconv supports //IGNORE
@@ -207,6 +190,12 @@ Configure miss: libedit readline replacement
 Configure miss: libjpeg
 Configure miss: libjpeg
 Configure miss: libjpeg
+Configure miss: libproc.h
+Configure miss: libproc.h
+Configure miss: libproc.h
+Configure miss: library containing Pgrab
+Configure miss: library containing Pgrab
+Configure miss: library containing Pgrab
 Configure miss: libwebp
 Configure miss: libwebp
 Configure miss: libwebp
@@ -222,15 +211,6 @@ Configure miss: mhash support
 Configure miss: mm support
 Configure miss: mm support
 Configure miss: mm support
-Configure miss: ms_cdecl calling convention
-Configure miss: ms_cdecl calling convention
-Configure miss: ms_cdecl calling convention
-Configure miss: os/signpost.h
-Configure miss: os/signpost.h
-Configure miss: os/signpost.h
-Configure miss: pascal calling convention
-Configure miss: pascal calling convention
-Configure miss: pascal calling convention
 Configure miss: php
 Configure miss: php
 Configure miss: php
@@ -240,12 +220,15 @@ Configure miss: phpdbg debug build
 Configure miss: phpdbg readline support
 Configure miss: phpdbg readline support
 Configure miss: phpdbg readline support
-Configure miss: port framework
-Configure miss: port framework
-Configure miss: port framework
-Configure miss: procctl
-Configure miss: procctl
-Configure miss: procctl
+Configure miss: port.h
+Configure miss: port.h
+Configure miss: port.h
+Configure miss: priv.h
+Configure miss: priv.h
+Configure miss: priv.h
+Configure miss: pset_bind
+Configure miss: pset_bind
+Configure miss: pset_bind
 Configure miss: pthread_attr_get_np
 Configure miss: pthread_attr_get_np
 Configure miss: pthread_attr_get_np
@@ -255,18 +238,15 @@ Configure miss: pthread_get_stackaddr_np
 Configure miss: pthread_jit_write_protect_np
 Configure miss: pthread_jit_write_protect_np
 Configure miss: pthread_jit_write_protect_np
+Configure miss: pthread_set_qos_class_self_np
+Configure miss: pthread_set_qos_class_self_np
+Configure miss: pthread_set_qos_class_self_np
 Configure miss: pthread_stackseg_np
 Configure miss: pthread_stackseg_np
 Configure miss: pthread_stackseg_np
-Configure miss: register calling convention
-Configure miss: register calling convention
-Configure miss: register calling convention
 Configure miss: res_ndestroy
 Configure miss: res_ndestroy
 Configure miss: res_ndestroy
-Configure miss: res_ndestroy in -lbind
-Configure miss: res_ndestroy in -lbind
-Configure miss: res_ndestroy in -lbind
 Configure miss: res_ndestroy in -lresolv
 Configure miss: res_ndestroy in -lresolv
 Configure miss: res_ndestroy in -lresolv
@@ -276,27 +256,24 @@ Configure miss: res_ndestroy in -lsocket
 Configure miss: rfork
 Configure miss: rfork
 Configure miss: rfork
-Configure miss: setpflags
-Configure miss: setpflags
-Configure miss: setpflags
+Configure miss: sendmail
+Configure miss: sendmail
+Configure miss: sendmail
 Configure miss: setproctitle_fast
 Configure miss: setproctitle_fast
 Configure miss: setproctitle_fast
-Configure miss: setsockopt in -lnetwork
-Configure miss: setsockopt in -lnetwork
-Configure miss: setsockopt in -lnetwork
+Configure miss: shm_create_largepage
+Configure miss: shm_create_largepage
+Configure miss: shm_create_largepage
 Configure miss: sigsetjmp
 Configure miss: sigsetjmp
 Configure miss: sigsetjmp
 Configure miss: std_syslog
 Configure miss: std_syslog
 Configure miss: std_syslog
-Configure miss: stdcall calling convention
-Configure miss: stdcall calling convention
-Configure miss: stdcall calling convention
-Configure miss: sun_len in sys/un.h
-Configure miss: sun_len in sys/un.h
-Configure miss: sun_len in sys/un.h
+Configure miss: struct cmsgcred
+Configure miss: struct cmsgcred
+Configure miss: struct cmsgcred
 Configure miss: suncc
 Configure miss: suncc
 Configure miss: suncc
@@ -306,18 +283,6 @@ Configure miss: sys/procctl.h
 Configure miss: sys/sysexits.h
 Configure miss: sys/sysexits.h
 Configure miss: sys/sysexits.h
-Configure miss: sysv calling convention
-Configure miss: sysv calling convention
-Configure miss: sysv calling convention
-Configure miss: target system is Darwin
-Configure miss: target system is Darwin
-Configure miss: target system is Darwin
-Configure miss: the location of libz
-Configure miss: the location of libz
-Configure miss: the location of libz
-Configure miss: thiscall calling convention
-Configure miss: thiscall calling convention
-Configure miss: thiscall calling convention
 Configure miss: union semun
 Configure miss: union semun
 Configure miss: union semun
@@ -333,33 +298,58 @@ Configure miss: usable _controlfp_s
 Configure miss: usable fpsetprec
 Configure miss: usable fpsetprec
 Configure miss: usable fpsetprec
+Configure miss: variable __attribute__((aligned))
+Configure miss: whether FFI_FASTCALL is declared
+Configure miss: whether FFI_FASTCALL is declared
+Configure miss: whether FFI_FASTCALL is declared
+Configure miss: whether FFI_MS_CDECL is declared
+Configure miss: whether FFI_MS_CDECL is declared
+Configure miss: whether FFI_MS_CDECL is declared
+Configure miss: whether FFI_PASCAL is declared
+Configure miss: whether FFI_PASCAL is declared
+Configure miss: whether FFI_PASCAL is declared
+Configure miss: whether FFI_REGISTER is declared
+Configure miss: whether FFI_REGISTER is declared
+Configure miss: whether FFI_REGISTER is declared
+Configure miss: whether FFI_STDCALL is declared
+Configure miss: whether FFI_STDCALL is declared
+Configure miss: whether FFI_STDCALL is declared
+Configure miss: whether FFI_SYSV is declared
+Configure miss: whether FFI_SYSV is declared
+Configure miss: whether FFI_SYSV is declared
+Configure miss: whether FFI_THISCALL is declared
+Configure miss: whether FFI_THISCALL is declared
+Configure miss: whether FFI_THISCALL is declared
+Configure miss: whether P_JAILID is declared
+Configure miss: whether P_JAILID is declared
+Configure miss: whether P_JAILID is declared
+Configure miss: whether P_UID is declared
+Configure miss: whether P_UID is declared
+Configure miss: whether P_UID is declared
 Configure miss: whether cross-process locking is required by accept()
 Configure miss: whether cross-process locking is required by accept()
 Configure miss: whether cross-process locking is required by accept()
-Configure miss: whether dlsym() requires a leading underscore in symbol names... checking whether to enable thread-safety
-Configure miss: whether dlsym() requires a leading underscore in symbol names... checking whether to enable thread-safety
-Configure miss: whether dlsym() requires a leading underscore in symbol names... checking whether to enable thread-safety
 Configure miss: whether flush should be called explicitly after a buffered io
 Configure miss: whether flush should be called explicitly after a buffered io
 Configure miss: whether flush should be called explicitly after a buffered io
-Configure miss: whether re2c -g works
-Configure miss: whether re2c -g works
-Configure miss: whether re2c -g works
 Configure miss: whether syscall to create shadow stack exists
 Configure miss: whether syscall to create shadow stack exists
 Configure miss: whether syscall to create shadow stack exists
 Configure miss: whether system uses EBCDIC
 Configure miss: whether system uses EBCDIC
 Configure miss: whether system uses EBCDIC
+Configure miss: whether to build Apache 2 handler module support via DSO through APXS
+Configure miss: whether to build Apache 2 handler module support via DSO through APXS
+Configure miss: whether to build Apache 2 handler module support via DSO through APXS
 Configure miss: whether to build with Enchant support
 Configure miss: whether to build with Enchant support
 Configure miss: whether to build with Enchant support
+Configure miss: whether to build with Expat support
+Configure miss: whether to build with Expat support
+Configure miss: whether to build with Expat support
 Configure miss: whether to build with LDAP Cyrus SASL support
 Configure miss: whether to build with LDAP Cyrus SASL support
 Configure miss: whether to build with LDAP Cyrus SASL support
-Configure miss: whether to build with expat support
-Configure miss: whether to build with expat support
-Configure miss: whether to build with expat support
 Configure miss: whether to build with iODBC support
 Configure miss: whether to build with iODBC support
 Configure miss: whether to build with iODBC support
@@ -369,6 +359,9 @@ Configure miss: whether to build with unixODBC support
 Configure miss: whether to dlopen extensions with RTLD_NOW instead of RTLD_LAZY
 Configure miss: whether to dlopen extensions with RTLD_NOW instead of RTLD_LAZY
 Configure miss: whether to dlopen extensions with RTLD_NOW instead of RTLD_LAZY
+Configure miss: whether to enable AppArmor confinement in PHP-FPM
+Configure miss: whether to enable AppArmor confinement in PHP-FPM
+Configure miss: whether to enable AppArmor confinement in PHP-FPM
 Configure miss: whether to enable DTrace support
 Configure miss: whether to enable DTrace support
 Configure miss: whether to enable DTrace support
@@ -378,9 +371,21 @@ Configure miss: whether to enable JIS-mapped Japanese font support in GD
 Configure miss: whether to enable PHP's own SIGCHLD handler
 Configure miss: whether to enable PHP's own SIGCHLD handler
 Configure miss: whether to enable PHP's own SIGCHLD handler
+Configure miss: whether to enable SELinux support in PHP-FPM
+Configure miss: whether to enable SELinux support in PHP-FPM
+Configure miss: whether to enable SELinux support in PHP-FPM
+Configure miss: whether to enable Valgrind support
+Configure miss: whether to enable Valgrind support
+Configure miss: whether to enable Valgrind support
 Configure miss: whether to enable Zend debugging
 Configure miss: whether to enable Zend debugging
 Configure miss: whether to enable Zend debugging
+Configure miss: whether to enable Zend max execution timers
+Configure miss: whether to enable Zend max execution timers
+Configure miss: whether to enable Zend max execution timers
+Configure miss: whether to enable argon2 password hashing (requires OpenSSL >= 3.2)
+Configure miss: whether to enable argon2 password hashing (requires OpenSSL >= 3.2)
+Configure miss: whether to enable argon2 password hashing (requires OpenSSL >= 3.2)
 Configure miss: whether to enable debug assertions in release mode
 Configure miss: whether to enable debug assertions in release mode
 Configure miss: whether to enable debug assertions in release mode
@@ -390,18 +395,12 @@ Configure miss: whether to enable dl-test extension
 Configure miss: whether to enable dmalloc
 Configure miss: whether to enable dmalloc
 Configure miss: whether to enable dmalloc
-Configure miss: whether to enable valgrind support
-Configure miss: whether to enable valgrind support
-Configure miss: whether to enable valgrind support
-Configure miss: whether to enable zend max execution timers
-Configure miss: whether to enable zend max execution timers
-Configure miss: whether to enable zend max execution timers
-Configure miss: whether to enable zend-test extension
-Configure miss: whether to enable zend-test extension
-Configure miss: whether to enable zend-test extension
-Configure miss: whether to explicitly enable FTP SSL support
-Configure miss: whether to explicitly enable FTP SSL support
-Configure miss: whether to explicitly enable FTP SSL support
+Configure miss: whether to enable thread safety
+Configure miss: whether to enable thread safety
+Configure miss: whether to enable thread safety
+Configure miss: whether to enable zend_test extension
+Configure miss: whether to enable zend_test extension
+Configure miss: whether to enable zend_test extension
 Configure miss: whether to explicitly link against libgcc
 Configure miss: whether to explicitly link against libgcc
 Configure miss: whether to explicitly link against libgcc
@@ -414,6 +413,15 @@ Configure miss: whether to include debugging symbols
 Configure miss: whether to include gcov symbols
 Configure miss: whether to include gcov symbols
 Configure miss: whether to include gcov symbols
+Configure miss: whether to load legacy algorithm provider
+Configure miss: whether to load legacy algorithm provider
+Configure miss: whether to load legacy algorithm provider
+Configure miss: whether to support opcache JIT disassembly through Capstone
+Configure miss: whether to support opcache JIT disassembly through Capstone
+Configure miss: whether to support opcache JIT disassembly through Capstone
+Configure miss: whether to use Access Control Lists (ACL) in PHP-FPM
+Configure miss: whether to use Access Control Lists (ACL) in PHP-FPM
+Configure miss: whether to use Access Control Lists (ACL) in PHP-FPM
 Configure miss: whether we are using musl libc
 Configure miss: whether we are using musl libc
 Configure miss: whether we are using musl libc
