@@ -5,16 +5,16 @@
 # autospec version: v21
 # autospec commit: f4a13a5
 #
-# Source0 file verified with key 0x56A97AF7600A39A6 (calvinb@php.net)
+# Source0 file verified with key 0x770426E17EBBB3DD (saki@php.net)
 #
 Name     : php
-Version  : 8.4.2
-Release  : 324
-URL      : https://us1.php.net/distributions/php-8.4.2.tar.gz
-Source0  : https://us1.php.net/distributions/php-8.4.2.tar.gz
+Version  : 8.4.3
+Release  : 325
+URL      : https://us1.php.net/distributions/php-8.4.3.tar.gz
+Source0  : https://us1.php.net/distributions/php-8.4.3.tar.gz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
-Source2  : https://us1.php.net/distributions/php-8.4.2.tar.gz.asc
-Source3  : 56A97AF7600A39A6.pkey
+Source2  : https://us1.php.net/distributions/php-8.4.3.tar.gz.asc
+Source3  : 770426E17EBBB3DD.pkey
 Source4  : php.ini
 Summary  : A general-purpose scripting language that is especially suited to web development
 Group    : Development/Tools
@@ -162,19 +162,19 @@ mkdir .gnupg
 chmod 700 .gnupg
 gpg --homedir .gnupg --import %{SOURCE3}
 gpg --homedir .gnupg --status-fd 1 --verify %{SOURCE2} %{SOURCE0} > gpg.status
-grep -E '^\[GNUPG:\] (GOODSIG|EXPKEYSIG) 56A97AF7600A39A6' gpg.status
-%setup -q -n php-8.4.2
+grep -E '^\[GNUPG:\] (GOODSIG|EXPKEYSIG) 770426E17EBBB3DD' gpg.status
+%setup -q -n php-8.4.3
 cd %{_builddir}
 tar xf %{_sourcedir}/phpbench-0.8.2.tar.gz
-cd %{_builddir}/php-8.4.2
+cd %{_builddir}/php-8.4.3
 mkdir -p phpbench
-cp -r %{_builddir}/phpbench-0.8.2/* %{_builddir}/php-8.4.2/phpbench
+cp -r %{_builddir}/phpbench-0.8.2/* %{_builddir}/php-8.4.3/phpbench
 %patch -P 1 -p1
 %patch -P 2 -p1
 %patch -P 3 -p1
 %patch -P 4 -p1
 pushd ..
-cp -a php-8.4.2 buildavx2
+cp -a php-8.4.3 buildavx2
 popd
 
 %build
@@ -194,7 +194,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1735919966
+export SOURCE_DATE_EPOCH=1737139382
 export GCC_IGNORE_WERROR=1
 CLEAR_INTERMEDIATE_CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -O3 -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 CLEAR_INTERMEDIATE_FCFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
@@ -445,7 +445,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1735919966
+export SOURCE_DATE_EPOCH=1737139382
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/php
 cp %{_builddir}/php-%{version}/TSRM/LICENSE %{buildroot}/usr/share/package-licenses/php/1ffc27ce3b11cd061bfd4882c22602560f2c7931 || :
@@ -648,7 +648,6 @@ mv %{buildroot}/usr/lib64/php/doc/PEAR %{buildroot}/usr/lib64/php/docs/PEAR
 /usr/lib64/php/test/Console_Getopt/tests/bug11068.phpt
 /usr/lib64/php/test/Console_Getopt/tests/bug13140.phpt
 /usr/lib64/php/test/Structures_Graph/tests/AcyclicTestTest.php
-/usr/lib64/php/test/Structures_Graph/tests/AllTests.php
 /usr/lib64/php/test/Structures_Graph/tests/BasicGraphTest.php
 /usr/lib64/php/test/Structures_Graph/tests/TopologicalSorterTest.php
 /usr/lib64/php/test/Structures_Graph/tests/helper.inc
