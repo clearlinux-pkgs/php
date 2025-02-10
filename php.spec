@@ -9,7 +9,7 @@
 #
 Name     : php
 Version  : 8.4.3
-Release  : 325
+Release  : 326
 URL      : https://us1.php.net/distributions/php-8.4.3.tar.gz
 Source0  : https://us1.php.net/distributions/php-8.4.3.tar.gz
 Source1  : http://localhost/cgit/projects/phpbench/snapshot/phpbench-0.8.2.tar.gz
