@@ -2337,6 +2337,7 @@ libphp.so:zim_IntlRuleBasedBreakIterator_getRules
 libphp.so:zim_IntlTimeZone___construct
 libphp.so:zoi_with_current_dtor
 libphp.so:zoi_with_current_get_current_data
+libphp.so:zoi_with_current_get_gc
 libphp.so:zoi_with_current_invalidate_current
 libphp.so:zoi_with_current_valid
 libphp.so:zval_add_ref

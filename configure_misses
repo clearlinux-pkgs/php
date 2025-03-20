@@ -58,9 +58,6 @@ Configure miss: PQchangePassword in -lpq
 Configure miss: PQclosePrepared in -lpq
 Configure miss: PQclosePrepared in -lpq
 Configure miss: PQclosePrepared in -lpq
-Configure miss: PQsetChunkedRowsMode in -lpq
-Configure miss: PQsetChunkedRowsMode in -lpq
-Configure miss: PQsetChunkedRowsMode in -lpq
 Configure miss: PQsocketPoll in -lpq
 Configure miss: PQsocketPoll in -lpq
 Configure miss: PQsocketPoll in -lpq
@@ -320,6 +317,9 @@ Configure miss: whether FFI_SYSV is declared
 Configure miss: whether FFI_THISCALL is declared
 Configure miss: whether FFI_THISCALL is declared
 Configure miss: whether FFI_THISCALL is declared
+Configure miss: whether PGRES_TUPLES_CHUNK is declared
+Configure miss: whether PGRES_TUPLES_CHUNK is declared
+Configure miss: whether PGRES_TUPLES_CHUNK is declared
 Configure miss: whether P_JAILID is declared
 Configure miss: whether P_JAILID is declared
 Configure miss: whether P_JAILID is declared

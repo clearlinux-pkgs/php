@@ -7,14 +7,12 @@ libexslt.so.0
 libffi.so.8
 libgcc_s.so.1
 libgd.so.3
-libgdbm.so.6
 libgmp.so.10
 libicui18n.so.75
 libicuio.so.75
 libicuuc.so.75
 liblber.so.2
 libldap.so.2
-liblmdb.so
 libm.so.6
 libonig.so.5
 libpcre2-8.so.0
