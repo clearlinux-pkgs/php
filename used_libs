@@ -24,7 +24,7 @@ libsodium.so.26
 libsqlite3.so.0
 libssl.so.3
 libstdc++.so.6
-libxml2.so.2
+libxml2.so.16
 libxslt.so.1
 libz.so.1
 libzip.so.5
